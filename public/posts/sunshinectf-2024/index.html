@@ -327,7 +327,7 @@
 <p>Since our stack is executable, we can write our shellcode straight to the <code>v1</code> variable and if our return at the end of this function returns to the same <code>v1</code> variable, our shellcode gets executed.</p>
 <p>For our payload to fill the rest of the variable, we can use <code>asm('nop')</code> because it is a single byte instruction that does nothing and won&rsquo;t be executed.</p>
 <p>Final exploit:</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -441,7 +441,7 @@
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">v3</span> <span class="o">-</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
 <p>Final exploit:</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -493,7 +493,7 @@
 <p>Jupiter was a cool challenge that required a format string write to overwrite the GOT entry of <code>puts</code> to <code>win</code>.</p>
 <p>The protections on the binary showed canary enabled, so I initially thought that I would have to leak the canary and move from there.</p>
 <p>Looking at the dissassembly, we see that the program makes some checks and then runs a unformatted printf statement which leads to a format string vulnerability.</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-c">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -545,7 +545,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
 <p>We can use the format string vulnerability to write the address of GOT puts to the address of win so when puts is called at the end of <code>main()</code> it will run <code>win()</code> instead. We can also use pwntools <code>fmtstr_payload</code> to make this easier.</p>
 <p>Final exploit:</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-py">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>

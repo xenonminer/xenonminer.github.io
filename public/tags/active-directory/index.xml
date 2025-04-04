@@ -12,7 +12,7 @@
     <guid>http://localhost:1313/projects/ad_pentest/</guid>
     <description><![CDATA[<p>Project link: <a href="https://github.com/xenonminer/ad_pentest" target="_blank" rel="noopener noreffer ">ad_pentest</a></p>
 <p>ad_pentest creates an interface for Active Directory pentesting that contains all the mainly used tools for AD pentesting in one place and the options to search, save, and add your own options to the commands</p>
-<p>One interesting feature is that there&rsquo;s a history of the commands saved,and  you can go through the commands in a shell-type interface with the added capabilities of tab completion and scrolling through commands</p>]]></description>
+<p>One interesting feature is that there&rsquo;s a history of the commands saved, and you can go through the commands in a shell-type interface with the added capabilities of tab completion and scrolling through commands</p>]]></description>
 </item>
 </channel>
 </rss>
