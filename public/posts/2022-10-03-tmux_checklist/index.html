@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Tmux checklist - pwnland</title><meta name="Description" content="mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall"><meta property="og:url" content="http://localhost:1313/posts/2022-10-03-tmux_checklist/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="Tmux checklist">
+  <meta property="og:description" content="Cool tmux checklist with examples to become really fast with organized terminal navigation
+Checklist Prefix key is default ctrl&#43;b
+Command Description Example tmux new -s (name) Create a new session (prefix key) c Add a window (prefix key) (window number) Switch to another window (numbers are on the bottom of terminal tmux ls List running tmux sessions tmux attach -t (session name) Attach to a running tmux session (prefix key) d Detach from a session (prefix key) , Rename a window (prefix key) % : Vertical Split window (prefix key) &#34; : Horizontal Split window Splitting windows (prefix key) (arrow keys) Move across windows (prefix key) z Zoom in and out of window (fullscreen) (prefix key) { : Move window left (prefix key) } : Move window right Moving windows (prefix key) spacebar Change window layout (prefix key) :source-file ~/.tmux.conf To reset tmux configs from tmux (prefix key) x To kill tmux session Ctrl &#43; d To kill tmux window (prefix key) [ Copy mode">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Tmux checklist">
+  <meta name="twitter:description" content="Cool tmux checklist with examples to become really fast with organized terminal navigation
+Checklist Prefix key is default ctrl&#43;b
+Command Description Example tmux new -s (name) Create a new session (prefix key) c Add a window (prefix key) (window number) Switch to another window (numbers are on the bottom of terminal tmux ls List running tmux sessions tmux attach -t (session name) Attach to a running tmux session (prefix key) d Detach from a session (prefix key) , Rename a window (prefix key) % : Vertical Split window (prefix key) &#34; : Horizontal Split window Splitting windows (prefix key) (arrow keys) Move across windows (prefix key) z Zoom in and out of window (fullscreen) (prefix key) { : Move window left (prefix key) } : Move window right Moving windows (prefix key) spacebar Change window layout (prefix key) :source-file ~/.tmux.conf To reset tmux configs from tmux (prefix key) x To kill tmux session Ctrl &#43; d To kill tmux window (prefix key) [ Copy mode">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/2022-10-03-tmux_checklist/" /><link rel="next" href="http://localhost:1313/posts/2023-06-15-scorpio_linux_setup/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Tmux checklist",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/2022-10-03-tmux_checklist\/"
+        },"genre": "posts","wordcount":  165 ,
+        "url": "http:\/\/localhost:1313\/posts\/2022-10-03-tmux_checklist\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "xenonminer"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Tmux checklist</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xenonminer</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;165 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#checklist">Checklist</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Cool tmux checklist with examples to become really fast with organized terminal navigation</p>
+<h2 id="checklist">Checklist</h2>
+<p>Prefix key is default ctrl+b</p>
+<table>
+  <thead>
+      <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>tmux new -s (name)</td>
+          <td>Create a new session</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) c</td>
+          <td>Add a window</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) (window number)</td>
+          <td>Switch to another window (numbers are on the bottom of terminal</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>tmux ls</td>
+          <td>List running tmux sessions</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>tmux attach -t (session name)</td>
+          <td>Attach to a running tmux session</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) d</td>
+          <td>Detach from a session</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) ,</td>
+          <td>Rename a window</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) % : Vertical Split window<!-- raw HTML omitted --> (prefix key) &quot; : Horizontal Split window</td>
+          <td>Splitting windows</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) (arrow keys)</td>
+          <td>Move across windows</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) z</td>
+          <td>Zoom in and out of window (fullscreen)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) { : Move window left<!-- raw HTML omitted --> (prefix key) } : Move window right</td>
+          <td>Moving windows</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) spacebar</td>
+          <td>Change window layout</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) :source-file ~/.tmux.conf</td>
+          <td>To reset tmux configs from tmux</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) x</td>
+          <td>To kill tmux session</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Ctrl + d</td>
+          <td>To kill tmux window</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) [</td>
+          <td>Copy mode</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/2022-10-03-tmux_checklist/" data-title="Tmux checklist"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/2022-10-03-tmux_checklist/" data-title="Tmux checklist"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2022-10-03-tmux_checklist/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/2022-10-03-tmux_checklist/" data-title="Tmux checklist"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/2022-10-03-tmux_checklist/" data-title="Tmux checklist"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/2022-10-03-tmux_checklist/" data-title="Tmux checklist"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/2022-10-03-tmux_checklist/" data-title="Tmux checklist" data-description=""><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2022-10-03-tmux_checklist%2f&amp;text=Tmux%20checklist" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/2023-06-15-scorpio_linux_setup/" class="next" rel="next" title="Scorpio Linux Setup">Scorpio Linux Setup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{}};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,539 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Rev - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/rev/</link>
+        <description>Rev - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Fri, 30 Sep 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/rev/" rel="self" type="application/rss+xml" /><item>
+    <title>WRECKCTF 2022</title>
+    <link>http://localhost:1313/posts/wreckctf-2022/</link>
+    <pubDate>Fri, 30 Sep 2022 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/wreckctf-2022/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/1775" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1775</a></li>
+<li>Sep 30 to Oct 02</li>
+<li>Played with wackers</li>
+<li>Ranking: 74/524 with 3275 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/flag-checker</td>
+          <td>easy</td>
+          <td>235</td>
+          <td><a href="#revflag-checker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/advanced-flag-checker</td>
+          <td>easy</td>
+          <td>343</td>
+          <td><a href="#revadvanced-flag-checker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/reverser</td>
+          <td>easy</td>
+          <td>374</td>
+          <td><a href="#revreverser" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="revflag-checker">rev/flag-checker</h3>
+<p>I implemented this simple flag checker—can you decompile it and get the right flag?</p>
+<p>Attachments: <a href="https://wreckctf.com/uploads/306b6533129a06b81530c043da7bea6125979565776123cf7dcecb31afad1a0f/chal" target="_blank" rel="noopener noreffer ">chal</a></p>
+<h3 id="solution">Solution</h3>
+<p>Open in ida and follow the ida variable indexes in order and get the flag</p>]]></description>
+</item>
+<item>
+    <title>DownUnder CTF 2022</title>
+    <link>http://localhost:1313/posts/downunder-ctf-2022/</link>
+    <pubDate>Fri, 23 Sep 2022 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/downunder-ctf-2022/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/1625" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1625</a></li>
+<li>Sep 23 to Sep 25</li>
+<li>Played with wackers</li>
+<li>Ranking: 392/1407 with 750 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/babyp(y)wn</td>
+          <td>beginner</td>
+          <td>50</td>
+          <td><a href="#pwnbabypywn" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/source-provided</td>
+          <td>beginner</td>
+          <td>50</td>
+          <td><a href="#revsource-provided" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="dfir">DFIR</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>dfir/Shop-Knock-Knock-Knock</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-knock-knock-knock" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-Logging-for-what?</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-logging-for-what" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-I&rsquo;m-just-looking!</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-im-just-looking" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-Oi!-Get-out-of-there!</td>
+          <td>medium</td>
+          <td>50</td>
+          <td><a href="#dfirshop-oi-get-out-of-there" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="pwnbabypywn">pwn/babypywn</h3>
+<p>Python is memory safe, right?</p>
+<p>Author: joseph#8210</p>
+<p>Attachments: <a href="https://play.duc.tf/files/75063ab9b30ed274dd69906496ce0c15/babypywn.py?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjozN30.YzHRZQ.fB3_7LN6wR9a1LOd2JRyUidbaC4" target="_blank" rel="noopener noreffer ">babypywn.py</a></p>]]></description>
+</item>
+<item>
+    <title>MHSCTF 2022</title>
+    <link>http://localhost:1313/posts/mhsctf-2022/</link>
+    <pubDate>Fri, 18 Feb 2022 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/mhsctf-2022/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/1564" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1564</a></li>
+<li>Feb 18 to Feb 25</li>
+<li>Played with wackers</li>
+<li>Ranking: 106/739 with 630 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="crypto">Crypto</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>crypto/Em-Dee</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptoem-dee" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Whats-Cooking</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptowhats-cooking" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Peanuts</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptopeanuts" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Crash-Hacker</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptocrash-hacker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Whats-Cooking-2</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptowhats-cooking-2" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/IPv11</td>
+          <td>Easy</td>
+          <td>15</td>
+          <td><a href="#cryptoipv11" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/Blank-Slate</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#forensicsblank-slate" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/In-Plain-Sight</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#forensicsin-plain-sight" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blank-Slate-2</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#forensicsblank-slate-2" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Chimera</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#forensicschimera" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blank-Slate-3</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#forensicsblank-slate-3" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blatant-Corruption</td>
+          <td>Medium</td>
+          <td>40</td>
+          <td><a href="#forensicsblatant-corruption" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="general">General</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>general/Sanity-Check</td>
+          <td>Easy</td>
+          <td>2</td>
+          <td><a href="#generalsanity-check" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Discord</td>
+          <td>Easy</td>
+          <td>3</td>
+          <td><a href="#generaldiscord" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Binned</td>
+          <td>Easy</td>
+          <td>5</td>
+          <td><a href="#generalbinned" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Where-the-Wild-Cards-Are</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#generalwhere-the-wild-cards-are" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Reconstruction</td>
+          <td>Medium</td>
+          <td>35</td>
+          <td><a href="#generalreconstruction" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/Lemme-In</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#revlemme-in" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/James-Harold-Japp</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#webjames-harold-japp" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/new-site-who-dis</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#webnew-site-who-dis" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Bend</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#webbend" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Piece-It-Together</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#webpiece-it-together" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Cuppa-Joe</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#webcuppa-joe" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Erlenmeyer-Biscuits</td>
+          <td>Easy</td>
+          <td>40</td>
+          <td><a href="#weberlenmeyer-biscuits" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="cryptoem-dee">crypto/Em-Dee</h3>
+<p>I have a good friend named Em. She loves secret codes, so when she challenged me this time, I was well up for it! She told me that she encoded the word &ldquo;happy&rdquo; as &ldquo;56ab24c15b72a457069c5ea42fcfc640&rdquo; and &ldquo;sad&rdquo; as &ldquo;49f0bad299687c62334182178bfd75d8&rdquo; (without the quotes) and challenged me to encode &ldquo;mhsctf&rdquo; using her method! I can&rsquo;t figure it out! What would it be? Enter your answer in flag format: &ldquo;flag{&hellip;}&rdquo;</p>]]></description>
+</item>
+<item>
+    <title>LIT 2021</title>
+    <link>http://localhost:1313/posts/lit-2021/</link>
+    <pubDate>Fri, 16 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/lit-2021/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/1398" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1398</a></li>
+<li>Jul 16 to Jul 18</li>
+<li>Played with wackers</li>
+<li>Ranking: 142/476 with 1875 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/Intro-to-CTF</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscintro-to-ctf" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Discord-Flag</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscdiscord-flag" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Survey</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscsurvey" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Hex-to-ASCII</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#mischex-to-ascii" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Dots-and-Lines</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscdots-and-lines" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Never-Gonna-Give-You-Up</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscnever-gonna-give-you-up" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Peanutbutter-Jar</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscpeanutbutter-jar" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Steganography</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscsteganography" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/CodeTiger-ORZ</td>
+          <td>Medium</td>
+          <td>I forgor</td>
+          <td><a href="#misccodetiger-orz" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/Gets</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#pwngets" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/Yarn</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#revyarn" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/Evaluation</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#revevaluation" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/Let-It-Go</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#weblet-it-go" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/My-First-Website</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#webmy-first-website" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/dizzy</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#webdizzy" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="miscintro-to-ctf">misc/Intro-to-CTF</h3>
+<p>Welcome to your first CTF Challenge! For this problem, you simply need to read the CTF Resource page and find the flag :D.
+Resource Page: <a href="https://lit.lhsmathcs.org/ctfres" target="_blank" rel="noopener noreffer ">https://lit.lhsmathcs.org/ctfres</a></p>]]></description>
+</item>
+</channel>
+</rss>

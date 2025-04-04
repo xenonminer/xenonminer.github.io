@@ -1,0 +1,4 @@
+baseURL = 'https://xenonminer.github.io'
+languageCode = 'en-us'
+title = 'pwnland'
+theme = 'loveit'

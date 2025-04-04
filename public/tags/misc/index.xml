@@ -1,0 +1,301 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Misc - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/misc/</link>
+        <description>Misc - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Fri, 11 Feb 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/misc/" rel="self" type="application/rss+xml" /><item>
+    <title>DefCamp CTF 2022</title>
+    <link>http://localhost:1313/posts/defcampctf-2022/</link>
+    <pubDate>Fri, 11 Feb 2022 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/defcampctf-2022/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/1560" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1560</a></li>
+<li>Feb 11 to Feb 13</li>
+<li>Played with wackers</li>
+<li>Ranking: 73/1035 with 736 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/this-file-hides-something</td>
+          <td>Medium</td>
+          <td>50</td>
+          <td><a href="#forensicsthis-file-hides-something" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/catch-me-if-you-can</td>
+          <td>Medium</td>
+          <td>186/772</td>
+          <td><a href="#misccatch-me-if-you-can" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/para-code</td>
+          <td>Easy</td>
+          <td>50</td>
+          <td><a href="#webpara-code" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="forensicsthis-file-hides-something">forensics/this-file-hides-something</h3>
+<p>There is an emergency regarding this file. We need to extract the password ASAP. It&rsquo;s a crash dump, but our tools are not working. Please help us, time is not on our side.</p>]]></description>
+</item>
+<item>
+    <title>LIT 2021</title>
+    <link>http://localhost:1313/posts/lit-2021/</link>
+    <pubDate>Fri, 16 Jul 2021 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/lit-2021/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/1398" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1398</a></li>
+<li>Jul 16 to Jul 18</li>
+<li>Played with wackers</li>
+<li>Ranking: 142/476 with 1875 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/Intro-to-CTF</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscintro-to-ctf" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Discord-Flag</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscdiscord-flag" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Survey</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscsurvey" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Hex-to-ASCII</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#mischex-to-ascii" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Dots-and-Lines</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscdots-and-lines" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Never-Gonna-Give-You-Up</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscnever-gonna-give-you-up" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Peanutbutter-Jar</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscpeanutbutter-jar" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Steganography</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscsteganography" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/CodeTiger-ORZ</td>
+          <td>Medium</td>
+          <td>I forgor</td>
+          <td><a href="#misccodetiger-orz" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/Gets</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#pwngets" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/Yarn</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#revyarn" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/Evaluation</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#revevaluation" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/Let-It-Go</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#weblet-it-go" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/My-First-Website</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#webmy-first-website" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/dizzy</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#webdizzy" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="miscintro-to-ctf">misc/Intro-to-CTF</h3>
+<p>Welcome to your first CTF Challenge! For this problem, you simply need to read the CTF Resource page and find the flag :D.
+Resource Page: <a href="https://lit.lhsmathcs.org/ctfres" target="_blank" rel="noopener noreffer ">https://lit.lhsmathcs.org/ctfres</a></p>]]></description>
+</item>
+<item>
+    <title>hsctf 2021</title>
+    <link>http://localhost:1313/posts/hsctf-2021/</link>
+    <pubDate>Mon, 14 Jun 2021 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/hsctf-2021/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/1264" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1264</a></li>
+<li>Jun 14 to Jun 19</li>
+<li>Played with wackers</li>
+<li>Ranking: 254/1164 with 3500 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/LSBlue</td>
+          <td>Medium</td>
+          <td>220</td>
+          <td><a href="#misclsblue" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/NRC</td>
+          <td>Easy</td>
+          <td>107</td>
+          <td><a href="#webnrc" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="misclsblue">misc/LSBlue</h3>
+<p>Orca watching is an awesome pastime of mine!</p>
+<p>Attachments: <a href="https://github.com/wackersCTF/hsctf-8/blob/main/misc/LSBlue/lsblue.png?raw=true" target="_blank" rel="noopener noreffer ">https://github.com/wackersCTF/hsctf-8/blob/main/misc/LSBlue/lsblue.png?raw=true</a></p>
+<h3 id="solution">Solution</h3>
+<p>First, you will obtain the file they gave.</p>
+<p>Since the title name of the challenge is LSBlue you will know that it has something to do with LSB.</p>]]></description>
+</item>
+</channel>
+</rss>

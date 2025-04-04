@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>MHSCTF 2022 - pwnland</title><meta name="Description" content="Writeup for the challenges in MHSCTF 2022"><meta property="og:url" content="http://localhost:1313/posts/mhsctf-2022/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="MHSCTF 2022">
+  <meta property="og:description" content="Writeup for the challenges in MHSCTF 2022">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-02-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-02-25T00:00:00+00:00">
+    <meta property="article:tag" content="Crypto">
+    <meta property="article:tag" content="Forensics">
+    <meta property="article:tag" content="Rev">
+    <meta property="article:tag" content="Web">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MHSCTF 2022">
+  <meta name="twitter:description" content="Writeup for the challenges in MHSCTF 2022">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/mhsctf-2022/" /><link rel="prev" href="http://localhost:1313/posts/defcampctf-2022/" /><link rel="next" href="http://localhost:1313/posts/csaw-2022/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "MHSCTF 2022",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/mhsctf-2022\/"
+        },"genre": "posts","keywords": "crypto, forensics, rev, web","wordcount":  2851 ,
+        "url": "http:\/\/localhost:1313\/posts\/mhsctf-2022\/","datePublished": "2022-02-18T00:00:00+00:00","dateModified": "2022-02-25T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "Writeup for the challenges in MHSCTF 2022"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MHSCTF 2022</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-02-18">2022-02-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2851 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#crypto">Crypto</a></li>
+    <li><a href="#forensics">Forensics</a></li>
+    <li><a href="#general">General</a></li>
+    <li><a href="#rev">Rev</a></li>
+    <li><a href="#web">Web</a></li>
+    <li><a href="#writeups">Writeups</a>
+      <ul>
+        <li><a href="#cryptoem-dee">crypto/Em-Dee</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#cryptowhats-cooking">crypto/Whats-Cooking</a></li>
+        <li><a href="#solution-1">Solution</a></li>
+        <li><a href="#cryptopeanuts">crypto/Peanuts</a></li>
+        <li><a href="#solution-2">Solution</a></li>
+        <li><a href="#cryptocrash-hacker">crypto/Crash-Hacker</a></li>
+        <li><a href="#solution-3">Solution</a></li>
+        <li><a href="#cryptowhats-cooking-2">crypto/Whats-Cooking-2</a></li>
+        <li><a href="#solution-4">Solution</a></li>
+        <li><a href="#cryptoipv11">crypto/IPv11</a></li>
+        <li><a href="#solution-5">Solution</a></li>
+        <li><a href="#forensicsblank-slate">forensics/Blank-Slate</a></li>
+        <li><a href="#solution-6">Solution</a></li>
+        <li><a href="#forensicsin-plain-sight">forensics/In-Plain-Sight</a></li>
+        <li><a href="#solution-7">Solution</a></li>
+        <li><a href="#forensicsblank-slate-2">forensics/Blank-Slate-2</a></li>
+        <li><a href="#solution-8">Solution</a></li>
+        <li><a href="#forensicschimera">forensics/Chimera</a></li>
+        <li><a href="#solution-9">Solution</a></li>
+        <li><a href="#forensicsblank-slate-3">forensics/Blank-Slate-3</a></li>
+        <li><a href="#solution-10">Solution</a></li>
+        <li><a href="#forensicsblatant-corruption">forensics/Blatant-Corruption</a></li>
+        <li><a href="#solution-11">Solution</a></li>
+        <li><a href="#generalsanity-check">general/Sanity-Check</a></li>
+        <li><a href="#solution-12">Solution</a></li>
+        <li><a href="#generaldiscord">general/Discord</a></li>
+        <li><a href="#solution-13">Solution</a></li>
+        <li><a href="#generalbinned">general/Binned</a></li>
+        <li><a href="#solution-14">Solution</a></li>
+        <li><a href="#generalwhere-the-wild-cards-are">general/Where-the-Wild-Cards-Are</a></li>
+        <li><a href="#solution-15">Solution</a></li>
+        <li><a href="#generalreconstruction">general/Reconstruction</a></li>
+        <li><a href="#solution-16">Solution</a></li>
+        <li><a href="#revlemme-in">rev/Lemme-In</a></li>
+        <li><a href="#solution-17">Solution</a></li>
+        <li><a href="#webjames-harold-japp">web/James-Harold-Japp</a></li>
+        <li><a href="#solution-18">Solution</a></li>
+        <li><a href="#webnew-site-who-dis">web/new-site-who-dis</a></li>
+        <li><a href="#solution-19">Solution</a></li>
+        <li><a href="#webbend">web/Bend</a></li>
+        <li><a href="#solution-20">Solution</a></li>
+        <li><a href="#webpiece-it-together">web/Piece-It-Together</a></li>
+        <li><a href="#solution-21">Solution</a></li>
+        <li><a href="#webcuppa-joe">web/Cuppa-Joe</a></li>
+        <li><a href="#solution-22">Solution</a></li>
+        <li><a href="#weberlenmeyer-biscuits">web/Erlenmeyer-Biscuits</a></li>
+        <li><a href="#solution-23">Solution</a></li>
+        <li><a href="#takeaways">Takeaways</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li><a href="https://ctftime.org/event/1564" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1564</a></li>
+<li>Feb 18 to Feb 25</li>
+<li>Played with wackers</li>
+<li>Ranking: 106/739 with 630 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="crypto">Crypto</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>crypto/Em-Dee</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptoem-dee" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Whats-Cooking</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptowhats-cooking" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Peanuts</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptopeanuts" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Crash-Hacker</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptocrash-hacker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Whats-Cooking-2</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptowhats-cooking-2" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/IPv11</td>
+          <td>Easy</td>
+          <td>15</td>
+          <td><a href="#cryptoipv11" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/Blank-Slate</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#forensicsblank-slate" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/In-Plain-Sight</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#forensicsin-plain-sight" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blank-Slate-2</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#forensicsblank-slate-2" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Chimera</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#forensicschimera" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blank-Slate-3</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#forensicsblank-slate-3" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blatant-Corruption</td>
+          <td>Medium</td>
+          <td>40</td>
+          <td><a href="#forensicsblatant-corruption" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="general">General</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>general/Sanity-Check</td>
+          <td>Easy</td>
+          <td>2</td>
+          <td><a href="#generalsanity-check" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Discord</td>
+          <td>Easy</td>
+          <td>3</td>
+          <td><a href="#generaldiscord" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Binned</td>
+          <td>Easy</td>
+          <td>5</td>
+          <td><a href="#generalbinned" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Where-the-Wild-Cards-Are</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#generalwhere-the-wild-cards-are" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Reconstruction</td>
+          <td>Medium</td>
+          <td>35</td>
+          <td><a href="#generalreconstruction" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/Lemme-In</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#revlemme-in" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/James-Harold-Japp</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#webjames-harold-japp" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/new-site-who-dis</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#webnew-site-who-dis" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Bend</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#webbend" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Piece-It-Together</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#webpiece-it-together" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Cuppa-Joe</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#webcuppa-joe" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Erlenmeyer-Biscuits</td>
+          <td>Easy</td>
+          <td>40</td>
+          <td><a href="#weberlenmeyer-biscuits" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="cryptoem-dee">crypto/Em-Dee</h3>
+<p>I have a good friend named Em. She loves secret codes, so when she challenged me this time, I was well up for it! She told me that she encoded the word &ldquo;happy&rdquo; as &ldquo;56ab24c15b72a457069c5ea42fcfc640&rdquo; and &ldquo;sad&rdquo; as &ldquo;49f0bad299687c62334182178bfd75d8&rdquo; (without the quotes) and challenged me to encode &ldquo;mhsctf&rdquo; using her method! I can&rsquo;t figure it out! What would it be? Enter your answer in flag format: &ldquo;flag{&hellip;}&rdquo;</p>
+<h3 id="solution">Solution</h3>
+<p>Just search up &ldquo;md5 encode&rdquo; on your web browser and click any link and paste &ldquo;mhsctf&rdquo; in there</p>
+<p>Flag: <code>flag{fc3e3c405a66f8fe7cb7f17a838ea88c}</code></p>
+<h3 id="cryptowhats-cooking">crypto/Whats-Cooking</h3>
+<p>65 141 40 66 144 40 67 70 40 66 70 40 65 141 40 63 63 40 67 64 40 67 64 40 66 62 40 65 67 40 63 61 40 66 66 40 66 63 40 64 65 40 64 61 40 66 142 40 66 64 40 64 67 40 64 66 40 63 71</p>
+<h3 id="solution-1">Solution</h3>
+<p>Go to <a href="https://gchq.github.io/CyberChef/" target="_blank" rel="noopener noreffer ">cyberchef</a> and paste in the text and click the magic wand to get the flag.</p>
+<p>Flag: <code>flag{mmm_p@$ta}</code></p>
+<h3 id="cryptopeanuts">crypto/Peanuts</h3>
+<p>Charlie Brown received this message from his good friend Pig-Pen, but it appears to be nonsense. What could it be? Remember to enter your answer in the &ldquo;flag{&hellip;}&rdquo; format; it&rsquo;s all lowercase.</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/74da0cdef1761cf9a67e7be690cc2faa/3fa7aeee79c660ea86111702f0d4953f.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6Mjd9.YhHcjQ.0E2RytMTn-Kq7M1EJsGT_BcvoEQ" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/74da0cdef1761cf9a67e7be690cc2faa/3fa7aeee79c660ea86111702f0d4953f.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6Mjd9.YhHcjQ.0E2RytMTn-Kq7M1EJsGT_BcvoEQ</a></p>
+<h3 id="solution-2">Solution</h3>
+<p>I just searched up pigpen cipher and found an image for it on google and manually decoded the text in the image.</p>
+<p>Flag: <code>flag{goodgriefcharliebrown}</code></p>
+<h3 id="cryptocrash-hacker">crypto/Crash-Hacker</h3>
+<p>Another super-secret message from Em! What does this one mean? b4b11af47f3086ce1293df4908d026d4 Remember to enter your answer in the &ldquo;flag{&hellip;}&rdquo; format! Hint: If at first you don&rsquo;t succeed, try, try again.</p>
+<h3 id="solution-3">Solution</h3>
+<p>Search up md5 decrypt and click any website. I used <a href="https://www.md5online.org/md5-decrypt.html" target="_blank" rel="noopener noreffer ">https://www.md5online.org/md5-decrypt.html</a>. Get the flag.</p>
+<p>Flag: <code>zero_cool</code></p>
+<h3 id="cryptowhats-cooking-2">crypto/Whats-Cooking-2</h3>
+<p>More layers of encryption! (Hint: there are 5 layers)</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/76237482cdd1bf13fd83c012d4ff3b8c/7732348dab3df4cf51cc5f6443aa6e38.txt?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6Mjh9.YhHc9w.P3u0FTcL0IBmcdZhYrUwXluYGwY" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/76237482cdd1bf13fd83c012d4ff3b8c/7732348dab3df4cf51cc5f6443aa6e38.txt?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6Mjh9.YhHc9w.P3u0FTcL0IBmcdZhYrUwXluYGwY</a></p>
+<h3 id="solution-4">Solution</h3>
+<p>I tried this for a bit and got stuck on the last text which had weird J&rsquo;s in it, so I just threw the entire file into ciphey with <code>ciphey -f file</code> and it gave the flag. I wasn&rsquo;t sure how the last one was octal but ciphey said it was.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/155826882-17b16f2f-85c3-479c-9097-1c27cd2a9072.PNG"
+        data-srcset="https://user-images.githubusercontent.com/46347858/155826882-17b16f2f-85c3-479c-9097-1c27cd2a9072.PNG, https://user-images.githubusercontent.com/46347858/155826882-17b16f2f-85c3-479c-9097-1c27cd2a9072.PNG 1.5x, https://user-images.githubusercontent.com/46347858/155826882-17b16f2f-85c3-479c-9097-1c27cd2a9072.PNG 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/155826882-17b16f2f-85c3-479c-9097-1c27cd2a9072.PNG"
+        title="ciphey" /></p>
+<p>Flag: <code>flag{m3$sy}</code></p>
+<h3 id="cryptoipv11">crypto/IPv11</h3>
+<p>I asked my friend for the IP addresss of their website and this is what they gave me. I&rsquo;m sure they&rsquo;re misunderstanding, but I should really decode this before deciding that. Remember to enter your answer in the &ldquo;flag{&hellip;}&rdquo; format! 1.9.100.51.110.116.105.102.105.51.100</p>
+<h3 id="solution-5">Solution</h3>
+<p>The text looked like ascii to me since most of the numbers were between the a-z range in the ascii table so I just replaced the dots with spaces and put the text into an ascii to text and got the flag. I got <code>d3ntifi3d</code> as the output and it looked close to identified so I just added a 1 in front.</p>
+<p>Flag: <code>flag{1d3ntifi3d}</code></p>
+<h3 id="forensicsblank-slate">forensics/Blank-Slate</h3>
+<p>My friend sent me this picture, and I&rsquo;m not sure what to do with it! It seems a little&hellip; blank?</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/eb554a89e9c7ea0cf3e399f2f9c0c688/8b04fe3a04c641931247c4a912a39213.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzB9.YhHdRA.aTG6IAOuzpZHWf7ynuc8DTunrTg" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/eb554a89e9c7ea0cf3e399f2f9c0c688/8b04fe3a04c641931247c4a912a39213.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzB9.YhHdRA.aTG6IAOuzpZHWf7ynuc8DTunrTg</a></p>
+<h3 id="solution-6">Solution</h3>
+<p>Download the file and run <code>strings</code> on it. Get the flag.</p>
+<p>Flag: <code>flag{get_grepped}</code></p>
+<h3 id="forensicsin-plain-sight">forensics/In-Plain-Sight</h3>
+<p>Did you know that the Imagineers who helped build the Disney parks incorporated hidden images into their structures and designs? Many of their designs were in the shape of Mickey Mouse like the one in this image. What else might be hiding in plain sight?</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/7cba480053e397bd4a5048d0a1c1d9da/c420629a20ab083202fddd39f722b41f.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzF9.YhHddQ.6Et8tBDLvQHae1S8IgYc-iK_UBY" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/7cba480053e397bd4a5048d0a1c1d9da/c420629a20ab083202fddd39f722b41f.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzF9.YhHddQ.6Et8tBDLvQHae1S8IgYc-iK_UBY</a></p>
+<h3 id="solution-7">Solution</h3>
+<p>Download the file and run <code>zsteg</code> on it. Get the flag.</p>
+<p>Flag: <code>flag{H1dd3nM1ck3y}</code></p>
+<h3 id="forensicsblank-slate-2">forensics/Blank-Slate-2</h3>
+<p>My friend is, once again, up to no good. They sent me this local git repository and it seems completely empty. Can you help me out here?</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/0c6a7d71f2e66309955ccce155127c02/957d69fa3cc9895ac8fa70cb5e75b698.zip?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzJ9.YhHdlA.4olJzib6ztGJpT70sssqHhlEo0E" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/0c6a7d71f2e66309955ccce155127c02/957d69fa3cc9895ac8fa70cb5e75b698.zip?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzJ9.YhHdlA.4olJzib6ztGJpT70sssqHhlEo0E</a></p>
+<h3 id="solution-8">Solution</h3>
+<p>Knowing that this was a git challenge, I would use GitTools&rsquo;s extractor <a href="https://github.com/internetwache/GitTools" target="_blank" rel="noopener noreffer ">https://github.com/internetwache/GitTools</a> to extract the flag from the commit history.</p>
+<p>Flag: <code>flag{w4tch_0ut_f0r_g17_h15t0ry}</code></p>
+<h3 id="forensicschimera">forensics/Chimera</h3>
+<p>It&rsquo;s just one inside another&hellip;</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/ee88e402b919e225443047e0cbe90e9d/87122c397ac8b10d53057a2c9ec1834e.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzN9.YhHdtg.gc76uG3CiDtO_s2jAd3ww__Oj6c" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/ee88e402b919e225443047e0cbe90e9d/87122c397ac8b10d53057a2c9ec1834e.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzN9.YhHdtg.gc76uG3CiDtO_s2jAd3ww__Oj6c</a></p>
+<h3 id="solution-9">Solution</h3>
+<p>The description mentioned that there was a file inside the original png file so I used <code>foremost</code> to extract the other file out and in the new png file was the flag.</p>
+<p>Flag:<code>flag{4bs0rb3d}</code></p>
+<h3 id="forensicsblank-slate-3">forensics/Blank-Slate-3</h3>
+<p>My friend sent me another picture&hellip; It still looks blank!</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/a864b5e615a110c4560e717d4ce057eb/87dda8317f800936d245ed709350bd3d.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzZ9.YhHd0w.O5ypOHelAKBi-6II64RjElAlSm8" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/a864b5e615a110c4560e717d4ce057eb/87dda8317f800936d245ed709350bd3d.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzZ9.YhHd0w.O5ypOHelAKBi-6II64RjElAlSm8</a></p>
+<h3 id="solution-10">Solution</h3>
+<p>Easy steg challenge. Just turn it to Superimposed or green field then get the flag. A good online tool for this challenge or for any steg challenge is <a href="https://aperisolve.fr/" target="_blank" rel="noopener noreffer ">https://aperisolve.fr/</a>.</p>
+<p>Flag: <code>flag{1t$_n0t_3mpty}</code></p>
+<h3 id="forensicsblatant-corruption">forensics/Blatant-Corruption</h3>
+<p>Something&rsquo;s wrong with this picture. Can you fix it for me?</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/72191be33b0560f3f45fdbdbb218fdc5/5d9af84cfad20e4cf005210e32e38899.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6NDN9.YhHd7A.D3TaYvWRQixfjsVwRG2GSlUgAks" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/72191be33b0560f3f45fdbdbb218fdc5/5d9af84cfad20e4cf005210e32e38899.png?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6NDN9.YhHd7A.D3TaYvWRQixfjsVwRG2GSlUgAks</a></p>
+<h3 id="solution-11">Solution</h3>
+<p>Simple magic bytes challenge, the image is originially corrupted because there were 4 bytes missing that are needed to identify that its a png image.</p>
+<p>So just find the correct file header from a website like <a href="https://en.wikipedia.org/wiki/List_of_file_signatures" target="_blank" rel="noopener noreffer ">https://en.wikipedia.org/wiki/List_of_file_signatures</a> and use <a href="https://hexed.it/" target="_blank" rel="noopener noreffer ">https://hexed.it/</a> to add the 4 bytes of <code>89 50 4E 47</code> to the beginning then export the file.</p>
+<p>After opening the file, you see the flag.</p>
+<p>Flag: <code>flag{str@ight_n_narr0w}</code></p>
+<h3 id="generalsanity-check">general/Sanity-Check</h3>
+<p>Let&rsquo;s have a quick sanity check. Enter the flag &ldquo;flag{1_am_$@n3}&rdquo; to make sure the platform&rsquo;s working! If you have any issues, be sure to contact <a href="mailto:mhsctf@gmail.com" rel="">mhsctf@gmail.com</a>, DM @0xmmalik on Twitter, or DM 0xmmalik#7959 on Discord.</p>
+<h3 id="solution-12">Solution</h3>
+<p>The flag is in the description.</p>
+<p>Flag: <code>flag{1_am_$@n3}</code></p>
+<h3 id="generaldiscord">general/Discord</h3>
+<p>Please join our discord for updates and other information! You&rsquo;ll find a special flag in #announcements. <a href="https://discord.gg/XPk6xTDtFV" target="_blank" rel="noopener noreffer ">https://discord.gg/XPk6xTDtFV</a> Also, please follow @mhsctf and @0xmmalik on Twitter for more information as the competition progresses.</p>
+<h3 id="solution-13">Solution</h3>
+<p>Click the discord link and join their discord. Go to the #announcements channel and scroll up a little. Get the flag.</p>
+<p>Flag: <code>flag{1_h4s_th3_d15c0rd}</code></p>
+<h3 id="generalbinned">general/Binned</h3>
+<p>If you have the number 1001000 in binary, what number is that in decimal? Enter your answer in the flag format: &ldquo;flag{###}&rdquo;</p>
+<h3 id="solution-14">Solution</h3>
+<p>Go to any binary to decimal converter or just do it in your head.</p>
+<p>Flag: <code>flag{72}</code></p>
+<h3 id="generalwhere-the-wild-cards-are">general/Where-the-Wild-Cards-Are</h3>
+<p>[a-z,0-9,{,},_](?=[0-D][T-Z]{7,14})</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/22c68e36282c7298eccdc6901700c880/3920d9a1f126c1ae8c6e559234e62e7d.txt?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MjR9.YhHe0g.gmtOJ5JqevqLjc-9Z4JvOUEGqKg" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/22c68e36282c7298eccdc6901700c880/3920d9a1f126c1ae8c6e559234e62e7d.txt?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MjR9.YhHe0g.gmtOJ5JqevqLjc-9Z4JvOUEGqKg</a></p>
+<h3 id="solution-15">Solution</h3>
+<p>We are given a lot of weird looking text and the description looks like regex so go to a website like <a href="https://regexr.com/" target="_blank" rel="noopener noreffer ">https://regexr.com/</a> and put the text in the file in and put the regex from the description in.</p>
+<p>The characters that make up the flag will be highlighted from the regex.</p>
+<p>Flag: <code>flag{0ut_1n_7he_wild}</code></p>
+<h3 id="generalreconstruction">general/Reconstruction</h3>
+<p>I received an interesting file that&rsquo;s supposed to create a picture, but I&rsquo;m not exactly sure how. Wanna give it a shot?</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/3ad6ac23eb7d0a4dd765a179a7f9a7b2/9712a0c4e51eae4c229538d050ae0d38.txt?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6NDl9.YhQ8cw._R8jGPFUxlfDgUOgKgCAg2Bijyw" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/3ad6ac23eb7d0a4dd765a179a7f9a7b2/9712a0c4e51eae4c229538d050ae0d38.txt?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6NDl9.YhQ8cw._R8jGPFUxlfDgUOgKgCAg2Bijyw</a></p>
+<h3 id="solution-16">Solution</h3>
+<p>We are given a file that looks like the RGB pixels that make up an image.</p>
+<p>We see that that there are also semicolons around the file, probably separating each row of the image as an image is like a matrix, with rows and columns.</p>
+<p>Converting back from RGB pixels to the image could be done with the python module PIL (Pillow).</p>
+<p>The problem is usually these files of RGB bytes, are given without the semicolons that separate each row, so the first task I had was to remove the semicolons.</p>
+<p>After removing the semicolons with python and making a new list that had all the correct bytes, we could make the image with the PIL module now.</p>
+<p>First thing to do would be to turn the list of pixels into bytes first.</p>
+<p>Then, we would use Image.frombytes with &ldquo;RGB&rdquo; and the image pixels.</p>
+<p>We also need to specify the length and width of the image we want to create, but we can play around with that later.</p>
+<p>Then we can use show() to show the image with an image editor.</p>
+<p>Here is what that part of the code looks like.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">img_bytes</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">actual_pixel_list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">frombytes</span><span class="p">(</span><span class="s2">&#34;RGB&#34;</span><span class="p">,</span> <span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">number</span><span class="p">),</span> <span class="n">img_bytes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">img</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span></span></code></pre></div></div>
+<p>Now, we just need to fix the length and width of the image we want to show.</p>
+<p>After playing around with the numbers a bit a testing the boundaries, I found out the maxes for the length and widt were 360, 3560 respectively.</p>
+<p>Here is the final code:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pixel_list</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">actual_pixel_list</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;9712a0c4e51eae4c229538d050ae0d38.txt&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pixel_list</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;;&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">broken</span> <span class="ow">in</span> <span class="n">pixel_list</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">broken</span> <span class="o">!=</span> <span class="s2">&#34;&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">broken</span> <span class="o">=</span> <span class="n">broken</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;,&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">broken</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s2">&#34;&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">actual_pixel_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">img_bytes</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">actual_pixel_list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">frombytes</span><span class="p">(</span><span class="s2">&#34;RGB&#34;</span><span class="p">,</span> <span class="p">(</span><span class="mi">360</span><span class="p">,</span> <span class="mi">2560</span><span class="p">),</span> <span class="n">img_bytes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">img</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span></span></code></pre></div></div>
+<p>Now running this file in my kali linux, it got opened with Image Magick, which was great because I could change the layout and orientation of the image itself.</p>
+<p>The first output after running the file is this:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/155826862-ad79ea5a-577a-431d-bb87-bb52a3eeda3a.PNG"
+        data-srcset="https://user-images.githubusercontent.com/46347858/155826862-ad79ea5a-577a-431d-bb87-bb52a3eeda3a.PNG, https://user-images.githubusercontent.com/46347858/155826862-ad79ea5a-577a-431d-bb87-bb52a3eeda3a.PNG 1.5x, https://user-images.githubusercontent.com/46347858/155826862-ad79ea5a-577a-431d-bb87-bb52a3eeda3a.PNG 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/155826862-ad79ea5a-577a-431d-bb87-bb52a3eeda3a.PNG"
+        title="1" /></p>
+<p>Looks horrible right. We can kind of see that the flag message is there but its really stripped and weird, lets try to maximize Image Magick.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/155826863-9e499bdc-22b4-4bd5-965c-11862d940aff.PNG"
+        data-srcset="https://user-images.githubusercontent.com/46347858/155826863-9e499bdc-22b4-4bd5-965c-11862d940aff.PNG, https://user-images.githubusercontent.com/46347858/155826863-9e499bdc-22b4-4bd5-965c-11862d940aff.PNG 1.5x, https://user-images.githubusercontent.com/46347858/155826863-9e499bdc-22b4-4bd5-965c-11862d940aff.PNG 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/155826863-9e499bdc-22b4-4bd5-965c-11862d940aff.PNG"
+        title="2" /></p>
+<p>Looks a little better, but doesn&rsquo;t look like the entire flag and it looks like it is flipped and turned sideways.</p>
+<p>Lets fix those things by going to ImageMagick&rsquo;s settings by clicking on the image then going to &ldquo;Transform&rdquo;, then pressing &ldquo;Flip&rdquo;, then &ldquo;Rotate Left&rdquo; twice.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/155826866-3a32d898-2eed-41e3-a333-cdb46196a0fe.PNG"
+        data-srcset="https://user-images.githubusercontent.com/46347858/155826866-3a32d898-2eed-41e3-a333-cdb46196a0fe.PNG, https://user-images.githubusercontent.com/46347858/155826866-3a32d898-2eed-41e3-a333-cdb46196a0fe.PNG 1.5x, https://user-images.githubusercontent.com/46347858/155826866-3a32d898-2eed-41e3-a333-cdb46196a0fe.PNG 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/155826866-3a32d898-2eed-41e3-a333-cdb46196a0fe.PNG"
+        title="3" /></p>
+<p>Now the flag is more clear and we can get most of the get the characters by reading what the phrase says.</p>
+<p>We get the flag!</p>
+<p>Flag: <code>flag{411_7h3_king5_h0rs3s_and_a11_th3_kings_m3n}</code></p>
+<p><code>Note that this was probably a really innieficient way to do this challenge. There was probably some better ways that built the image by row without having to remove the semicolons, but I didn't know how and just went with my way.</code></p>
+<h3 id="revlemme-in">rev/Lemme-In</h3>
+<p>I want to join this secret club, but they have the weirdest passwords! I&rsquo;ve managed to intercept the program they use to authenticate the passwords, but I don&rsquo;t know how to figure it out. Can you figure out the password for me?</p>
+<p>Attachments: <a href="https://mhsctf2022.ctfd.io/files/c36599beaf8c45a69b8d6172e46fe4fd/d17d3daad85fb5fd1fb849c5e4d63d9e.py?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzV9.YhHfeA.6m7VPyyE4Mv47kDnLYaFru7lM6w" target="_blank" rel="noopener noreffer ">https://mhsctf2022.ctfd.io/files/c36599beaf8c45a69b8d6172e46fe4fd/d17d3daad85fb5fd1fb849c5e4d63d9e.py?token=eyJ1c2VyX2lkIjo3NDQsInRlYW1faWQiOjIxMywiZmlsZV9pZCI6MzV9.YhHfeA.6m7VPyyE4Mv47kDnLYaFru7lM6w</a></p>
+<h3 id="solution-17">Solution</h3>
+<p>I was very braindead wasn&rsquo;t thinking when starting this challenge. But, after a small break I realized that it was pretty simple.</p>
+<p>We are given the code:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">roll</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">text</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">swoop</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">text</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;Enter the password: &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">swoop</span><span class="p">(</span><span class="n">roll</span><span class="p">(</span><span class="n">password</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&#34;}12u7#dvl{$`fos_4jwchb}jelg&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Welcome in!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Sorry, wrong password.&#34;</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>We can see that the roll() function just reverses the text and the swoop() function just goes up the ascii table a certain amount of characters.</p>
+<p>To solve, we can just reverse the order of those two functions and reverse what the swoop() function does.</p>
+<p>My reversed code is here:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ct</span> <span class="o">=</span> <span class="s2">&#34;}12u7#dvl{$`fos_4jwchb}jelg&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ct</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ct</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ct</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">ct</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ct</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></span></span></code></pre></div></div>
+<p>We get the flag!</p>
+<p>Flag: <code>flag{ah_th3_old_$witc#3r00}</code></p>
+<h3 id="webjames-harold-japp">web/James-Harold-Japp</h3>
+<p>I need to be able to log in to this website. Can you tell me how to do it? mhsctf-jamesharoldjapp.0xmmalik.repl.co (you may need to wait for the site to wake up)</p>
+<h3 id="solution-18">Solution</h3>
+<p>Going to the website, we see that it asks for a Password and there is a Submit button.</p>
+<p>Looking in the source code of the website, we see that if we set the password to <code>this_is_a_really_secure_password</code>, we would get sent to another page that should have the flag.</p>
+<p>But when we get sent to the new page, it doesn&rsquo;t have the flag. Even worse, it says that the requested resource isn&rsquo;t there.</p>
+<p>Luckily, taking a look at the page itself, we can see that this is not a standard php file not found error, but a css that just makes the page look like it.</p>
+<p>So, going to the source code of that page, we find the flag!</p>
+<p>Flag: <code>flag{1n$p3ct0r_g3n3r@l}</code></p>
+<h3 id="webnew-site-who-dis">web/new-site-who-dis</h3>
+<p>I just started making my new website. Can you pen-test it and see if you can get the super-secret flag mhsctf-newsitewhodis.0xmmalik.repl.co (you may need to wait for the site to wake up)</p>
+<h3 id="solution-19">Solution</h3>
+<p>Going to the website, we see there is a link to a new page that says <code>Admins, get your flag here!</code></p>
+<p>From this message it already seems clear as to what this challenge is.</p>
+<p>Entering the new page we see that it says <code>Sorry, only admins can see the super-secret flag!</code>.</p>
+<p>We now know that it is a cookie value changing challenge.</p>
+<p>Inspecting the page and going to the cookie section we see that there is a cookie named <code>user</code> with the value of <code>basic</code>.</p>
+<p>Changing the value from <code>basic</code> to <code>admin</code> and refreshignr the page, we get the flag!</p>
+<p>Flag: <code>flag{1t3-@_m3_Mari0}</code></p>
+<p>Notes: <code>I was really confused  when doing this challenge because I thought they had some setting that blocked cookie value changing or something similar. But it turns out, it was just a Chrome setting that you could change somehow. I just opened the firefox browser instead and it worked perfectly fine.</code></p>
+<h3 id="webbend">web/Bend</h3>
+<p>I found this weird website that says it can give me a cool flag, but I can&rsquo;t seem to get it! What am I doing wrong? mhsctf-bend.0xmmalik.repl.co (you may need to wait for the site to wake up)</p>
+<h3 id="solution-20">Solution</h3>
+<p>Going to the website, we see the message <code>Welcome! Click here to get your flag!</code> where the here is a link pointing to a new page.</p>
+<p>Sadly, when we click the link, we don&rsquo;t get sent to a page that has the flag, we get redirected to a rickroll :rage:. Bad ctf smh.</p>
+<p>Sadly, when we go to the link, we can&rsquo;t even view the source code because it automatically redirects us.</p>
+<p>So another way to view the source code would to use curl.</p>
+<p>Using the command <code>curl https://mhsctf-bend.0xmmalik.repl.co/flag/</code>, We see that there is a flag.</p>
+<p>Flag: <code>flag{g3t_cur1ed}</code></p>
+<h3 id="webpiece-it-together">web/Piece-It-Together</h3>
+<p>My friend dared me to find the secret password to their website, but their code is so messy! It&rsquo;s impossible to see what&rsquo;s what! Can you help me? mhsctf-pieceittogether.0xmmalik.repl.co (you may need to wait for the site to wake up)</p>
+<h3 id="solution-21">Solution</h3>
+<p>Taking a look at the soure code of the website, there isn&rsquo;t really anything readable and all looks encoded in some really weird thing.</p>
+<p>But when taking a look with inspect at the source code, we see that some parts are still readable and we find a function called checkpwd().</p>
+<p>The checkpwd() function contained a still &ldquo;unreadable&rdquo; code but, this time it was more obvious as to what this was.</p>
+<p>Deobfuscating this code using a website like <a href="http://jsnice.org/" target="_blank" rel="noopener noreffer ">http://jsnice.org/</a>, we get a better looking code.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-javascript">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/** @type {!Array} */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_0xa8fe</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;4w&#34;</span><span class="p">,</span> <span class="s2">&#34;d}&#34;</span><span class="p">,</span> <span class="s2">&#34;g{&#34;</span><span class="p">,</span> <span class="s2">&#34;j&#34;</span><span class="p">,</span> <span class="s2">&#34;}&#34;</span><span class="p">,</span> <span class="s2">&#34;1g&#34;</span><span class="p">,</span> <span class="s2">&#34;w0&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">,</span> <span class="s2">&#34;al&#34;</span><span class="p">,</span> <span class="s2">&#34;s&#34;</span><span class="p">,</span> <span class="s2">&#34;h7&#34;</span><span class="p">,</span> <span class="s2">&#34;ag{&#34;</span><span class="p">,</span> <span class="s2">&#34;fl&#34;</span><span class="p">,</span> <span class="s2">&#34;m3t&#34;</span><span class="p">,</span> <span class="s2">&#34;value&#34;</span><span class="p">,</span> <span class="s2">&#34;pwd&#34;</span><span class="p">,</span> <span class="s2">&#34;getElementById&#34;</span><span class="p">,</span> <span class="s2">&#34;Yep, that&#39;s the flag!&#34;</span><span class="p">,</span> <span class="s2">&#34;Sorry, that&#39;s not the flag!&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @return {undefined}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">checkpwd</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nb">document</span><span class="p">[</span><span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">16</span><span class="p">]](</span><span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">15</span><span class="p">])[</span><span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">14</span><span class="p">]]</span> <span class="o">==</span> <span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">+</span> <span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">+</span> <span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">alert</span><span class="p">(</span><span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">17</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">alert</span><span class="p">(</span><span class="nx">_0xa8fe</span><span class="p">[</span><span class="mi">18</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span></span></span></code></pre></div></div>
+<p>Now getting the flag was pretty obvious as we could just follow what indexes were added up from the list to make up the flag. We get the flag!</p>
+<p>Flag: <code>flag{j1gs4w}</code></p>
+<h3 id="webcuppa-joe">web/Cuppa-Joe</h3>
+<p>A new coffee shop is opening up in my neihborhood! It&rsquo;s called Cuppa Joe and I can&rsquo;t wait to check it out! It would ahem be a real shame if someone were to ahem hack their website and, hypothetically, get their secret flag. mhsctf-cuppajoe.0xmmalik.repl.co (you may need to wait for the site to wake up)</p>
+<h3 id="solution-22">Solution</h3>
+<p>Taking a look at the website we see that there are three pages in the entire site of &ldquo;index.php&rdquo;, &ldquo;flag.php&rdquo;, and &ldquo;message.php&rdquo;.</p>
+<p>Now at first thought we think this challenge might be to do some command injection in the message box they gave us to get to flag.php, but realizing that we aren&rsquo;t able to click the flag.php link as it redirects to nowhere, there is a better idea.</p>
+<p>We know that pressing the &ldquo;Submit&rdquo; button makes a POST request to the message.php file but what happens if we change the link from message.php to flag.php in the source code.</p>
+<p>After changing the message.php link to flag.php in the source code, we see that after pressing the &ldquo;Submit&rdquo; button, we are redirected to the flag page.</p>
+<p>We get the flag!</p>
+<p>Flag: <code>flag{c0ff33_be4nz}</code></p>
+<h3 id="weberlenmeyer-biscuits">web/Erlenmeyer-Biscuits</h3>
+<p>You remember that coffee shop that just opened up, Cuppa Joe? Well there&rsquo;s now a competitor shop that&rsquo;s opening up across from them! It&rsquo;s called Erlenmeyer Biscuits, and here is their website. I really don&rsquo;t want Cuppa Joe to go out of business, so do you think you could dig up some dirt on Erlenmeyer Biscuits to stop them from opening? mhsctf-erlenmeyer-biscuits.0xmmalik.repl.co (you may need to wait for the site to wake up)</p>
+<h3 id="solution-23">Solution</h3>
+<p>Reading the title of the challenge, I realized that Erlenmeyer meant &ldquo;Erlenmeyer Flask&rdquo; and Buscuits was talking about &ldquo;cookies&rdquo; so checking the cookies in the page and decoding the flask session cookie from base64, we get the flag.</p>
+<p>Flag: <code>flag{fl45k_s35510n_c00k13s_4r3_1n53cure}</code></p>
+<h3 id="takeaways">Takeaways</h3>
+<ul>
+<li>I learned how to do git forensics challenges.</li>
+<li>I learned that there is a type of octal that has J&rsquo;s in it???</li>
+<li>Check the source code with developer tools instead of Ctrl + U sometimes because it might have better information</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-02-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/mhsctf-2022/" data-title="MHSCTF 2022" data-hashtags="crypto,forensics,rev,web"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/mhsctf-2022/" data-title="MHSCTF 2022"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/mhsctf-2022/" data-hashtag="crypto"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/mhsctf-2022/" data-title="MHSCTF 2022"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/mhsctf-2022/" data-title="MHSCTF 2022"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/mhsctf-2022/" data-title="MHSCTF 2022"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/mhsctf-2022/" data-title="MHSCTF 2022" data-description="Writeup for the challenges in MHSCTF 2022"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmhsctf-2022%2f&amp;text=MHSCTF%202022" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/crypto/">Crypto</a>,&nbsp;<a href="/tags/forensics/">Forensics</a>,&nbsp;<a href="/tags/rev/">Rev</a>,&nbsp;<a href="/tags/web/">Web</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/defcampctf-2022/" class="prev" rel="prev" title="DefCamp CTF 2022"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>DefCamp CTF 2022</a>
+            <a href="/posts/csaw-2022/" class="next" rel="next" title="csaw 2022">csaw 2022<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

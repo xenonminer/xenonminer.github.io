@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>HackTheBox - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/hackthebox/</link>
+        <description>HackTheBox - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Mon, 27 Jan 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/hackthebox/" rel="self" type="application/rss+xml" /><item>
+    <title>Offensive Certifications Part 1</title>
+    <link>http://localhost:1313/posts/offensive-certifications/</link>
+    <pubDate>Mon, 27 Jan 2025 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/offensive-certifications/</guid>
+    <description><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>In the past 6 months, I have been working on and achieved 3 certifications related to offensive security. The 3 certifications are Certified Penetration Testing Specialist (CPTS), Certified Bug Bounty Hunter (CBBH), and Certified Red Team Operator (CRTO) from HackTheBox and Zero-Point Security. This blog post will be detailing my experiences through these certifications and as a comparison.</p>
+<h2 id="cpts">CPTS</h2>
+<p>The Certified Penetration Testing Specialist (CPTS) certification was the first certification I achieved. The certification was a great introduction to pentesting web and network applications.</p>]]></description>
+</item>
+</channel>
+</rss>

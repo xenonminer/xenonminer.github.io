@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - pwnland</title><meta name="Description" content="mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall"><meta property="og:url" content="http://localhost:1313/posts/2021-08-23-gradescraper/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="pwnland">
+  <meta property="og:description" content="Get bs4 module by like pip install bs4 or search up how to do it on your os.
+Copy the program to a file and replace the email and password part with yours.
+Run!
+Code import requests from bs4 import BeautifulSoup payload = { &#39;portalAccountUsername&#39;: &#39;email&#39;, #replace with your email &#39;portalAccountPassword&#39;: &#39;password&#39; #replace with your password } with requests.Session() as s: p = s.post(&#39;https://mystudent.fjuhsd.org/Parent/LoginParent.aspx&#39;, data=payload) gradebook = s.get(&#39;https://mystudent.fjuhsd.org/Parent/GradebookSummary.aspx&#39;) soup = BeautifulSoup(gradebook.content, &#39;html.parser&#39;) strings = soup.find_all(class_=&#34;Data al&#34;) numbers = soup.find_all(class_=&#34;Data ac&#34;) class_names = [] teachers = [] letter_grade = [] number_grades = [] for string in strings: string = string.get_text().strip() #get the raw text from each element in strings if string != &#34;&#34;: #for strings with text if(len(string) &lt; 3 and string[0].isupper()): #if the string is less than 3 chars and the first letter is uppercase letter_grade.append(string) # it&#39;s a letter grade elif(string.istitle() and &#39;-&#39; not in string): #if the string is a title (all words only have the first letter capitalized) and there are no hyphens) teachers.append(string) # it&#39;s a teacher elif(len(string) &gt; 5): # if it&#39;s not the other two and the length of the string is greater than 5 class_names.append(string) # it&#39;s a class for num in numbers: if(&#39;span&#39; in str(num)): #if there&#39;s span in the element (only number grades have span in them) num = num.span # num is equal to the span tag if(num.get(&#39;style&#39;) != &#34;display:none;&#34;): # if the style attribute of the span tag isn&#39;t &#34;display:none;&#34; num = num.get_text().strip() # get the innerHTML of the span if num != &#34;&#34; and len(num) &gt; 2: # if the text is greater than 2 and isn&#39;t nothing if(num[:2].isnumeric()): # if the first two characters of the grade are numbers number_grades.append(num) # it&#39;s a number grade assert len(class_names) == len(teachers) == len(letter_grade) == len(number_grades) # iterate through all the lists at the same time and print the elements as it goes for name, teacher, letter, number in zip(class_names, teachers, letter_grade, number_grades): if(letter == &#34;A&#43;&#34; or number == &#39;100.00&#39;): code = &#39;\u001b[32;1m&#39; elif(&#39;A&#39; in letter): code = &#39;\u001b[32m&#39; elif(&#39;B&#39; in letter): code = &#39;\u001b[34;1m&#39; elif(&#39;C&#39; in letter): code = &#39;\u001b[33;1m&#39; elif(&#39;D&#39; in letter): code = &#39;\u001b[31;1m&#39; elif(&#39;F&#39; in letter): code = &#39;\u001b[31m&#39; else: code = &#39;\u001b[0m&#39; print(f&#34;\u001b[0m{name} ({teacher}) - {code}{number} \u001b[0m({code}{letter}\u001b[0m)&#34;)">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="pwnland">
+  <meta name="twitter:description" content="Get bs4 module by like pip install bs4 or search up how to do it on your os.
+Copy the program to a file and replace the email and password part with yours.
+Run!
+Code import requests from bs4 import BeautifulSoup payload = { &#39;portalAccountUsername&#39;: &#39;email&#39;, #replace with your email &#39;portalAccountPassword&#39;: &#39;password&#39; #replace with your password } with requests.Session() as s: p = s.post(&#39;https://mystudent.fjuhsd.org/Parent/LoginParent.aspx&#39;, data=payload) gradebook = s.get(&#39;https://mystudent.fjuhsd.org/Parent/GradebookSummary.aspx&#39;) soup = BeautifulSoup(gradebook.content, &#39;html.parser&#39;) strings = soup.find_all(class_=&#34;Data al&#34;) numbers = soup.find_all(class_=&#34;Data ac&#34;) class_names = [] teachers = [] letter_grade = [] number_grades = [] for string in strings: string = string.get_text().strip() #get the raw text from each element in strings if string != &#34;&#34;: #for strings with text if(len(string) &lt; 3 and string[0].isupper()): #if the string is less than 3 chars and the first letter is uppercase letter_grade.append(string) # it&#39;s a letter grade elif(string.istitle() and &#39;-&#39; not in string): #if the string is a title (all words only have the first letter capitalized) and there are no hyphens) teachers.append(string) # it&#39;s a teacher elif(len(string) &gt; 5): # if it&#39;s not the other two and the length of the string is greater than 5 class_names.append(string) # it&#39;s a class for num in numbers: if(&#39;span&#39; in str(num)): #if there&#39;s span in the element (only number grades have span in them) num = num.span # num is equal to the span tag if(num.get(&#39;style&#39;) != &#34;display:none;&#34;): # if the style attribute of the span tag isn&#39;t &#34;display:none;&#34; num = num.get_text().strip() # get the innerHTML of the span if num != &#34;&#34; and len(num) &gt; 2: # if the text is greater than 2 and isn&#39;t nothing if(num[:2].isnumeric()): # if the first two characters of the grade are numbers number_grades.append(num) # it&#39;s a number grade assert len(class_names) == len(teachers) == len(letter_grade) == len(number_grades) # iterate through all the lists at the same time and print the elements as it goes for name, teacher, letter, number in zip(class_names, teachers, letter_grade, number_grades): if(letter == &#34;A&#43;&#34; or number == &#39;100.00&#39;): code = &#39;\u001b[32;1m&#39; elif(&#39;A&#39; in letter): code = &#39;\u001b[32m&#39; elif(&#39;B&#39; in letter): code = &#39;\u001b[34;1m&#39; elif(&#39;C&#39; in letter): code = &#39;\u001b[33;1m&#39; elif(&#39;D&#39; in letter): code = &#39;\u001b[31;1m&#39; elif(&#39;F&#39; in letter): code = &#39;\u001b[31m&#39; else: code = &#39;\u001b[0m&#39; print(f&#34;\u001b[0m{name} ({teacher}) - {code}{number} \u001b[0m({code}{letter}\u001b[0m)&#34;)">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/2021-08-23-gradescraper/" /><link rel="prev" href="http://localhost:1313/posts/2024-04-8-ad_pentest/" /><link rel="next" href="http://localhost:1313/posts/hsctf-2021/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/2021-08-23-gradescraper\/"
+        },"genre": "posts","wordcount":  372 ,
+        "url": "http:\/\/localhost:1313\/posts\/2021-08-23-gradescraper\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "xenonminer"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xenonminer</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;372 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#code">Code</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Get bs4 module by like pip install bs4 or search up how to do it on your os.</p>
+<p>Copy the program to a file and replace the email and password part with yours.</p>
+<p>Run!</p>
+<h2 id="code">Code</h2>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;portalAccountUsername&#39;</span><span class="p">:</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="c1">#replace with your email</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;portalAccountPassword&#39;</span><span class="p">:</span> <span class="s1">&#39;password&#39;</span> <span class="c1">#replace with your password</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;https://mystudent.fjuhsd.org/Parent/LoginParent.aspx&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">gradebook</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://mystudent.fjuhsd.org/Parent/GradebookSummary.aspx&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">gradebook</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">strings</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s2">&#34;Data al&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">numbers</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s2">&#34;Data ac&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">class_names</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">teachers</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">letter_grade</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">number_grades</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1">#get the raw text from each element in strings</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">string</span> <span class="o">!=</span> <span class="s2">&#34;&#34;</span><span class="p">:</span> <span class="c1">#for strings with text</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">()):</span> <span class="c1">#if the string is less than 3 chars and the first letter is uppercase</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">                <span class="n">letter_grade</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1"># it&#39;s a letter grade</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;-&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">string</span><span class="p">):</span> <span class="c1">#if the string is a title (all words only have the first letter capitalized) and there are no hyphens)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">                <span class="n">teachers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1"># it&#39;s a teacher</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">):</span> <span class="c1"># if it&#39;s not the other two and the length of the string is greater than 5</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">                <span class="n">class_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1"># it&#39;s a class</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>    
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="s1">&#39;span&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)):</span> <span class="c1">#if there&#39;s span in the element (only number grades have span in them)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="n">span</span> <span class="c1"># num is equal to the span tag</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">num</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&#34;display:none;&#34;</span><span class="p">):</span> <span class="c1"># if the style attribute of the span tag isn&#39;t &#34;display:none;&#34;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1"># get the innerHTML of the span</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">num</span> <span class="o">!=</span> <span class="s2">&#34;&#34;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span> <span class="c1"># if the text is greater than 2 and isn&#39;t nothing</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">num</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()):</span> <span class="c1"># if the first two characters of the grade are numbers</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                    <span class="n">number_grades</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="c1"># it&#39;s a number grade</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">class_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">teachers</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">letter_grade</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">number_grades</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># iterate through all the lists at the same time and print the elements as it goes</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">teacher</span><span class="p">,</span> <span class="n">letter</span><span class="p">,</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">class_names</span><span class="p">,</span> <span class="n">teachers</span><span class="p">,</span> <span class="n">letter_grade</span><span class="p">,</span> <span class="n">number_grades</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">letter</span> <span class="o">==</span> <span class="s2">&#34;A+&#34;</span> <span class="ow">or</span> <span class="n">number</span> <span class="o">==</span> <span class="s1">&#39;100.00&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u001b</span><span class="s1">[32;1m&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span><span class="p">(</span><span class="s1">&#39;A&#39;</span> <span class="ow">in</span> <span class="n">letter</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u001b</span><span class="s1">[32m&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span><span class="p">(</span><span class="s1">&#39;B&#39;</span> <span class="ow">in</span> <span class="n">letter</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u001b</span><span class="s1">[34;1m&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span><span class="p">(</span><span class="s1">&#39;C&#39;</span> <span class="ow">in</span> <span class="n">letter</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u001b</span><span class="s1">[33;1m&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span><span class="p">(</span><span class="s1">&#39;D&#39;</span> <span class="ow">in</span> <span class="n">letter</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u001b</span><span class="s1">[31;1m&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span><span class="p">(</span><span class="s1">&#39;F&#39;</span> <span class="ow">in</span> <span class="n">letter</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u001b</span><span class="s1">[31m&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u001b</span><span class="s1">[0m&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\u001b</span><span class="s2">[0m</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">teacher</span><span class="si">}</span><span class="s2">) - </span><span class="si">{</span><span class="n">code</span><span class="si">}{</span><span class="n">number</span><span class="si">}</span><span class="s2"> </span><span class="se">\u001b</span><span class="s2">[0m(</span><span class="si">{</span><span class="n">code</span><span class="si">}{</span><span class="n">letter</span><span class="si">}</span><span class="se">\u001b</span><span class="s2">[0m)&#34;</span><span class="p">)</span></span></span></code></pre></div></div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/2021-08-23-gradescraper/" data-title=""><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/2021-08-23-gradescraper/" data-title=""><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2021-08-23-gradescraper/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/2021-08-23-gradescraper/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/2021-08-23-gradescraper/" data-title=""><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/2021-08-23-gradescraper/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/2021-08-23-gradescraper/" data-title="" data-description=""><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f2021-08-23-gradescraper%2f&amp;text=" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-04-8-ad_pentest/" class="prev" rel="prev" title="ad_pentest"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ad_pentest</a>
+            <a href="/posts/hsctf-2021/" class="next" rel="next" title="hsctf 2021">hsctf 2021<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{}};</script><script src="/js/theme.min.js"></script></body>
+</html>
