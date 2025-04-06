@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Heap - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/heap/</link>
+        <description>Heap - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Mon, 05 Feb 2024 02:05:00 &#43;0700</lastBuildDate><atom:link href="http://localhost:1313/tags/heap/" rel="self" type="application/rss+xml" /><item>
+    <title>DiceCTF Quals 2024</title>
+    <link>http://localhost:1313/posts/dicectf-quals-2024/</link>
+    <pubDate>Mon, 05 Feb 2024 02:05:00 &#43;0700</pubDate>
+    <author>ItayB</author>
+    <guid>http://localhost:1313/posts/dicectf-quals-2024/</guid>
+    <description><![CDATA[<p>Writeups to baby-talk,boogie-woogie in DiceCTF Quals.</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>pwnland</title><meta name="Description" content="mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall"><meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="pwnland">
+  <meta property="og:description" content="mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="pwnland">
+  <meta name="twitter:description" content="mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/" /><link rel="alternate" href="/index.xml" type="application/rss+xml" title="pwnland">
+    <link rel="feed" href="/index.xml" type="application/rss+xml" title="pwnland"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "http:\/\/localhost:1313\/","inLanguage": "en-us","author": {
+                "@type": "Person",
+                "name": "xenonminer"
+            },"description": "mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall","name": "pwnland"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-avatar"><a href="/aboutme/" title="About Me"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://github.com/xenonminer.png"
+        data-srcset="https://github.com/xenonminer.png, https://github.com/xenonminer.png 1.5x, https://github.com/xenonminer.png 2x"
+        data-sizes="auto"
+        alt="https://github.com/xenonminer.png"
+        title="https://github.com/xenonminer.png" /></a></div><h1 class="home-title">Cyber/CTF Blog</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/xenonminer" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/jaden-wijata" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/ritsec-ctf-2025/">RITSEC CTF 2025</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-03-21">2025-03-21</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/2673" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/2673</a></li>
+<li>March 21 - March 23</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/banksman</td>
+          <td>medium</td>
+          <td>471</td>
+          <td><a href="#forensicsbanksman" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/virtual-mayhem</td>
+          <td>easy</td>
+          <td>419</td>
+          <td><a href="#webvirtual-mayhem" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/upload-issues</td>
+          <td>medium</td>
+          <td>483</td>
+          <td><a href="#webupload-issues" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/bit-burger</td>
+          <td>easy</td>
+          <td>467</td>
+          <td><a href="#pwnbit-burger" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>pwn/hashmatch</td>
+          <td>medium</td>
+          <td>499</td>
+          <td><a href="#pwnhashmatch" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="jail">Jail</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>jail/shrimple</td>
+          <td>easy</td>
+          <td>494</td>
+          <td><a href="#jailshrimple" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>jail/seti</td>
+          <td>easy</td>
+          <td>496</td>
+          <td><a href="#jailseti" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="forensicsbanksman">forensics/banksman</h3>
+<p>Our professor received a report from an unfamiliar student. With his experience, the professor realized that this report was abnormal. He immediately used this file for our research assignment. Let&rsquo;s analyze whether there is anything mysterious embedded in it!</p></div><div class="post-footer">
+        <a href="/posts/ritsec-ctf-2025/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/forensics/">Forensics</a>,&nbsp;<a href="/tags/web/">Web</a>,&nbsp;<a href="/tags/pwn/">Pwn</a>,&nbsp;<a href="/tags/jail/">Jail</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/offensive-certifications/">Offensive Certifications Part 1</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-01-27">2025-01-27</time></span>&nbsp;<span class="post-category">included in <a href="/categories/posts/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Posts</a></span></div><div class="content"><h1 id="introduction">Introduction</h1>
+<p>In the past 6 months, I have been working on and achieved 3 certifications related to offensive security. The 3 certifications are Certified Penetration Testing Specialist (CPTS), Certified Bug Bounty Hunter (CBBH), and Certified Red Team Operator (CRTO) from HackTheBox and Zero-Point Security. This blog post will be detailing my experiences through these certifications and as a comparison.</p>
+<h2 id="cpts">CPTS</h2>
+<p>The Certified Penetration Testing Specialist (CPTS) certification was the first certification I achieved. The certification was a great introduction to pentesting web and network applications.</p></div><div class="post-footer">
+        <a href="/posts/offensive-certifications/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/hackthebox/">HackTheBox</a>,&nbsp;<a href="/tags/zero-pointer-security/">Zero Pointer Security</a>,&nbsp;<a href="/tags/offensive-security/">Offensive Security</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/sunshinectf-2024/">sunshineCTF 2024</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-10-19">2024-10-19</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/2485" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/2485</a></li>
+<li>Oct 19 - Oct 21</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="i-95-quick-pwn">I-95 (Quick Pwn)</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>i-95/Melbourne</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#i-95melbourne" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>i-95/Cape Canaveral</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#i-95cape-canaveral" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>i-95/Palm Beach</td>
+          <td>Medium</td>
+          <td>10</td>
+          <td><a href="#i-95palm-beach" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>i-95/Fort Pierce</td>
+          <td>Medium</td>
+          <td>10</td>
+          <td><a href="#i-95fort-pierce" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>i-95/Jupiter</td>
+          <td>Medium</td>
+          <td>86</td>
+          <td><a href="#i-95jupiter" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="i-95melbourne">i-95/Melbourne</h3>
+<p>Drive on down the I-95 to your favorite cities along the way! First up: Melbourne!</p>
+<p>Attachments: <a href="https://2024.sunshinectf.games/36fea04521ee/melbourne" target="_blank" rel="noopener noreffer ">melbourne</a></p>
+<p>nc 2024.sunshinectf.games 24601</p>
+<h3 id="solution">Solution</h3>
+<p>Looking at the code from the disassembly, we can see that we are trying to modify <code>s1</code> to be <code>0xdeadbeef</code> without direct access to the variable.</p></div><div class="post-footer">
+        <a href="/posts/sunshinectf-2024/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/pwn/">Pwn</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/scorpio-linux-setup/">Scorpio Linux Setup</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-15">2023-06-15</time></span>&nbsp;<span class="post-category">included in <a href="/categories/posts/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Posts</a></span></div><div class="content"><h1 id="description">Description</h1>
+<p>In this blog post, you will learn how to setup the <a href="https://github.com/troy-cyber/scorpio" target="_blank" rel="noopener noreffer ">Scorpio Scoring Engine</a> for Linux OSes.</p>
+<h2 id="what-is-scorpio">What is Scorpio?</h2>
+<p>Scorpio is a Python-based scoring engine created to score image vulnerabilities. Scorpio checks if a vulnerability has been fixed and gives live feedback to the students.</p>
+<h2 id="how-does-scorpio-work">How does Scorpio work?</h2>
+<p>The image creator (you) will implement vulnerabilities onto a virtual machine and record them onto <strong>engine.py</strong> which runs every 30 seconds. As the students secure the system, the scoring engine will update <strong>Template.html</strong> (Scoring Report) to display the fixed vulnerabilities.</p></div><div class="post-footer">
+        <a href="/posts/scorpio-linux-setup/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/scorpio/">Scorpio</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/wreckctf-2022/">WRECKCTF 2022</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-09-30">2022-09-30</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/1775" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1775</a></li>
+<li>Sep 30 to Oct 02</li>
+<li>Played with wackers</li>
+<li>Ranking: 74/524 with 3275 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/flag-checker</td>
+          <td>easy</td>
+          <td>235</td>
+          <td><a href="#revflag-checker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/advanced-flag-checker</td>
+          <td>easy</td>
+          <td>343</td>
+          <td><a href="#revadvanced-flag-checker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/reverser</td>
+          <td>easy</td>
+          <td>374</td>
+          <td><a href="#revreverser" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="revflag-checker">rev/flag-checker</h3>
+<p>I implemented this simple flag checker—can you decompile it and get the right flag?</p>
+<p>Attachments: <a href="https://wreckctf.com/uploads/306b6533129a06b81530c043da7bea6125979565776123cf7dcecb31afad1a0f/chal" target="_blank" rel="noopener noreffer ">chal</a></p>
+<h3 id="solution">Solution</h3>
+<p>Open in ida and follow the ida variable indexes in order and get the flag</p></div><div class="post-footer">
+        <a href="/posts/wreckctf-2022/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rev/">Rev</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/downunder-ctf-2022/">DownUnder CTF 2022</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-09-23">2022-09-23</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/1625" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1625</a></li>
+<li>Sep 23 to Sep 25</li>
+<li>Played with wackers</li>
+<li>Ranking: 392/1407 with 750 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/babyp(y)wn</td>
+          <td>beginner</td>
+          <td>50</td>
+          <td><a href="#pwnbabypywn" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/source-provided</td>
+          <td>beginner</td>
+          <td>50</td>
+          <td><a href="#revsource-provided" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="dfir">DFIR</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>dfir/Shop-Knock-Knock-Knock</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-knock-knock-knock" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-Logging-for-what?</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-logging-for-what" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-I&rsquo;m-just-looking!</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-im-just-looking" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-Oi!-Get-out-of-there!</td>
+          <td>medium</td>
+          <td>50</td>
+          <td><a href="#dfirshop-oi-get-out-of-there" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="pwnbabypywn">pwn/babypywn</h3>
+<p>Python is memory safe, right?</p>
+<p>Author: joseph#8210</p>
+<p>Attachments: <a href="https://play.duc.tf/files/75063ab9b30ed274dd69906496ce0c15/babypywn.py?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjozN30.YzHRZQ.fB3_7LN6wR9a1LOd2JRyUidbaC4" target="_blank" rel="noopener noreffer ">babypywn.py</a></p></div><div class="post-footer">
+        <a href="/posts/downunder-ctf-2022/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/pwn/">Pwn</a>,&nbsp;<a href="/tags/rev/">Rev</a>,&nbsp;<a href="/tags/dfir/">Dfir</a></div></div>
+</article><ul class="pagination"><li class="page-item active">
+                    <span class="page-link">
+                        <a href="/">1</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/2/">2</a>
+                    </span>
+                </li></ul></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/typeit/index.umd.js"></script><script>window.config={"data":{"id-1":"mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"]},"duration":-1,"speed":100}};</script><script src="/js/theme.min.js"></script></body>
+</html>

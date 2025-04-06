@@ -1,0 +1,88 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/</link>
+        <description>Tags - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Fri, 21 Mar 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Forensics</title>
+    <link>http://localhost:1313/tags/forensics/</link>
+    <pubDate>Fri, 21 Mar 2025 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/forensics/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Jail</title>
+    <link>http://localhost:1313/tags/jail/</link>
+    <pubDate>Fri, 21 Mar 2025 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/jail/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Pwn</title>
+    <link>http://localhost:1313/tags/pwn/</link>
+    <pubDate>Fri, 21 Mar 2025 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/pwn/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Web</title>
+    <link>http://localhost:1313/tags/web/</link>
+    <pubDate>Fri, 21 Mar 2025 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/web/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>HackTheBox</title>
+    <link>http://localhost:1313/tags/hackthebox/</link>
+    <pubDate>Mon, 27 Jan 2025 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/hackthebox/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Offensive Security</title>
+    <link>http://localhost:1313/tags/offensive-security/</link>
+    <pubDate>Mon, 27 Jan 2025 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/offensive-security/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Zero Pointer Security</title>
+    <link>http://localhost:1313/tags/zero-pointer-security/</link>
+    <pubDate>Mon, 27 Jan 2025 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/zero-pointer-security/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Active Directory</title>
+    <link>http://localhost:1313/tags/active-directory/</link>
+    <pubDate>Mon, 08 Apr 2024 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/active-directory/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Linux</title>
+    <link>http://localhost:1313/tags/linux/</link>
+    <pubDate>Thu, 15 Jun 2023 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/linux/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Scorpio</title>
+    <link>http://localhost:1313/tags/scorpio/</link>
+    <pubDate>Thu, 15 Jun 2023 00:00:00 &#43;0000</pubDate>
+    <author>xenonminer</author>
+    <guid>http://localhost:1313/tags/scorpio/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>RITSEC CTF 2025 - pwnland</title><meta name="Description" content="Writeup for the challenges in RITSEC CTF 2025"><meta property="og:url" content="http://localhost:1313/posts/ritsec-ctf-2025/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="RITSEC CTF 2025">
+  <meta property="og:description" content="Writeup for the challenges in RITSEC CTF 2025">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-03-23T00:00:00+00:00">
+    <meta property="article:tag" content="Forensics">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="Pwn">
+    <meta property="article:tag" content="Jail">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="RITSEC CTF 2025">
+  <meta name="twitter:description" content="Writeup for the challenges in RITSEC CTF 2025">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/ritsec-ctf-2025/" /><link rel="prev" href="http://localhost:1313/posts/offensive-certifications/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "RITSEC CTF 2025",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/ritsec-ctf-2025\/"
+        },"genre": "posts","keywords": "forensics, web, pwn, jail","wordcount":  334 ,
+        "url": "http:\/\/localhost:1313\/posts\/ritsec-ctf-2025\/","datePublished": "2025-03-21T00:00:00+00:00","dateModified": "2025-03-23T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "Writeup for the challenges in RITSEC CTF 2025"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">RITSEC CTF 2025</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-21">2025-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;334 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#forensics">Forensics</a></li>
+    <li><a href="#web">Web</a></li>
+    <li><a href="#pwn">Pwn</a></li>
+    <li><a href="#jail">Jail</a></li>
+    <li><a href="#writeups">Writeups</a>
+      <ul>
+        <li><a href="#forensicsbanksman">forensics/banksman</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#webvirtual-mayhem">web/virtual-mayhem</a></li>
+        <li><a href="#solution-1">Solution</a></li>
+        <li><a href="#webupload-issues">web/upload-issues</a></li>
+        <li><a href="#solution-2">Solution</a></li>
+        <li><a href="#pwnbit-burger">pwn/bit-burger</a></li>
+        <li><a href="#solution-3">Solution</a></li>
+        <li><a href="#pwnhashmatch">pwn/hashmatch</a></li>
+        <li><a href="#solution-4">Solution</a></li>
+        <li><a href="#jailshrimple">jail/shrimple</a></li>
+        <li><a href="#solution-5">Solution</a></li>
+        <li><a href="#jailseti">jail/seti</a></li>
+        <li><a href="#solution-6">Solution</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li><a href="https://ctftime.org/event/2673" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/2673</a></li>
+<li>March 21 - March 23</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/banksman</td>
+          <td>medium</td>
+          <td>471</td>
+          <td><a href="#forensicsbanksman" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/virtual-mayhem</td>
+          <td>easy</td>
+          <td>419</td>
+          <td><a href="#webvirtual-mayhem" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/upload-issues</td>
+          <td>medium</td>
+          <td>483</td>
+          <td><a href="#webupload-issues" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/bit-burger</td>
+          <td>easy</td>
+          <td>467</td>
+          <td><a href="#pwnbit-burger" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>pwn/hashmatch</td>
+          <td>medium</td>
+          <td>499</td>
+          <td><a href="#pwnhashmatch" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="jail">Jail</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>jail/shrimple</td>
+          <td>easy</td>
+          <td>494</td>
+          <td><a href="#jailshrimple" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>jail/seti</td>
+          <td>easy</td>
+          <td>496</td>
+          <td><a href="#jailseti" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="forensicsbanksman">forensics/banksman</h3>
+<p>Our professor received a report from an unfamiliar student. With his experience, the professor realized that this report was abnormal. He immediately used this file for our research assignment. Let&rsquo;s analyze whether there is anything mysterious embedded in it!</p>
+<p>(This challenge was written by MetaCTF. The flag format is MetaCTF{})</p>
+<p>Attachments: <a href="https://ctfd.ritsec.club/files/acce4da559bf8d367c25d85374095f15/report.pdf?token=eyJ1c2VyX2lkIjo1NjksInRlYW1faWQiOjMwNiwiZmlsZV9pZCI6MjB9.Z-B9wQ.i-1b83cuGvfTZ0ftqqbXRR87C0o" target="_blank" rel="noopener noreffer ">report.pdf</a></p>
+<h3 id="solution">Solution</h3>
+<p><code>Flag: DUCTF{C_is_n0t_s0_f0r31gn_f0r_incr3d1bl3_pwn3rs}</code></p>
+<h3 id="webvirtual-mayhem">web/virtual-mayhem</h3>
+<p>This application uses a virtual machine to sandbox user templates and filters potentially harmful input. However, every lock has its key. Can you figure out how to escape the virtual machine and retrieve the flag?</p>
+<p>host5.metaproblems.com:7585</p>
+<p>(This challenge was written by MetaCTF. The flag format is MetaCTF{})</p>
+<p>Attachments: <a href="https://ctfd.ritsec.club/files/6e87b37374f323335aff8977a297bfab/virtual_mayhem.zip?token=eyJ1c2VyX2lkIjo1NjksInRlYW1faWQiOjMwNiwiZmlsZV9pZCI6MjV9.Z-B-Jg.1W0IXuC7B-qiAa6I6WEV7CCAFJQ" target="_blank" rel="noopener noreffer ">virtual_mayhem.zip</a></p>
+<h3 id="solution-1">Solution</h3>
+<h3 id="webupload-issues">web/upload-issues</h3>
+<p>This site lets you look at cpio archives. If only we had an admin account, we could look at the flag&hellip;</p>
+<p>web-upload-issues.ctf.ritsec.club</p>
+<p>(This challenge was written by ICR.)</p>
+<p>Attachments: <a href="https://ctfd.ritsec.club/files/84e7abaa156f638e60e0e780fc15cb30/upload_issues.zip?token=eyJ1c2VyX2lkIjo1NjksInRlYW1faWQiOjMwNiwiZmlsZV9pZCI6NDB9.Z-B-1Q.6UTm9Z0hKBpLO7HF5X-MG3WDAqI" target="_blank" rel="noopener noreffer ">upload_issues.zip</a></p>
+<h3 id="solution-2">Solution</h3>
+<p>Flag: <code>abuse@telstra.net</code></p>
+<h3 id="pwnbit-burger">pwn/bit-burger</h3>
+<p>Welcome to BitBurger, home of the world-famous Bit Burger! 🍔</p>
+<p>Put in an order here: nc binex-bitburger.ctf.ritsec.club 32200</p>
+<p>Only grilled or fried at the moment though, the other machines are broken, sorry!</p>
+<p>(This challenge was written by MetaCTF.)</p>
+<p>Attachments: <a href="https://ctfd.ritsec.club/files/0c89e0a38527c92bf27972fd41422f6b/bit_burger.zip?token=eyJ1c2VyX2lkIjo1NjksInRlYW1faWQiOjMwNiwiZmlsZV9pZCI6MzB9.Z-B_Iw.X1IvBkP67LkqSFi2Vpo4WfpO1Jk" target="_blank" rel="noopener noreffer ">bit_burger.zip</a></p>
+<h3 id="solution-3">Solution</h3>
+<p><code>Flag: pTCNp5p6LP0d7qA77yvb4SHf40</code></p>
+<h3 id="pwnhashmatch">pwn/hashmatch</h3>
+<p>This server is asking me to reverse a hash for a flag, but brute forcing MD5 sounds tedious. Maybe there&rsquo;s something more&hellip; fun we can do to find the flag.</p>
+<p>nc hashmatch.ctf.ritsec.club 30898</p>
+<p>When you connect, type your input and it will be handled by the challenge.</p>
+<p>(This challenge was written by ICR.)</p>
+<p>Attachments: <a href="https://ctfd.ritsec.club/files/67524143b8aa8bae3bfbaff845e09347/hashmatch.zip?token=eyJ1c2VyX2lkIjo1NjksInRlYW1faWQiOjMwNiwiZmlsZV9pZCI6NTJ9.Z-B_XA.zBZo6IPQg71dIx3iQ-ZWwHN-SZU" target="_blank" rel="noopener noreffer ">hashmatch.zip</a></p>
+<h3 id="solution-4">Solution</h3>
+<p><code>Flag: nuclei</code></p>
+<h3 id="jailshrimple">jail/shrimple</h3>
+<p>As shrimple as that :p</p>
+<p>nc shrimple.ctf.ritsec.club 32195</p>
+<p>Attachments: <a href="https://ctfd.ritsec.club/files/1dca913b2e6e8ffc19dfc1fd1164dfc6/shrimple.py?token=eyJ1c2VyX2lkIjo1NjksInRlYW1faWQiOjMwNiwiZmlsZV9pZCI6NDZ9.Z-B_gA.q6QKBzoDeEEQIopttb2b_ymfifU" target="_blank" rel="noopener noreffer ">shrimple.py</a></p>
+<h3 id="solution-5">Solution</h3>
+<p><code>Flag: ozzieozzieozzie</code></p>
+<h3 id="jailseti">jail/seti</h3>
+<p>Come join our search for alien life</p>
+<p>nc seti.ctf.ritsec.club 31793</p>
+<p>Attachments: <a href="https://ctfd.ritsec.club/files/fa22e106dfa5538a985b2fb282edc4a0/seti.zip?token=eyJ1c2VyX2lkIjo1NjksInRlYW1faWQiOjMwNiwiZmlsZV9pZCI6NDV9.Z-B_xA.dZ9pU6kxOysjF--ANSYzv8NGKd0" target="_blank" rel="noopener noreffer ">seti.zip</a></p>
+<h3 id="solution-6">Solution</h3>
+<p>``</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-03-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/ritsec-ctf-2025/" data-title="RITSEC CTF 2025" data-hashtags="forensics,web,pwn,jail"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/ritsec-ctf-2025/" data-title="RITSEC CTF 2025"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/ritsec-ctf-2025/" data-hashtag="forensics"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/ritsec-ctf-2025/" data-title="RITSEC CTF 2025"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/ritsec-ctf-2025/" data-title="RITSEC CTF 2025"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/ritsec-ctf-2025/" data-title="RITSEC CTF 2025"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/ritsec-ctf-2025/" data-title="RITSEC CTF 2025" data-description="Writeup for the challenges in RITSEC CTF 2025"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fritsec-ctf-2025%2f&amp;text=RITSEC%20CTF%202025" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/forensics/">Forensics</a>,&nbsp;<a href="/tags/web/">Web</a>,&nbsp;<a href="/tags/pwn/">Pwn</a>,&nbsp;<a href="/tags/jail/">Jail</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/offensive-certifications/" class="prev" rel="prev" title="Offensive Certifications Part 1"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Offensive Certifications Part 1</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

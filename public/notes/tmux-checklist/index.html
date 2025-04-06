@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Tmux Checklist - pwnland</title><meta name="Description" content="Tmux Checklist"><meta property="og:url" content="http://localhost:1313/notes/tmux-checklist/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="Tmux Checklist">
+  <meta property="og:description" content="Tmux Checklist">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="notes">
+    <meta property="article:published_time" content="2022-10-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-10-05T00:00:00+00:00">
+    <meta property="article:tag" content="Tmux">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Tmux Checklist">
+  <meta name="twitter:description" content="Tmux Checklist">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/notes/tmux-checklist/" /><link rel="prev" href="http://localhost:1313/notes/vim-checklist/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Tmux Checklist",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/notes\/tmux-checklist\/"
+        },"genre": "notes","keywords": "tmux","wordcount":  165 ,
+        "url": "http:\/\/localhost:1313\/notes\/tmux-checklist\/","datePublished": "2022-10-03T00:00:00+00:00","dateModified": "2022-10-05T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "Tmux Checklist"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Tmux Checklist</h1><div class="content" id="content"><p>Cool tmux checklist with examples to become really fast with organized terminal navigation</p>
+<h2 id="checklist">Checklist</h2>
+<p>Prefix key is default ctrl+b</p>
+<table>
+  <thead>
+      <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>tmux new -s (name)</td>
+          <td>Create a new session</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) c</td>
+          <td>Add a window</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) (window number)</td>
+          <td>Switch to another window (numbers are on the bottom of terminal</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>tmux ls</td>
+          <td>List running tmux sessions</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>tmux attach -t (session name)</td>
+          <td>Attach to a running tmux session</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) d</td>
+          <td>Detach from a session</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) ,</td>
+          <td>Rename a window</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) % : Vertical Split window<!-- raw HTML omitted --> (prefix key) &quot; : Horizontal Split window</td>
+          <td>Splitting windows</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) (arrow keys)</td>
+          <td>Move across windows</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) z</td>
+          <td>Zoom in and out of window (fullscreen)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) { : Move window left<!-- raw HTML omitted --> (prefix key) } : Move window right</td>
+          <td>Moving windows</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) spacebar</td>
+          <td>Change window layout</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) :source-file ~/.tmux.conf</td>
+          <td>To reset tmux configs from tmux</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) x</td>
+          <td>To kill tmux session</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Ctrl + d</td>
+          <td>To kill tmux window</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>(prefix key) [</td>
+          <td>Copy mode</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>WRECKCTF 2022 - pwnland</title><meta name="Description" content="Writeup for the challenges in WRECKCTF 2022"><meta property="og:url" content="http://localhost:1313/posts/wreckctf-2022/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="WRECKCTF 2022">
+  <meta property="og:description" content="Writeup for the challenges in WRECKCTF 2022">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-09-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-10-02T00:00:00+00:00">
+    <meta property="article:tag" content="Rev">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="WRECKCTF 2022">
+  <meta name="twitter:description" content="Writeup for the challenges in WRECKCTF 2022">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/wreckctf-2022/" /><link rel="prev" href="http://localhost:1313/posts/downunder-ctf-2022/" /><link rel="next" href="http://localhost:1313/posts/scorpio-linux-setup/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "WRECKCTF 2022",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/wreckctf-2022\/"
+        },"genre": "posts","keywords": "rev","wordcount":  366 ,
+        "url": "http:\/\/localhost:1313\/posts\/wreckctf-2022\/","datePublished": "2022-09-30T00:00:00+00:00","dateModified": "2021-10-02T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "Writeup for the challenges in WRECKCTF 2022"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">WRECKCTF 2022</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-09-30">2022-09-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;366 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#rev">Rev</a></li>
+    <li><a href="#writeups">Writeups</a>
+      <ul>
+        <li><a href="#revflag-checker">rev/flag-checker</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#revadvanced-flag-checker">rev/advanced-flag-checker</a></li>
+        <li><a href="#solution-1">Solution</a></li>
+        <li><a href="#revreverser">rev/reverser</a></li>
+        <li><a href="#solution-2">Solution</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li><a href="https://ctftime.org/event/1775" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1775</a></li>
+<li>Sep 30 to Oct 02</li>
+<li>Played with wackers</li>
+<li>Ranking: 74/524 with 3275 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/flag-checker</td>
+          <td>easy</td>
+          <td>235</td>
+          <td><a href="#revflag-checker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/advanced-flag-checker</td>
+          <td>easy</td>
+          <td>343</td>
+          <td><a href="#revadvanced-flag-checker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/reverser</td>
+          <td>easy</td>
+          <td>374</td>
+          <td><a href="#revreverser" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="revflag-checker">rev/flag-checker</h3>
+<p>I implemented this simple flag checker—can you decompile it and get the right flag?</p>
+<p>Attachments: <a href="https://wreckctf.com/uploads/306b6533129a06b81530c043da7bea6125979565776123cf7dcecb31afad1a0f/chal" target="_blank" rel="noopener noreffer ">chal</a></p>
+<h3 id="solution">Solution</h3>
+<p>Open in ida and follow the ida variable indexes in order and get the flag</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/194734590-c374ab9e-18e3-4f3f-aacb-39b2e6bd03ef.png"
+        data-srcset="https://user-images.githubusercontent.com/46347858/194734590-c374ab9e-18e3-4f3f-aacb-39b2e6bd03ef.png, https://user-images.githubusercontent.com/46347858/194734590-c374ab9e-18e3-4f3f-aacb-39b2e6bd03ef.png 1.5x, https://user-images.githubusercontent.com/46347858/194734590-c374ab9e-18e3-4f3f-aacb-39b2e6bd03ef.png 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/194734590-c374ab9e-18e3-4f3f-aacb-39b2e6bd03ef.png"
+        title="image" /></p>
+<p><code>Flag: flag{gdb_1s_y0ur_b35t_fr13nd_6d94620fa6}</code></p>
+<h3 id="revadvanced-flag-checker">rev/advanced-flag-checker</h3>
+<p>Okay, maybe the last one was a little too easy. This time I&rsquo;ve added some secret encryption techniques so that you can&rsquo;t find out my flag!</p>
+<p>Attachments: <a href="https://wreckctf.com/uploads/306b6533129a06b81530c043da7bea6125979565776123cf7dcecb31afad1a0f/chal" target="_blank" rel="noopener noreffer ">chal</a></p>
+<h3 id="solution-1">Solution</h3>
+<p>Looking at the code through dogbolt&rsquo;s binary ninja decompiler, we can see that it is xoring different hex values together</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/194734627-29913bff-20cd-43e7-ba02-ed7eb9e0844c.png"
+        data-srcset="https://user-images.githubusercontent.com/46347858/194734627-29913bff-20cd-43e7-ba02-ed7eb9e0844c.png, https://user-images.githubusercontent.com/46347858/194734627-29913bff-20cd-43e7-ba02-ed7eb9e0844c.png 1.5x, https://user-images.githubusercontent.com/46347858/194734627-29913bff-20cd-43e7-ba02-ed7eb9e0844c.png 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/194734627-29913bff-20cd-43e7-ba02-ed7eb9e0844c.png"
+        title="image" /></p>
+<p>Xor is directly reversible by performing xor again, so xor each value back together to probably get the hex of the flag</p>
+<p>I did this using a small python script</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ct</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x6239a8ba</span><span class="p">,</span> <span class="mh">0x17f64e0</span><span class="p">,</span> <span class="mh">0xa14442bb</span><span class="p">,</span> <span class="mh">0x415c0789</span><span class="p">,</span> <span class="mh">0xf6e1eb2b</span><span class="p">,</span> <span class="mh">0xde2c6878</span><span class="p">,</span> <span class="mh">0x669d2f08</span><span class="p">,</span> <span class="mh">0xc8d2ae51</span><span class="p">,</span> <span class="mh">0x6c12677f</span><span class="p">,</span> <span class="mh">0x3c3cfba3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">bruh</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x558C4DC</span><span class="p">,</span> <span class="mh">0x71100C9B</span><span class="p">,</span> <span class="mh">0xCE3D1DDE</span><span class="p">,</span> <span class="mh">0x322958FC</span><span class="p">,</span> <span class="mh">0x8CBE8F4E</span><span class="p">,</span> <span class="mh">0xB14A374B</span><span class="p">,</span> <span class="mh">0xEE9707A</span><span class="p">,</span> <span class="mh">0xF98DDD38</span><span class="p">,</span> <span class="mh">0x5D715F4D</span><span class="p">,</span> <span class="mh">0x410B9F90</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ct</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">flag</span> <span class="o">+=</span> <span class="nb">hex</span><span class="p">(</span><span class="n">ct</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">bruh</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>The result looks like weird backward hex so it might be something to do with endianess</p>
+<p>Plug the resulting hex into cyberchef, swap endianess, and go from hex</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/194734686-5fa4616a-6a88-43e9-97ae-b6371a23681a.png"
+        data-srcset="https://user-images.githubusercontent.com/46347858/194734686-5fa4616a-6a88-43e9-97ae-b6371a23681a.png, https://user-images.githubusercontent.com/46347858/194734686-5fa4616a-6a88-43e9-97ae-b6371a23681a.png 1.5x, https://user-images.githubusercontent.com/46347858/194734686-5fa4616a-6a88-43e9-97ae-b6371a23681a.png 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/194734686-5fa4616a-6a88-43e9-97ae-b6371a23681a.png"
+        title="image" /></p>
+<p><code>Flag: flag{hope_you_used_z3_for_this_128c13d7}</code></p>
+<h3 id="revreverser">rev/reverser</h3>
+<p>reverse your strings, free of charge!</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>nc challs.wreckctf.com 31706</code></pre></div>
+<p>Attachments: <a href="https://wreckctf.com/uploads/cae6302ebfb0c136da02abd232f1b08f0556fbb2344f72eee1963269dbfe3a51/program.py" target="_blank" rel="noopener noreffer ">program.py</a></p>
+<h3 id="solution-2">Solution</h3>
+<p>I tried doing the chall the intended way at first by reversing target back to the license key, but that didn&rsquo;t go so well so I moved to bruteforcing.</p>
+<p>Remaking the check_license function to instead just return the value instead of returning if the value is equal to the target we can bruteforce character by character until the target is met.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">check_license</span><span class="p">(</span><span class="n">license</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">license</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span> <span class="o">%</span> <span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s1">x</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">bruh</span> <span class="o">=</span> <span class="s1">&#39;0123456789abcdef&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;51c49a1a00647b037f5f3d5c878eb656&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">license</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">bruh</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ihatethis</span> <span class="o">=</span> <span class="n">check_license</span><span class="p">(</span><span class="n">license</span> <span class="o">+</span> <span class="n">char</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">ihatethis</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">[</span><span class="n">x</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">license</span> <span class="o">+=</span> <span class="n">char</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">license</span><span class="p">)</span></span></span></code></pre></div></div>
+<p>License key: ccb85179606e3453486a4a87cf16dbf1</p>
+<p>put the license key into the nc server with and input after and you will get the flag!</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/194734761-48bf4946-4108-4c04-9fcd-b24492ca8ba2.png"
+        data-srcset="https://user-images.githubusercontent.com/46347858/194734761-48bf4946-4108-4c04-9fcd-b24492ca8ba2.png, https://user-images.githubusercontent.com/46347858/194734761-48bf4946-4108-4c04-9fcd-b24492ca8ba2.png 1.5x, https://user-images.githubusercontent.com/46347858/194734761-48bf4946-4108-4c04-9fcd-b24492ca8ba2.png 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/194734761-48bf4946-4108-4c04-9fcd-b24492ca8ba2.png"
+        title="image" /></p>
+<p><code>Flag: flag{clock_math_too_hard}</code></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-10-02</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/wreckctf-2022/" data-title="WRECKCTF 2022" data-hashtags="rev"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/wreckctf-2022/" data-title="WRECKCTF 2022"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/wreckctf-2022/" data-hashtag="rev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/wreckctf-2022/" data-title="WRECKCTF 2022"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/wreckctf-2022/" data-title="WRECKCTF 2022"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/wreckctf-2022/" data-title="WRECKCTF 2022"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/wreckctf-2022/" data-title="WRECKCTF 2022" data-description="Writeup for the challenges in WRECKCTF 2022"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fwreckctf-2022%2f&amp;text=WRECKCTF%202022" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rev/">Rev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/downunder-ctf-2022/" class="prev" rel="prev" title="DownUnder CTF 2022"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>DownUnder CTF 2022</a>
+            <a href="/posts/scorpio-linux-setup/" class="next" rel="next" title="Scorpio Linux Setup">Scorpio Linux Setup<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,141 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Vim - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/vim/</link>
+        <description>Vim - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Mon, 19 Sep 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/vim/" rel="self" type="application/rss+xml" /><item>
+    <title>Vim Checklist</title>
+    <link>http://localhost:1313/notes/vim-checklist/</link>
+    <pubDate>Mon, 19 Sep 2022 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/notes/vim-checklist/</guid>
+    <description><![CDATA[<p>This is a easy access vim checklist that has examples along with the commands and description.</p>
+<h2 id="normal-mode">Normal Mode</h2>
+<p>When entering into vim, you enter normal mode. Command mode is where most of the commands in vim will be used.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Esc</td>
+          <td>Entering normal mode (if not already in)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>:w : write to the file<!-- raw HTML omitted -->:q : quit the file if nothing written<!-- raw HTML omitted -->:q! : force quit even with written text<!-- raw HTML omitted --></td>
+          <td>quitting/writing to vim</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>:!<!-- raw HTML omitted --></td>
+          <td>Running shell commands from vim</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>:set number : normal line numbers&lt;&gt;:set relativenumber : line numbers are relative</td>
+          <td>Make vim have line numbers</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Ex: 5<!-- raw HTML omitted --> (goes 5 lines down)</td>
+          <td>Typing a number x before a vim command makes you do that command x many times</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>h : move left<!-- raw HTML omitted -->j : move down<!-- raw HTML omitted -->k : move up<!-- raw HTML omitted -->l : move right</td>
+          <td>Moving around (arrow keys also works)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>u : undo (undoes whatever you just did in the last insert mode only)<!-- raw HTML omitted -->Ctrl + r : redo</td>
+          <td>undo/redo previous actions</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>dd : delete entire line<!-- raw HTML omitted -->Shift + d : delete the rest of the line from where cursor is</td>
+          <td>Deleting text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>yy/Shift + y</td>
+          <td>Copy entire line</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>cc : Change the line (delete but also puts you in insert mode after)<!-- raw HTML omitted -->Shift + c : Changes the rest of the line (changes from where cursor is to the end of the line)</td>
+          <td>Changing in vim (like delete but leaves you in insert mode after)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>r</td>
+          <td>Replace character cursor is on</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>p : paste text<!-- raw HTML omitted -->Shift + p : paste text on line above cursor position</td>
+          <td>Pasting text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>w : move forward a word (this consideres a word separated by hyphens or other searators as well besides spaces)<!-- raw HTML omitted -->Shift + w : move forward a word (only delimiter is a space)<!-- raw HTML omitted -->b : move backward a word (same conditions as moving forward)<!-- raw HTML omitted -->Shift + b : move backward a word (same conditions as moving forward)<!-- raw HTML omitted -->e : jump to the end of the current word<!-- raw HTML omitted -->0 : go to the beginning of the line (without entering insert mode)<!-- raw HTML omitted -->$ : go to the end of line (without entering insert mode)</td>
+          <td>Moving across text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>dw : deletes a word in front of cursor position<!-- raw HTML omitted -->(number x)dw : deletes x many words in front<!-- raw HTML omitted -->d0 : delete everything until the start of line<!-- raw HTML omitted -->d$ : delete everything until end of line</td>
+          <td>Combining vim commands examples</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>These all can be ci<!-- raw HTML omitted -->, di&lt;something, yi<!-- raw HTML omitted --> diw : deletes the word<!-- raw HTML omitted -->ciw : changes the word<!-- raw HTML omitted -->yiw : copy the word you are inside of<!-- raw HTML omitted -->di&quot; : deletes everything inside two quotation marks<!-- raw HTML omitted -->ci&quot; : changes everything inside two quotation marks<!-- raw HTML omitted -->yi&quot; : copy everything inside quotes</td>
+          <td>Options when inside a word (cursor is like in the l part of hello)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>% : go back and forth across a pair of chars (() [] {}) <!-- raw HTML omitted --> Only in current line<!-- raw HTML omitted -->  t : jump to the right before the char in the line <!-- raw HTML omitted -->  f : jump to on the char in the line<!-- raw HTML omitted -->  Shift + t : same as t but backwards<!-- raw HTML omitted -->  Shift + f : same as f but backwards<!-- raw HTML omitted --> gg : jump to beginning of file<!-- raw HTML omitted --> Shift + g : jump to end of file<!-- raw HTML omitted --> <!-- raw HTML omitted --> + Shift + g : jump to line number</td>
+          <td>Jumping/Finding text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>&raquo; : Shift text to the right<!-- raw HTML omitted -->&laquo; : Shift text to the left<!-- raw HTML omitted -->If in visual mode and selecting text then only have to do once (&gt; or &lt;)<!-- raw HTML omitted -->== : indent line correctly (good for programming)<!-- raw HTML omitted -->gg=Shift + g : If the entire file is badly indented</td>
+          <td>Indeting/Shifting</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>/(search term) : jumps to next occurrence of (search term) from where cursor is at<!-- raw HTML omitted -->?(search term) : jumpts to previous occurrence of (search term) from where cursor is at<!-- raw HTML omitted -->n : jumps to next occurrence of (search term)<!-- raw HTML omitted -->Shift + n : jumpts to previous occurrence of (search term)<!-- raw HTML omitted -->Selected text in visual mode<!-- raw HTML omitted --># : goes to previous term of the highlighted text<!-- raw HTML omitted -->* : goes to next term of the highlighted text</td>
+          <td>Searching/Replacing</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>m(character) : creates a waypoint to that line<!-- raw HTML omitted -->&rsquo;(character) : goes to that waypoint<!-- raw HTML omitted -->:marks : view all waypoints</td>
+          <td>Vim waypoints (like a portal back to a certain registered waypoint) (can also be through different files)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>zz</td>
+          <td>Center line to the middle of screen</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>. : execute command that was last run</td>
+          <td>Repeat command</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>:reg : pull up the list of all the saved content<!-- raw HTML omitted -->&quot;(char)p : paste a certain text from register or (name)p because the Name is the title of it<!-- raw HTML omitted -->(name)(command) : does some command to that line in the register</td>
+          <td>Vim registers</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="insert-mode">Insert Mode</h2>
+<p>Insert mode will be used to do all the typing/programming.</p>]]></description>
+</item>
+</channel>
+</rss>

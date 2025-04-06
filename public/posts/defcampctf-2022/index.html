@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>DefCamp CTF 2022 - pwnland</title><meta name="Description" content="Writeup for the challenges in DefCamp CTF 2022"><meta property="og:url" content="http://localhost:1313/posts/defcampctf-2022/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="DefCamp CTF 2022">
+  <meta property="og:description" content="Writeup for the challenges in DefCamp CTF 2022">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-02-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-02-13T00:00:00+00:00">
+    <meta property="article:tag" content="Forensics">
+    <meta property="article:tag" content="Misc">
+    <meta property="article:tag" content="Web">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DefCamp CTF 2022">
+  <meta name="twitter:description" content="Writeup for the challenges in DefCamp CTF 2022">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/defcampctf-2022/" /><link rel="prev" href="http://localhost:1313/posts/lit-2021/" /><link rel="next" href="http://localhost:1313/posts/mhsctf-2022/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "DefCamp CTF 2022",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/defcampctf-2022\/"
+        },"genre": "posts","keywords": "forensics, misc, web","wordcount":  979 ,
+        "url": "http:\/\/localhost:1313\/posts\/defcampctf-2022\/","datePublished": "2022-02-11T00:00:00+00:00","dateModified": "2022-02-13T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "Writeup for the challenges in DefCamp CTF 2022"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">DefCamp CTF 2022</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-02-11">2022-02-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;979 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#forensics">Forensics</a></li>
+    <li><a href="#misc">Misc</a></li>
+    <li><a href="#web">Web</a></li>
+    <li><a href="#writeups">Writeups</a>
+      <ul>
+        <li><a href="#forensicsthis-file-hides-something">forensics/this-file-hides-something</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#misccatch-me-if-you-can">misc/catch-me-if-you-can</a></li>
+        <li><a href="#solution-1">Solution</a></li>
+        <li><a href="#webpara-code">web/para-code</a></li>
+        <li><a href="#solution-2">Solution</a></li>
+        <li><a href="#takeaways">Takeaways</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li><a href="https://ctftime.org/event/1560" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1560</a></li>
+<li>Feb 11 to Feb 13</li>
+<li>Played with wackers</li>
+<li>Ranking: 73/1035 with 736 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/this-file-hides-something</td>
+          <td>Medium</td>
+          <td>50</td>
+          <td><a href="#forensicsthis-file-hides-something" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/catch-me-if-you-can</td>
+          <td>Medium</td>
+          <td>186/772</td>
+          <td><a href="#misccatch-me-if-you-can" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/para-code</td>
+          <td>Easy</td>
+          <td>50</td>
+          <td><a href="#webpara-code" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="forensicsthis-file-hides-something">forensics/this-file-hides-something</h3>
+<p>There is an emergency regarding this file. We need to extract the password ASAP. It&rsquo;s a crash dump, but our tools are not working. Please help us, time is not on our side.</p>
+<p>PS: Flag format is not standard.</p>
+<p>Attachments: <a href="https://api.cyberedu.ro/v1/contest/dctf21/challenge/bf7cde20-89b7-11ec-b6ba-fdc8d6daa06e/download/2001" target="_blank" rel="noopener noreffer ">https://api.cyberedu.ro/v1/contest/dctf21/challenge/bf7cde20-89b7-11ec-b6ba-fdc8d6daa06e/download/2001</a></p>
+<h3 id="solution">Solution</h3>
+<p>We are given a crashdump.zip file that we can extract into a crashdump.elf.</p>
+<p>From the description, it is hinting us that this challenge is something to do with memory and memory that gets rid of itself or deletes itself.
+Also, the name of the file is crashdump, so the tool we need for this challenge stands out.</p>
+<p>We will be using the tool <code>volatility</code>, which is a tool that is good for memory forensics challenges.
+The download to the tool can be found at <a href="https://github.com/volatilityfoundation/volatility" target="_blank" rel="noopener noreffer ">https://github.com/volatilityfoundation/volatility</a></p>
+<p>After the tool is setup, we can run the vo.py file using any version of python2 and use the -f option to supply our memory file.</p>
+<p>First, we want to use the <code>imageinfo</code> option to find the correct profile.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/153773080-2e1d1268-14b4-4ce7-80af-e2cd67aded5d.PNG"
+        data-srcset="https://user-images.githubusercontent.com/46347858/153773080-2e1d1268-14b4-4ce7-80af-e2cd67aded5d.PNG, https://user-images.githubusercontent.com/46347858/153773080-2e1d1268-14b4-4ce7-80af-e2cd67aded5d.PNG 1.5x, https://user-images.githubusercontent.com/46347858/153773080-2e1d1268-14b4-4ce7-80af-e2cd67aded5d.PNG 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/153773080-2e1d1268-14b4-4ce7-80af-e2cd67aded5d.PNG"
+        title="imageinfo" /></p>
+<p>We will choose the first profile in the list and use that for our next tests. (Win7SP1x64)</p>
+<p>We can extract the lsa secrets now using the <code>lsadump</code> option.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/153773086-cd374023-2f2b-4e74-941b-84dca2e931e0.PNG"
+        data-srcset="https://user-images.githubusercontent.com/46347858/153773086-cd374023-2f2b-4e74-941b-84dca2e931e0.PNG, https://user-images.githubusercontent.com/46347858/153773086-cd374023-2f2b-4e74-941b-84dca2e931e0.PNG 1.5x, https://user-images.githubusercontent.com/46347858/153773086-cd374023-2f2b-4e74-941b-84dca2e931e0.PNG 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/153773086-cd374023-2f2b-4e74-941b-84dca2e931e0.PNG"
+        title="password" /></p>
+<p>We get the password: <code>Str0ngAsAR0ck!</code></p>
+<h3 id="misccatch-me-if-you-can">misc/catch-me-if-you-can</h3>
+<p>We need your technical expertise to analyze this Android project. We tried to compile it, no success, we tried to open it, no success, but we know for sure that the final product had to scope to deliver hidden messages to different attackers worldwide in a form of a mobile game.</p>
+<p>Flag format: not standard</p>
+<p>Attachments: <a href="https://api.cyberedu.ro/v1/contest/dctf21/challenge/bd772bd0-8a4c-11ec-84f7-4917e4d507f7/download/2006" target="_blank" rel="noopener noreffer ">https://api.cyberedu.ro/v1/contest/dctf21/challenge/bd772bd0-8a4c-11ec-84f7-4917e4d507f7/download/2006</a></p>
+<h3 id="solution-1">Solution</h3>
+<p>I just went straight to the 4th question, since the competition was almost over and it seemed the most understandable and easiest to do.</p>
+<p>The question was <code>Something is wrong with the SharedPreferences file. We didn't manage to understand the string value. Please share it with us.</code></p>
+<p>The question asks us to look at the SharedPreferences file and taking a look at the options, it was clear it was talking about the SharedPreferences.java file.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-images.githubusercontent.com/46347858/153781418-66be7fdc-b7f5-491e-8a21-497a2ea8ab16.PNG"
+        data-srcset="https://user-images.githubusercontent.com/46347858/153781418-66be7fdc-b7f5-491e-8a21-497a2ea8ab16.PNG, https://user-images.githubusercontent.com/46347858/153781418-66be7fdc-b7f5-491e-8a21-497a2ea8ab16.PNG 1.5x, https://user-images.githubusercontent.com/46347858/153781418-66be7fdc-b7f5-491e-8a21-497a2ea8ab16.PNG 2x"
+        data-sizes="auto"
+        alt="https://user-images.githubusercontent.com/46347858/153781418-66be7fdc-b7f5-491e-8a21-497a2ea8ab16.PNG"
+        title="stringthing" /></p>
+<p>Looking at the file we see the string value that looks cryptic and not understandable that the question was talking about.
+I knew that we had to somehow decrypt this into a normal string, so I started looking for options.</p>
+<p>I couldn&rsquo;t think of any ciphers that looked like this, so I took a look at the SharedPreferences.java file again.</p>
+<p>Right about the cryptic string, I saw that it said &lsquo;1337&rsquo;.
+I thought about this for a while and got nothing, but then I searched 1337 code on google and it brought me to <code>Leet Speak</code></p>
+<p>I found a decoder for it by dcode.fr: <a href="https://www.dcode.fr/leet-speak-1337" target="_blank" rel="noopener noreffer ">https://www.dcode.fr/leet-speak-1337</a></p>
+<p>Putting the text in and decrypting, we get a more recognizable word, but some parts of it are still not as understable.</p>
+<p>But looking at the text, we can deduce the rest of the words and make the decoded string.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>Flags:
+1. Not solved
+2. Not solved
+3. Not solved
+4. DOYOUTHINKYOUHAVEIT</code></pre></div>
+<h3 id="webpara-code">web/para-code</h3>
+<p>I do not think that this API needs any sort of security testing as it only executes and retrieves the output of ID and PS commands.</p>
+<p>Flag format: CTF{sha256}</p>
+<p>Attachments: 34.159.7.96:32210</p>
+<h3 id="solution-2">Solution</h3>
+<p>Taking a look at the website given, we see some php code</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-php">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">require</span> <span class="no">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/flag.php&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">show_source</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">exit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$blackList</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;ss&#39;</span><span class="p">,</span><span class="s1">&#39;sc&#39;</span><span class="p">,</span><span class="s1">&#39;aa&#39;</span><span class="p">,</span><span class="s1">&#39;od&#39;</span><span class="p">,</span><span class="s1">&#39;pr&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;ps&#39;</span><span class="p">,</span><span class="s1">&#39;pa&#39;</span><span class="p">,</span><span class="s1">&#39;pd&#39;</span><span class="p">,</span><span class="s1">&#39;pp&#39;</span><span class="p">,</span><span class="s1">&#39;po&#39;</span><span class="p">,</span><span class="s1">&#39;pc&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pt&#39;</span><span class="p">,</span><span class="s1">&#39;pu&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pf&#39;</span><span class="p">,</span><span class="s1">&#39;pz&#39;</span><span class="p">,</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span><span class="s1">&#39;pw&#39;</span><span class="p">,</span><span class="s1">&#39;px&#39;</span><span class="p">,</span><span class="s1">&#39;py&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="s1">&#39;pj&#39;</span><span class="p">,</span><span class="s1">&#39;pl&#39;</span><span class="p">,</span><span class="s1">&#39;pm&#39;</span><span class="p">,</span><span class="s1">&#39;pn&#39;</span><span class="p">,</span><span class="s1">&#39;pq&#39;</span><span class="p">,</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span><span class="s1">&#39;dd&#39;</span><span class="p">,</span><span class="s1">&#39;nl&#39;</span><span class="p">,</span><span class="s1">&#39;nk&#39;</span><span class="p">,</span><span class="s1">&#39;df&#39;</span><span class="p">,</span><span class="s1">&#39;wc&#39;</span><span class="p">,</span> <span class="s1">&#39;du&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$valid</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$blackList</span> <span class="k">as</span> <span class="nv">$blackItem</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">strpos</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">],</span> <span class="nv">$blackItem</span><span class="p">)</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">$valid</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">         <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$valid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">show_source</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">exit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// This will return output only for id and ps.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">strlen</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="nx">shell_exec</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="s2">&#34;Please enter a valid command&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="k">False</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="nv">$flag</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></div></div>
+<p>Reading through this php code, we can see that this is a command injection challenge where we can put commands into the the start query.
+Also we can see that if we somehow trigger False, the flag variable will appear in the source code.</p>
+<p>Reading the input part of the code, we see that there is a blacklist preventing us from typing any of those letters inside our commands and that our command must be less that 5 characters long.</p>
+<p>With this knowledge, I tried out some basic command injection stuff like l\s or l&rsquo;s&rsquo; and it printed out that there was a flag.php and a index.php.
+With only 4 letters to type for our command, I knew that opening the flag.php file was an impossibility.</p>
+<p>Next, I went to try to exploit the if (False) part to get the $flag variable to show in the source code.
+I knew that the input could only be 4 characters max, so I would have to have at max a 2 character command followed by a space and an asterisk after.</p>
+<p>This part wasn&rsquo;t very fun for me, because I had to &ldquo;bruteforce&rdquo; through all the 2 characters commands until I found a correct one.
+By bruteforce, I meant go through the commands that seemed valid in <a href="https://www.davekb.com/browse_computer_tips:linux_two_letter_commands:txt" target="_blank" rel="noopener noreffer ">https://www.davekb.com/browse_computer_tips:linux_two_letter_commands:txt</a></p>
+<p>Eventually I got to the command m4 which when doing <code>?start=m4 *</code> showed the $flag variable in the source code.</p>
+<p>Note: Sadly I didn&rsquo;t know what m4 actually did to trigger the if statement to a False and print the flag in the source code, but the m4 command processes macros in files.
+Read more at: <a href="https://www.commandlinux.com/man-page/man1/m4.1.html" target="_blank" rel="noopener noreffer ">https://www.commandlinux.com/man-page/man1/m4.1.html</a></p>
+<p>Wrapping the flag with CTF{} we get: <code>CTF{791b21ee6421993a8e25564227a816ee52e48edb437909cba7e1e80c0579b6be}</code></p>
+<h3 id="takeaways">Takeaways</h3>
+<ul>
+<li>I learned about some new commands in linux that are able to print stuff to stdout like nl or m4.</li>
+<li>I learned that 1337 means leet speak</li>
+<li>I learned a new tool <code>volatility</code> that is able to analyze memory files for forensic challenges</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-02-13</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/defcampctf-2022/" data-title="DefCamp CTF 2022" data-hashtags="forensics,misc,web"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/defcampctf-2022/" data-title="DefCamp CTF 2022"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/defcampctf-2022/" data-hashtag="forensics"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/defcampctf-2022/" data-title="DefCamp CTF 2022"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/defcampctf-2022/" data-title="DefCamp CTF 2022"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/defcampctf-2022/" data-title="DefCamp CTF 2022"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/defcampctf-2022/" data-title="DefCamp CTF 2022" data-description="Writeup for the challenges in DefCamp CTF 2022"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fdefcampctf-2022%2f&amp;text=DefCamp%20CTF%202022" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/forensics/">Forensics</a>,&nbsp;<a href="/tags/misc/">Misc</a>,&nbsp;<a href="/tags/web/">Web</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/lit-2021/" class="prev" rel="prev" title="LIT 2021"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>LIT 2021</a>
+            <a href="/posts/mhsctf-2022/" class="next" rel="next" title="MHSCTF 2022">MHSCTF 2022<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

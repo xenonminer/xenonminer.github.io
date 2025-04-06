@@ -1,0 +1,102 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Dfir - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/dfir/</link>
+        <description>Dfir - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Fri, 23 Sep 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/dfir/" rel="self" type="application/rss+xml" /><item>
+    <title>DownUnder CTF 2022</title>
+    <link>http://localhost:1313/posts/downunder-ctf-2022/</link>
+    <pubDate>Fri, 23 Sep 2022 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/downunder-ctf-2022/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/1625" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1625</a></li>
+<li>Sep 23 to Sep 25</li>
+<li>Played with wackers</li>
+<li>Ranking: 392/1407 with 750 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/babyp(y)wn</td>
+          <td>beginner</td>
+          <td>50</td>
+          <td><a href="#pwnbabypywn" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/source-provided</td>
+          <td>beginner</td>
+          <td>50</td>
+          <td><a href="#revsource-provided" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="dfir">DFIR</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>dfir/Shop-Knock-Knock-Knock</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-knock-knock-knock" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-Logging-for-what?</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-logging-for-what" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-I&rsquo;m-just-looking!</td>
+          <td>easy</td>
+          <td>50</td>
+          <td><a href="#dfirshop-im-just-looking" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>dfir/Shop-Oi!-Get-out-of-there!</td>
+          <td>medium</td>
+          <td>50</td>
+          <td><a href="#dfirshop-oi-get-out-of-there" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="pwnbabypywn">pwn/babypywn</h3>
+<p>Python is memory safe, right?</p>
+<p>Author: joseph#8210</p>
+<p>Attachments: <a href="https://play.duc.tf/files/75063ab9b30ed274dd69906496ce0c15/babypywn.py?token=eyJ1c2VyX2lkIjozNTUxLCJ0ZWFtX2lkIjoxNTQwLCJmaWxlX2lkIjozN30.YzHRZQ.fB3_7LN6wR9a1LOd2JRyUidbaC4" target="_blank" rel="noopener noreffer ">babypywn.py</a></p>]]></description>
+</item>
+</channel>
+</rss>

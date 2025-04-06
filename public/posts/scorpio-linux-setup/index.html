@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Scorpio Linux Setup - pwnland</title><meta name="Description" content="Tutorial for Scorpio scoring engine setup for CyberPatriot Linux images"><meta property="og:url" content="http://localhost:1313/posts/scorpio-linux-setup/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="Scorpio Linux Setup">
+  <meta property="og:description" content="Tutorial for Scorpio scoring engine setup for CyberPatriot Linux images">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-06-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-06-17T00:00:00+00:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Scorpio">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Scorpio Linux Setup">
+  <meta name="twitter:description" content="Tutorial for Scorpio scoring engine setup for CyberPatriot Linux images">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/scorpio-linux-setup/" /><link rel="prev" href="http://localhost:1313/posts/wreckctf-2022/" /><link rel="next" href="http://localhost:1313/posts/sunshinectf-2024/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Scorpio Linux Setup",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/scorpio-linux-setup\/"
+        },"genre": "posts","keywords": "linux, scorpio","wordcount":  1152 ,
+        "url": "http:\/\/localhost:1313\/posts\/scorpio-linux-setup\/","datePublished": "2023-06-15T00:00:00+00:00","dateModified": "2023-06-17T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "Tutorial for Scorpio scoring engine setup for CyberPatriot Linux images"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Scorpio Linux Setup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-category">included in <a href="/categories/posts/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Posts</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-15">2023-06-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1152 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-is-scorpio">What is Scorpio?</a></li>
+    <li><a href="#how-does-scorpio-work">How does Scorpio work?</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#steps">Steps</a>
+      <ul>
+        <li><a href="#step-1-opencreate-a-sandbox-virtual-machine">Step 1: Open/Create a Sandbox Virtual Machine</a></li>
+        <li><a href="#step-2-setting-upimplementing-vulnerabilities-in-the-image">Step 2: Setting up/Implementing Vulnerabilities in the Image</a></li>
+        <li><a href="#step-3-cloning-scorpio-repository-into-the-system--setting-up-directories">Step 3: Cloning Scorpio Repository into the system + Setting up directories</a></li>
+        <li><a href="#step-4-configuring-the-engine">Step 4: Configuring the Engine</a></li>
+        <li><a href="#step-5-checking-vulnerabilities-with-the-engine">Step 5: Checking Vulnerabilities with the Engine</a></li>
+        <li><a href="#step-6-encrypting-the-engine">Step 6: Encrypting the engine</a></li>
+        <li><a href="#step-7-setting-up-the-engine-service">Step 7: Setting up the engine service</a></li>
+        <li><a href="#step-8-powering-off-and-exporting">Step 8: Powering Off and Exporting</a></li>
+        <li><a href="#step-9-testing-the-image">Step 9: Testing the Image</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="description">Description</h1>
+<p>In this blog post, you will learn how to setup the <a href="https://github.com/troy-cyber/scorpio" target="_blank" rel="noopener noreffer ">Scorpio Scoring Engine</a> for Linux OSes.</p>
+<h2 id="what-is-scorpio">What is Scorpio?</h2>
+<p>Scorpio is a Python-based scoring engine created to score image vulnerabilities. Scorpio checks if a vulnerability has been fixed and gives live feedback to the students.</p>
+<h2 id="how-does-scorpio-work">How does Scorpio work?</h2>
+<p>The image creator (you) will implement vulnerabilities onto a virtual machine and record them onto <strong>engine.py</strong> which runs every 30 seconds. As the students secure the system, the scoring engine will update <strong>Template.html</strong> (Scoring Report) to display the fixed vulnerabilities.</p>
+<h1 id="instructions-for-setup">Instructions for setup</h1>
+<p>If you have already created the image with vulnerabilities and want to jump to Scorpio setup, <a href="#step-3-cloning-scorpio-repository-into-the-system--setting-up-directories" rel="">click here</a>.</p>
+<h2 id="steps">Steps</h2>
+<h3 id="step-1-opencreate-a-sandbox-virtual-machine">Step 1: Open/Create a Sandbox Virtual Machine</h3>
+<p>To get started, first create your base image. You can grab free sandbox images at <a href="https://www.linuxvmimages.com/" target="_blank" rel="noopener noreffer ">linuxvmimages</a>. Since this post is meant for Linux and CyberPatriot, grab a <a href="https://www.linuxvmimages.com/images/ubuntu-2004/" target="_blank" rel="noopener noreffer ">Ubuntu 20.04 Image</a> or a <a href="https://www.linuxvmimages.com/images/ubuntu-2204/" target="_blank" rel="noopener noreffer ">Ubuntu 22.04 Image</a>. Make sure to grab the Vmware image and <strong>NOT</strong> the VirtualBox.</p>
+<p>Extract the image. After extracting, open the <strong>.vmx</strong> file by double-clicking it. Or, go into Vmware, click <strong>Open a Virtual Machine</strong>, then select the <strong>.vmx</strong> file to open.</p>
+<p>Then run the image by clicking the play button.</p>
+<h3 id="step-2-setting-upimplementing-vulnerabilities-in-the-image">Step 2: Setting up/Implementing Vulnerabilities in the Image</h3>
+<p>Now that you have the sandbox image open, implement all your vulnerabilities in the image.</p>
+<p>Here&rsquo;s 4 examples of vulnerabilities you can set up.</p>
+<ol>
+<li>Adding an unauthorized user onto the system
+<ul>
+<li><code>sudo adduser username</code></li>
+<li>Example: <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/7b540450-2b31-4f69-b3cf-68cd9eb850e6"
+        data-srcset="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/7b540450-2b31-4f69-b3cf-68cd9eb850e6, https://github.com/xenonminer/xenonminer.github.io/assets/46347858/7b540450-2b31-4f69-b3cf-68cd9eb850e6 1.5x, https://github.com/xenonminer/xenonminer.github.io/assets/46347858/7b540450-2b31-4f69-b3cf-68cd9eb850e6 2x"
+        data-sizes="auto"
+        alt="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/7b540450-2b31-4f69-b3cf-68cd9eb850e6"
+        title="unauthuseradd" /></li>
+</ul>
+</li>
+<li>Modifying the GUI Software &amp; Updates Settings
+<ul>
+<li>Example: <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/0747bcfb-0e37-473d-b0d7-3699c728ad17"
+        data-srcset="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/0747bcfb-0e37-473d-b0d7-3699c728ad17, https://github.com/xenonminer/xenonminer.github.io/assets/46347858/0747bcfb-0e37-473d-b0d7-3699c728ad17 1.5x, https://github.com/xenonminer/xenonminer.github.io/assets/46347858/0747bcfb-0e37-473d-b0d7-3699c728ad17 2x"
+        data-sizes="auto"
+        alt="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/0747bcfb-0e37-473d-b0d7-3699c728ad17"
+        title="guisandu" /></li>
+</ul>
+</li>
+<li>Installing a malicious package
+<ul>
+<li><code>sudo apt install package</code></li>
+<li>Example: <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/2facee6e-ebef-45c1-8fa1-732b31ff6798"
+        data-srcset="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/2facee6e-ebef-45c1-8fa1-732b31ff6798, https://github.com/xenonminer/xenonminer.github.io/assets/46347858/2facee6e-ebef-45c1-8fa1-732b31ff6798 1.5x, https://github.com/xenonminer/xenonminer.github.io/assets/46347858/2facee6e-ebef-45c1-8fa1-732b31ff6798 2x"
+        data-sizes="auto"
+        alt="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/2facee6e-ebef-45c1-8fa1-732b31ff6798"
+        title="hashcatinstall" /></li>
+</ul>
+</li>
+<li>Adding a malicious file
+<ul>
+<li><code>touch /path/to/random/directory/file</code></li>
+<li>Example: <img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/6b8b7e42-2a37-4d52-bf5e-bd4716cc2741"
+        data-srcset="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/6b8b7e42-2a37-4d52-bf5e-bd4716cc2741, https://github.com/xenonminer/xenonminer.github.io/assets/46347858/6b8b7e42-2a37-4d52-bf5e-bd4716cc2741 1.5x, https://github.com/xenonminer/xenonminer.github.io/assets/46347858/6b8b7e42-2a37-4d52-bf5e-bd4716cc2741 2x"
+        data-sizes="auto"
+        alt="https://github.com/xenonminer/xenonminer.github.io/assets/46347858/6b8b7e42-2a37-4d52-bf5e-bd4716cc2741"
+        title="touchfile" /></li>
+</ul>
+</li>
+</ol>
+<p>After creating the vulnerabilities, you want to create the README, Forensic Questions, and the <strong>Set Name for Scoring Report</strong> files. These files will be created on the Desktop of your main user.</p>
+<p>The README can be written in Google Docs. <a href="https://docs.google.com/document/d/1M4mljp9yEzb5GLsibm0Z7RqTzpiPQalwZlfn4i8nixo" target="_blank" rel="noopener noreffer ">Here is an example README</a>. After creating the README, download the README as a <strong>pdf</strong> onto the system and rename it to <strong>README.pdf</strong>. Then move it onto the Desktop.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mv ~/Downloads/README_download ~/Desktop/README.pdf</span></span></code></pre></div></div>
+<p>The Forensic Question files should be in the format &ldquo;Forensics_#.txt&rdquo;. Create them using the command <code>touch Forensics_#.txt</code>. The accepted format is as follows:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>(Example: Example_Answer)
+
+Question: Question_Here
+
+Answer:</code></pre></div>
+<p>Also, create the &ldquo;Set Name for Scoring Report&rdquo; on the Desktop of the main user: <code>touch &quot;Set Name for Scoring Report&quot;</code>. The accepted format is as follows:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>YOUR FULL NAME: [id]</code></pre></div>
+<p>The competitor/student completing the image will fill in the <strong>id</strong> upon opening the image. The <strong>id</strong> can be anything you choose.</p>
+<p>Other things to configure are:</p>
+<ul>
+<li>Your main user&rsquo;s <strong>.bash_history file</strong> and root&rsquo;s <strong>.bash_history</strong> file. This clears your bash history permanently so students can&rsquo;t figure out what commands you ran.
+<ul>
+<li>To do this with example user <code>joe</code>, run the commands
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf /home/joe/.bash_history
+</span></span><span class="line"><span class="cl">ln -s /dev/null /home/joe/.bash_history
+</span></span><span class="line"><span class="cl">sudo rm -rf /root/.bash_history
+</span></span><span class="line"><span class="cl">sudo ln -s /dev/null /root/.bash_history</span></span></code></pre></div></div>
+</li>
+</ul>
+</li>
+<li>Autologin for your main user with gdm3
+<ul>
+<li>To set this up with <code>joe</code>, edit the <strong>/etc/gdm3/custom.conf</strong>
+Then uncomment and edit the following lines to look like this:
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">AutomaticLoginEnable</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="nv">AutomaticLogin</span><span class="o">=</span>joe</span></span></code></pre></div></div>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="step-3-cloning-scorpio-repository-into-the-system--setting-up-directories">Step 3: Cloning Scorpio Repository into the system + Setting up directories</h3>
+<p>After adding all the vulnerabilities, you can start setting up the engine.</p>
+<p>Install python2, pip, pyconcrete, and git on the image:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install python2 -y
+</span></span><span class="line"><span class="cl">sudo apt install python3-pip -y
+</span></span><span class="line"><span class="cl">sudo <span class="nv">PYCONCRETE_PASSPHRASE</span><span class="o">=</span>password_here pip install pyconcrete
+</span></span><span class="line"><span class="cl">sudo apt install git -y</span></span></code></pre></div></div>
+<p>Clone the engine repository: <code>git clone https://github.com/troy-cyber/scorpio.git</code> and rename it to the <code>/opt/temp</code> directory with <code>mv scorpio /opt/temp</code>.</p>
+<h3 id="step-4-configuring-the-engine">Step 4: Configuring the Engine</h3>
+<p>After cloning the repository and setting up the directories, set up the engine.</p>
+<p>First, change the <strong>imageName</strong> at the top of <strong>engine.py</strong> so it fits your image. This name will be displayed at the top of the Scoring Report.</p>
+<p>Then, change all occurences of <code>kaisa</code> to your main user&rsquo;s username.</p>
+<h3 id="step-5-checking-vulnerabilities-with-the-engine">Step 5: Checking Vulnerabilities with the Engine</h3>
+<p>After you have added the vulnerabilities, configure them to be checked in the engine.</p>
+<p>Navigate to <strong>/opt/temp/</strong> and open up <strong>engine.py</strong>.</p>
+<p>The lines to change are the ones that look like this:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">vulns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newCommandObject</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;cat /home/kaisa/Desktop/Forensics_1.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;Valoran City Park&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">True</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;Forensics Question 1 correct&#39;</span><span class="p">))</span></span></span></code></pre></div></div>
+<p>These lines add a vuln object with specific parameters. Going left to right the parameters are:</p>
+<ul>
+<li>The command to check the vuln</li>
+<li>What to check for in the result of the command</li>
+<li>If the command was checked for that value, put True. If it was checked for not being that value, put False.</li>
+<li>Number of points assigned for that vulnerability</li>
+<li>Scoring Report message</li>
+</ul>
+<p>The 4 vulns from earlier would look like this:</p>
+<ul>
+<li>Checking for unauthorized user deletion (user will be bob):
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">vulns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newCommandObject</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;cat /etc/passwd | grep -v &#34;#&#34; | grep bob | wc -l&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Removed unauthorized user bob&#39;</span><span class="p">))</span></span></span></code></pre></div></div>
+</li>
+<li>Fixing GUI Software &amp; Updates Settings
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">vulns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newCommandObject</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;cat /etc/apt/apt.conf.d/20auto-upgrades | grep &#34;APT::Periodic::Update-Package-Lists&#34; | grep &#34;1&#34; | wc -l&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Daily updates enabled&#39;</span><span class="p">))</span></span></span></code></pre></div></div>
+</li>
+<li>Checking for a deleted package
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">vulns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newCommandObject</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;apt list --installed hashcat&#39;</span><span class="p">,</span> <span class="s1">&#39;installed&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">False</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Prohibited software hashcat removed&#39;</span><span class="p">))</span></span></span></code></pre></div></div>
+</li>
+<li>Checking for a deleted file
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">vulns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newCommandObject</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;ls /home/bob/.passwords.txt | wc -l&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">True</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Removed plaintext password file&#39;</span><span class="p">))</span></span></span></code></pre></div></div>
+</li>
+</ul>
+<p>With these checks, you are trying to find the result to see if it&rsquo;s there and modify the <code>newCommandObject</code> based on that.</p>
+<h3 id="step-6-encrypting-the-engine">Step 6: Encrypting the engine</h3>
+<p>We need to encrypt the engine to make sure no one can read the vulns. Since pyconcrete should already be installed, you can now run:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-py">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">pyconcrete</span><span class="o">-</span><span class="n">admin</span><span class="o">.</span><span class="n">py</span> <span class="nb">compile</span> <span class="o">--</span><span class="n">source</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">temp</span> <span class="o">--</span><span class="n">pye</span></span></span></code></pre></div></div>
+<p>to encrypt the <strong>engine.py</strong> into a <strong>engine.pye</strong>.</p>
+<p>Now, save the original <strong>engine.py</strong> onto your Google Drive/Github just in case you need to make engine edits later. <strong>There will most likely be bugs with the engine the first time around, so please do this!</strong></p>
+<p>Then, delete the original <strong>engine.py</strong> from <strong>/opt/temp/</strong> to make sure no one can directly see the vulns.</p>
+<h3 id="step-7-setting-up-the-engine-service">Step 7: Setting up the engine service</h3>
+<p>After encrypting the engine, make the engine a service so that it runs forever (as long as it&rsquo;s not disabled/stopped).</p>
+<p>Create the file <strong>/lib/systemd/system/engine.service</strong> with <code>sudo nano /lib/systemd/system/engine.service</code>
+Copy and paste the following into the file:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>Unit<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Description</span><span class="o">=</span>Scoring Engine
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>network.target
+</span></span><span class="line"><span class="cl"><span class="nv">StartLimitIntervalSec</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>simple
+</span></span><span class="line"><span class="cl"><span class="nv">Restart</span><span class="o">=</span>always
+</span></span><span class="line"><span class="cl"><span class="nv">RestartSec</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">User</span><span class="o">=</span>root
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>pyconcrete /opt/temp/engine.pye
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Install<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target</span></span></code></pre></div></div>
+<p>Then, enable the service:</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-bash">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl daemon-reload
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> engine
+</span></span><span class="line"><span class="cl">reboot
+</span></span><span class="line"><span class="cl">sudo systemctl status engine</span></span></code></pre></div></div>
+<h3 id="step-8-powering-off-and-exporting">Step 8: Powering Off and Exporting</h3>
+<p>After setting up the engine service, the image is fully created with the vulnerabilities and the scoring engine.</p>
+<p>Power off the image. After powering off the image, go into the settings and modify the <strong>Memory</strong> to 4 GB and <strong>Processors</strong> to 2 GB. Also modify the image name to the theme of the image.</p>
+<p>Zip up the entire image directory with <strong>7zip</strong> to a new zip file. This may take some time.</p>
+<h3 id="step-9-testing-the-image">Step 9: Testing the Image</h3>
+<p>Have someone else extract the zip file, run the image, and test every vulnerability to make sure the scoring works properly. Once you do that, you should have a working image!</p>
+<p>Hope this helps!</p>
+<p><em>edited by</em> <a href="https://github.com/prince-of-tennis" target="_blank" rel="noopener noreffer ">prince-of-tennis</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-06-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/scorpio-linux-setup/" data-title="Scorpio Linux Setup" data-hashtags="linux,scorpio"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/scorpio-linux-setup/" data-title="Scorpio Linux Setup"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/scorpio-linux-setup/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/scorpio-linux-setup/" data-title="Scorpio Linux Setup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/scorpio-linux-setup/" data-title="Scorpio Linux Setup"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/scorpio-linux-setup/" data-title="Scorpio Linux Setup"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/scorpio-linux-setup/" data-title="Scorpio Linux Setup" data-description="Tutorial for Scorpio scoring engine setup for CyberPatriot Linux images"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fscorpio-linux-setup%2f&amp;text=Scorpio%20Linux%20Setup" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/scorpio/">Scorpio</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/wreckctf-2022/" class="prev" rel="prev" title="WRECKCTF 2022"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>WRECKCTF 2022</a>
+            <a href="/posts/sunshinectf-2024/" class="next" rel="next" title="sunshineCTF 2024">sunshineCTF 2024<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

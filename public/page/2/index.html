@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>pwnland</title><meta name="Description" content="mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall"><meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="pwnland">
+  <meta property="og:description" content="mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="pwnland">
+  <meta name="twitter:description" content="mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/" /><link rel="alternate" href="/index.xml" type="application/rss+xml" title="pwnland">
+    <link rel="feed" href="/index.xml" type="application/rss+xml" title="pwnland"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "http:\/\/localhost:1313\/","inLanguage": "en-us","author": {
+                "@type": "Person",
+                "name": "xenonminer"
+            },"description": "mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall","name": "pwnland"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-avatar"><a href="/aboutme/" title="About Me"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://github.com/xenonminer.png"
+        data-srcset="https://github.com/xenonminer.png, https://github.com/xenonminer.png 1.5x, https://github.com/xenonminer.png 2x"
+        data-sizes="auto"
+        alt="https://github.com/xenonminer.png"
+        title="https://github.com/xenonminer.png" /></a></div><h1 class="home-title">Cyber/CTF Blog</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/xenonminer" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="https://linkedin.com/in/jaden-wijata" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/csaw-2022/">csaw 2022</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-09-09">2022-09-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/1613" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1613</a></li>
+<li>Sep 9 to Sep 11</li>
+<li>Played with wackers</li>
+<li>Ranking: 372/884 with 243 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/World Wide Web</td>
+          <td>Easy</td>
+          <td>54</td>
+          <td><a href="#webworld-wide-web" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="webworld-wide-web">web/world-wide-web</h3>
+<h2 id="description">Description</h2>
+<p>Isn&rsquo;t the Word Wide Web a fascinating place to be in? Words.. so many words.. all linked&hellip; NOTE: The flag doesn&rsquo;t have a wrapper. It needs to be wrapped with curly brackets and please put CTF in front of the curly brackets.</p></div><div class="post-footer">
+        <a href="/posts/csaw-2022/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/web/">Web</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/mhsctf-2022/">MHSCTF 2022</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-02-18">2022-02-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/1564" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1564</a></li>
+<li>Feb 18 to Feb 25</li>
+<li>Played with wackers</li>
+<li>Ranking: 106/739 with 630 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="crypto">Crypto</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>crypto/Em-Dee</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptoem-dee" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Whats-Cooking</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptowhats-cooking" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Peanuts</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptopeanuts" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Crash-Hacker</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptocrash-hacker" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/Whats-Cooking-2</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#cryptowhats-cooking-2" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>crypto/IPv11</td>
+          <td>Easy</td>
+          <td>15</td>
+          <td><a href="#cryptoipv11" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/Blank-Slate</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#forensicsblank-slate" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/In-Plain-Sight</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#forensicsin-plain-sight" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blank-Slate-2</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#forensicsblank-slate-2" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Chimera</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#forensicschimera" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blank-Slate-3</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#forensicsblank-slate-3" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>forensics/Blatant-Corruption</td>
+          <td>Medium</td>
+          <td>40</td>
+          <td><a href="#forensicsblatant-corruption" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="general">General</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>general/Sanity-Check</td>
+          <td>Easy</td>
+          <td>2</td>
+          <td><a href="#generalsanity-check" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Discord</td>
+          <td>Easy</td>
+          <td>3</td>
+          <td><a href="#generaldiscord" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Binned</td>
+          <td>Easy</td>
+          <td>5</td>
+          <td><a href="#generalbinned" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Where-the-Wild-Cards-Are</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#generalwhere-the-wild-cards-are" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>general/Reconstruction</td>
+          <td>Medium</td>
+          <td>35</td>
+          <td><a href="#generalreconstruction" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/Lemme-In</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#revlemme-in" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/James-Harold-Japp</td>
+          <td>Easy</td>
+          <td>10</td>
+          <td><a href="#webjames-harold-japp" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/new-site-who-dis</td>
+          <td>Easy</td>
+          <td>20</td>
+          <td><a href="#webnew-site-who-dis" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Bend</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#webbend" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Piece-It-Together</td>
+          <td>Easy</td>
+          <td>25</td>
+          <td><a href="#webpiece-it-together" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Cuppa-Joe</td>
+          <td>Easy</td>
+          <td>30</td>
+          <td><a href="#webcuppa-joe" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/Erlenmeyer-Biscuits</td>
+          <td>Easy</td>
+          <td>40</td>
+          <td><a href="#weberlenmeyer-biscuits" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="cryptoem-dee">crypto/Em-Dee</h3>
+<p>I have a good friend named Em. She loves secret codes, so when she challenged me this time, I was well up for it! She told me that she encoded the word &ldquo;happy&rdquo; as &ldquo;56ab24c15b72a457069c5ea42fcfc640&rdquo; and &ldquo;sad&rdquo; as &ldquo;49f0bad299687c62334182178bfd75d8&rdquo; (without the quotes) and challenged me to encode &ldquo;mhsctf&rdquo; using her method! I can&rsquo;t figure it out! What would it be? Enter your answer in flag format: &ldquo;flag{&hellip;}&rdquo;</p></div><div class="post-footer">
+        <a href="/posts/mhsctf-2022/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/crypto/">Crypto</a>,&nbsp;<a href="/tags/forensics/">Forensics</a>,&nbsp;<a href="/tags/rev/">Rev</a>,&nbsp;<a href="/tags/web/">Web</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/defcampctf-2022/">DefCamp CTF 2022</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-02-11">2022-02-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/1560" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1560</a></li>
+<li>Feb 11 to Feb 13</li>
+<li>Played with wackers</li>
+<li>Ranking: 73/1035 with 736 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/this-file-hides-something</td>
+          <td>Medium</td>
+          <td>50</td>
+          <td><a href="#forensicsthis-file-hides-something" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/catch-me-if-you-can</td>
+          <td>Medium</td>
+          <td>186/772</td>
+          <td><a href="#misccatch-me-if-you-can" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/para-code</td>
+          <td>Easy</td>
+          <td>50</td>
+          <td><a href="#webpara-code" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="forensicsthis-file-hides-something">forensics/this-file-hides-something</h3>
+<p>There is an emergency regarding this file. We need to extract the password ASAP. It&rsquo;s a crash dump, but our tools are not working. Please help us, time is not on our side.</p></div><div class="post-footer">
+        <a href="/posts/defcampctf-2022/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/forensics/">Forensics</a>,&nbsp;<a href="/tags/misc/">Misc</a>,&nbsp;<a href="/tags/web/">Web</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/lit-2021/">LIT 2021</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-07-16">2021-07-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/1398" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1398</a></li>
+<li>Jul 16 to Jul 18</li>
+<li>Played with wackers</li>
+<li>Ranking: 142/476 with 1875 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/Intro-to-CTF</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscintro-to-ctf" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Discord-Flag</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscdiscord-flag" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Survey</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscsurvey" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Hex-to-ASCII</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#mischex-to-ascii" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Dots-and-Lines</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscdots-and-lines" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Never-Gonna-Give-You-Up</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscnever-gonna-give-you-up" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Peanutbutter-Jar</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscpeanutbutter-jar" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/Steganography</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#miscsteganography" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>misc/CodeTiger-ORZ</td>
+          <td>Medium</td>
+          <td>I forgor</td>
+          <td><a href="#misccodetiger-orz" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/Gets</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#pwngets" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rev">Rev</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rev/Yarn</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#revyarn" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>rev/Evaluation</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#revevaluation" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/Let-It-Go</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#weblet-it-go" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/My-First-Website</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#webmy-first-website" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/dizzy</td>
+          <td>Easy</td>
+          <td>I forgor</td>
+          <td><a href="#webdizzy" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="miscintro-to-ctf">misc/Intro-to-CTF</h3>
+<p>Welcome to your first CTF Challenge! For this problem, you simply need to read the CTF Resource page and find the flag :D.
+Resource Page: <a href="https://lit.lhsmathcs.org/ctfres" target="_blank" rel="noopener noreffer ">https://lit.lhsmathcs.org/ctfres</a></p></div><div class="post-footer">
+        <a href="/posts/lit-2021/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/misc/">Misc</a>,&nbsp;<a href="/tags/pwn/">Pwn</a>,&nbsp;<a href="/tags/rev/">Rev</a>,&nbsp;<a href="/tags/web/">Web</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/hsctf-2021/">hsctf 2021</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-06-14">2021-06-14</time></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div><div class="content"><ul>
+<li><a href="https://ctftime.org/event/1264" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1264</a></li>
+<li>Jun 14 to Jun 19</li>
+<li>Played with wackers</li>
+<li>Ranking: 254/1164 with 3500 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/LSBlue</td>
+          <td>Medium</td>
+          <td>220</td>
+          <td><a href="#misclsblue" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/NRC</td>
+          <td>Easy</td>
+          <td>107</td>
+          <td><a href="#webnrc" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="misclsblue">misc/LSBlue</h3>
+<p>Orca watching is an awesome pastime of mine!</p>
+<p>Attachments: <a href="https://github.com/wackersCTF/hsctf-8/blob/main/misc/LSBlue/lsblue.png?raw=true" target="_blank" rel="noopener noreffer ">https://github.com/wackersCTF/hsctf-8/blob/main/misc/LSBlue/lsblue.png?raw=true</a></p>
+<h3 id="solution">Solution</h3>
+<p>First, you will obtain the file they gave.</p>
+<p>Since the title name of the challenge is LSBlue you will know that it has something to do with LSB.</p></div><div class="post-footer">
+        <a href="/posts/hsctf-2021/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/misc/">Misc</a>,&nbsp;<a href="/tags/web/">Web</a></div></div>
+</article><ul class="pagination"><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/">1</a>
+                    </span>
+                </li><li class="page-item active">
+                    <span class="page-link">
+                        <a href="/page/2/">2</a>
+                    </span>
+                </li></ul></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/typeit/index.umd.js"></script><script>window.config={"data":{"id-1":"mov rax, 0xFFFF; pop rdi; ret; pop rsi; ret; syscall"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"]},"duration":-1,"speed":100}};</script><script src="/js/theme.min.js"></script></body>
+</html>

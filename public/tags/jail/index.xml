@@ -1,0 +1,117 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Jail - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/jail/</link>
+        <description>Jail - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Fri, 21 Mar 2025 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/jail/" rel="self" type="application/rss+xml" /><item>
+    <title>RITSEC CTF 2025</title>
+    <link>http://localhost:1313/posts/ritsec-ctf-2025/</link>
+    <pubDate>Fri, 21 Mar 2025 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/ritsec-ctf-2025/</guid>
+    <description><![CDATA[<ul>
+<li><a href="https://ctftime.org/event/2673" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/2673</a></li>
+<li>March 21 - March 23</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="forensics">Forensics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>forensics/banksman</td>
+          <td>medium</td>
+          <td>471</td>
+          <td><a href="#forensicsbanksman" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/virtual-mayhem</td>
+          <td>easy</td>
+          <td>419</td>
+          <td><a href="#webvirtual-mayhem" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>web/upload-issues</td>
+          <td>medium</td>
+          <td>483</td>
+          <td><a href="#webupload-issues" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="pwn">Pwn</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pwn/bit-burger</td>
+          <td>easy</td>
+          <td>467</td>
+          <td><a href="#pwnbit-burger" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>pwn/hashmatch</td>
+          <td>medium</td>
+          <td>499</td>
+          <td><a href="#pwnhashmatch" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="jail">Jail</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>jail/shrimple</td>
+          <td>easy</td>
+          <td>494</td>
+          <td><a href="#jailshrimple" rel="">jump</a></td>
+      </tr>
+      <tr>
+          <td>jail/seti</td>
+          <td>easy</td>
+          <td>496</td>
+          <td><a href="#jailseti" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="forensicsbanksman">forensics/banksman</h3>
+<p>Our professor received a report from an unfamiliar student. With his experience, the professor realized that this report was abnormal. He immediately used this file for our research assignment. Let&rsquo;s analyze whether there is anything mysterious embedded in it!</p>]]></description>
+</item>
+</channel>
+</rss>

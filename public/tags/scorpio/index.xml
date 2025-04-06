@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Scorpio - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/scorpio/</link>
+        <description>Scorpio - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Thu, 15 Jun 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/scorpio/" rel="self" type="application/rss+xml" /><item>
+    <title>Scorpio Linux Setup</title>
+    <link>http://localhost:1313/posts/scorpio-linux-setup/</link>
+    <pubDate>Thu, 15 Jun 2023 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/posts/scorpio-linux-setup/</guid>
+    <description><![CDATA[<h1 id="description">Description</h1>
+<p>In this blog post, you will learn how to setup the <a href="https://github.com/troy-cyber/scorpio" target="_blank" rel="noopener noreffer ">Scorpio Scoring Engine</a> for Linux OSes.</p>
+<h2 id="what-is-scorpio">What is Scorpio?</h2>
+<p>Scorpio is a Python-based scoring engine created to score image vulnerabilities. Scorpio checks if a vulnerability has been fixed and gives live feedback to the students.</p>
+<h2 id="how-does-scorpio-work">How does Scorpio work?</h2>
+<p>The image creator (you) will implement vulnerabilities onto a virtual machine and record them onto <strong>engine.py</strong> which runs every 30 seconds. As the students secure the system, the scoring engine will update <strong>Template.html</strong> (Scoring Report) to display the fixed vulnerabilities.</p>]]></description>
+</item>
+</channel>
+</rss>

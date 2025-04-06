@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>hsctf 2021 - pwnland</title><meta name="Description" content="writeup for challenges in hsctf 2021"><meta property="og:url" content="http://localhost:1313/posts/hsctf-2021/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="hsctf 2021">
+  <meta property="og:description" content="writeup for challenges in hsctf 2021">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-06-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-06-19T00:00:00+00:00">
+    <meta property="article:tag" content="Misc">
+    <meta property="article:tag" content="Web">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hsctf 2021">
+  <meta name="twitter:description" content="writeup for challenges in hsctf 2021">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/hsctf-2021/" /><link rel="next" href="http://localhost:1313/posts/lit-2021/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "hsctf 2021",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/hsctf-2021\/"
+        },"genre": "posts","keywords": "misc, web","wordcount":  223 ,
+        "url": "http:\/\/localhost:1313\/posts\/hsctf-2021\/","datePublished": "2021-06-14T00:00:00+00:00","dateModified": "2021-06-19T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "writeup for challenges in hsctf 2021"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">hsctf 2021</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://xenonminer.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Xenonminer</a></span>&nbsp;<span class="post-category">included in <a href="/categories/writeups/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Writeups</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-06-14">2021-06-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;223 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#misc">Misc</a></li>
+    <li><a href="#web">Web</a></li>
+    <li><a href="#writeups">Writeups</a>
+      <ul>
+        <li><a href="#misclsblue">misc/LSBlue</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#webnrc">web/NRC</a></li>
+        <li><a href="#solution-1">Solution</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li><a href="https://ctftime.org/event/1264" target="_blank" rel="noopener noreffer ">https://ctftime.org/event/1264</a></li>
+<li>Jun 14 to Jun 19</li>
+<li>Played with wackers</li>
+<li>Ranking: 254/1164 with 3500 points</li>
+</ul>
+<h1 id="my-solveswriteups">My Solves/Writeups</h1>
+<h2 id="misc">Misc</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>misc/LSBlue</td>
+          <td>Medium</td>
+          <td>220</td>
+          <td><a href="#misclsblue" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="web">Web</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Challenge Name</th>
+          <th>Difficulty</th>
+          <th>Points</th>
+          <th>Writeup</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>web/NRC</td>
+          <td>Easy</td>
+          <td>107</td>
+          <td><a href="#webnrc" rel="">jump</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="writeups">Writeups</h2>
+<h3 id="misclsblue">misc/LSBlue</h3>
+<p>Orca watching is an awesome pastime of mine!</p>
+<p>Attachments: <a href="https://github.com/wackersCTF/hsctf-8/blob/main/misc/LSBlue/lsblue.png?raw=true" target="_blank" rel="noopener noreffer ">https://github.com/wackersCTF/hsctf-8/blob/main/misc/LSBlue/lsblue.png?raw=true</a></p>
+<h3 id="solution">Solution</h3>
+<p>First, you will obtain the file they gave.</p>
+<p>Since the title name of the challenge is LSBlue you will know that it has something to do with LSB.</p>
+<p>The tool you will want to use for this challenge is zsteg.
+Zsteg is a Ruby tool that detects hidden data in PNG and BMP images.</p>
+<p>Once you use zsteg on the original image file they gave, you will see many lines.</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
+        <span class="copy" title="Copy to clipboard"><i class="far fa-copy fa-fw" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>imagedata           .. text: &#34;Uhv4BR$.&lt;!(2#(0\&#34;(2#*4*4@;L\\l&#34;
+b1,b,lsb,xy         .. text: &#34;flag{0rc45_4r3nt_6lu3_s1lly_4895131}&#34;
+b2,r,lsb,xy         .. text: &#34;UUTFUUUW&#34;
+b2,g,lsb,xy         .. file: PGP Secret Key -
+b2,g,msb,xy         .. text: &#34;iiUueUUu&#34;
+b2,b,msb,xy         .. text: &#34;TUUUEUTAUE&#34;
+b2,bgr,msb,xy       .. text: &#34;VU_UUUUeY&#34;
+b4,r,lsb,xy         .. text: &#34;UEUffufffgUfffeeEfUVVuVeUUfVffUUVfvvDffVfUUWeFfVfUfeeUeVffUeWffwffeVffeffVfefffvfUEeffffeUgUUUffVeVeUUVfffUfUfeUWvffVefefUfvfgUUVffgeUvfUUfgffeVeVgfffUUUUUUUUUUUVehveUfUVfegeUUUUVgeUVggeUUUUUUUUUUUeVgvVUUUvUEUVvVuUUUfeUUUVvfVffffVfffeVfgeUUUUUUUVffeUUUUVeV&#34;
+b4,r,msb,xy         .. text: &#34;jfnn\&#34;ffjf&#34;
+b4,g,lsb,xy         .. text: &#34;\&#34;\&#34;\&#34;\&#34;\&#34;\&#34;\&#34;2&#34;
+b4,g,msb,xy         .. text: &#34;DHDDDDDDDL&#34;
+b4,b,msb,xy         .. text: &#34;7swwwww73sw337s73swww7swwww7w7773www77sww7swwww7swwwwwwwwswwsw7swwwsw7s7ww77sswwwww7wwwww7sww7333s333swww7333s7s&#34;</code></pre></div>
+<p>Most of these lines are pretty unimportant, but in the second line you will get the flag. <code>flag{0rc45_4r3nt_6lu3_s1lly_4895131}</code></p>
+<h3 id="webnrc">web/NRC</h3>
+<p>Find the flag :)</p>
+<p>Attachments: <a href="https://no-right-click.hsc.tf" target="_blank" rel="noopener noreffer ">https://no-right-click.hsc.tf</a></p>
+<h3 id="solution-1">Solution</h3>
+<p>Press Ctrl + Shift + I to open the developer console</p>
+<p>Go to sources, then go to the CSS file</p>
+<p>Look in the comments :)</p>
+<p>Flag: <code>flag{keyboard_shortcuts_or_taskbar}</code></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-06-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/posts/hsctf-2021/" data-title="hsctf 2021" data-hashtags="misc,web"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/posts/hsctf-2021/" data-title="hsctf 2021"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/hsctf-2021/" data-hashtag="misc"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/posts/hsctf-2021/" data-title="hsctf 2021"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/posts/hsctf-2021/" data-title="hsctf 2021"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/hsctf-2021/" data-title="hsctf 2021"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/posts/hsctf-2021/" data-title="hsctf 2021" data-description="writeup for challenges in hsctf 2021"><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fhsctf-2021%2f&amp;text=hsctf%202021" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/misc/">Misc</a>,&nbsp;<a href="/tags/web/">Web</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/lit-2021/" class="next" rel="next" title="LIT 2021">LIT 2021<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

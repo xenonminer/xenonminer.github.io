@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Vim Checklist - pwnland</title><meta name="Description" content="Vim Checklist"><meta property="og:url" content="http://localhost:1313/notes/vim-checklist/">
+  <meta property="og:site_name" content="pwnland">
+  <meta property="og:title" content="Vim Checklist">
+  <meta property="og:description" content="Vim Checklist">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="notes">
+    <meta property="article:published_time" content="2022-09-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-09-21T00:00:00+00:00">
+    <meta property="article:tag" content="Vim">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Vim Checklist">
+  <meta name="twitter:description" content="Vim Checklist">
+<meta name="application-name" content="Cyber/CTF Blog">
+<meta name="apple-mobile-web-app-title" content="Cyber/CTF Blog">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/notes/vim-checklist/" /><link rel="next" href="http://localhost:1313/notes/tmux-checklist/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Vim Checklist",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/notes\/vim-checklist\/"
+        },"genre": "notes","keywords": "vim","wordcount":  918 ,
+        "url": "http:\/\/localhost:1313\/notes\/vim-checklist\/","datePublished": "2022-09-19T00:00:00+00:00","dateModified": "2021-09-21T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Xenonminer"
+            },"description": "Vim Checklist"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="pwnland">pwn.land</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/projects/"> Projects </a><a class="menu-item" href="/notes/"> Notes </a><a class="menu-item" href="/aboutme/"> About Me </a><a class="menu-item" href="/tags/"> Tags </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="pwnland">pwn.land</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/projects/" title="">Projects</a><a class="menu-item" href="/notes/" title="">Notes</a><a class="menu-item" href="/aboutme/" title="">About Me</a><a class="menu-item" href="/tags/" title="">Tags</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Vim Checklist</h1><div class="content" id="content"><p>This is a easy access vim checklist that has examples along with the commands and description.</p>
+<h2 id="normal-mode">Normal Mode</h2>
+<p>When entering into vim, you enter normal mode. Command mode is where most of the commands in vim will be used.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Esc</td>
+          <td>Entering normal mode (if not already in)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>:w : write to the file<!-- raw HTML omitted -->:q : quit the file if nothing written<!-- raw HTML omitted -->:q! : force quit even with written text<!-- raw HTML omitted --></td>
+          <td>quitting/writing to vim</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>:!<!-- raw HTML omitted --></td>
+          <td>Running shell commands from vim</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>:set number : normal line numbers&lt;&gt;:set relativenumber : line numbers are relative</td>
+          <td>Make vim have line numbers</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Ex: 5<!-- raw HTML omitted --> (goes 5 lines down)</td>
+          <td>Typing a number x before a vim command makes you do that command x many times</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>h : move left<!-- raw HTML omitted -->j : move down<!-- raw HTML omitted -->k : move up<!-- raw HTML omitted -->l : move right</td>
+          <td>Moving around (arrow keys also works)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>u : undo (undoes whatever you just did in the last insert mode only)<!-- raw HTML omitted -->Ctrl + r : redo</td>
+          <td>undo/redo previous actions</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>dd : delete entire line<!-- raw HTML omitted -->Shift + d : delete the rest of the line from where cursor is</td>
+          <td>Deleting text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>yy/Shift + y</td>
+          <td>Copy entire line</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>cc : Change the line (delete but also puts you in insert mode after)<!-- raw HTML omitted -->Shift + c : Changes the rest of the line (changes from where cursor is to the end of the line)</td>
+          <td>Changing in vim (like delete but leaves you in insert mode after)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>r</td>
+          <td>Replace character cursor is on</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>p : paste text<!-- raw HTML omitted -->Shift + p : paste text on line above cursor position</td>
+          <td>Pasting text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>w : move forward a word (this consideres a word separated by hyphens or other searators as well besides spaces)<!-- raw HTML omitted -->Shift + w : move forward a word (only delimiter is a space)<!-- raw HTML omitted -->b : move backward a word (same conditions as moving forward)<!-- raw HTML omitted -->Shift + b : move backward a word (same conditions as moving forward)<!-- raw HTML omitted -->e : jump to the end of the current word<!-- raw HTML omitted -->0 : go to the beginning of the line (without entering insert mode)<!-- raw HTML omitted -->$ : go to the end of line (without entering insert mode)</td>
+          <td>Moving across text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>dw : deletes a word in front of cursor position<!-- raw HTML omitted -->(number x)dw : deletes x many words in front<!-- raw HTML omitted -->d0 : delete everything until the start of line<!-- raw HTML omitted -->d$ : delete everything until end of line</td>
+          <td>Combining vim commands examples</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>These all can be ci<!-- raw HTML omitted -->, di&lt;something, yi<!-- raw HTML omitted --> diw : deletes the word<!-- raw HTML omitted -->ciw : changes the word<!-- raw HTML omitted -->yiw : copy the word you are inside of<!-- raw HTML omitted -->di&quot; : deletes everything inside two quotation marks<!-- raw HTML omitted -->ci&quot; : changes everything inside two quotation marks<!-- raw HTML omitted -->yi&quot; : copy everything inside quotes</td>
+          <td>Options when inside a word (cursor is like in the l part of hello)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>% : go back and forth across a pair of chars (() [] {}) <!-- raw HTML omitted --> Only in current line<!-- raw HTML omitted -->  t : jump to the right before the char in the line <!-- raw HTML omitted -->  f : jump to on the char in the line<!-- raw HTML omitted -->  Shift + t : same as t but backwards<!-- raw HTML omitted -->  Shift + f : same as f but backwards<!-- raw HTML omitted --> gg : jump to beginning of file<!-- raw HTML omitted --> Shift + g : jump to end of file<!-- raw HTML omitted --> <!-- raw HTML omitted --> + Shift + g : jump to line number</td>
+          <td>Jumping/Finding text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>&raquo; : Shift text to the right<!-- raw HTML omitted -->&laquo; : Shift text to the left<!-- raw HTML omitted -->If in visual mode and selecting text then only have to do once (&gt; or &lt;)<!-- raw HTML omitted -->== : indent line correctly (good for programming)<!-- raw HTML omitted -->gg=Shift + g : If the entire file is badly indented</td>
+          <td>Indeting/Shifting</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>/(search term) : jumps to next occurrence of (search term) from where cursor is at<!-- raw HTML omitted -->?(search term) : jumpts to previous occurrence of (search term) from where cursor is at<!-- raw HTML omitted -->n : jumps to next occurrence of (search term)<!-- raw HTML omitted -->Shift + n : jumpts to previous occurrence of (search term)<!-- raw HTML omitted -->Selected text in visual mode<!-- raw HTML omitted --># : goes to previous term of the highlighted text<!-- raw HTML omitted -->* : goes to next term of the highlighted text</td>
+          <td>Searching/Replacing</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>m(character) : creates a waypoint to that line<!-- raw HTML omitted -->&rsquo;(character) : goes to that waypoint<!-- raw HTML omitted -->:marks : view all waypoints</td>
+          <td>Vim waypoints (like a portal back to a certain registered waypoint) (can also be through different files)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>zz</td>
+          <td>Center line to the middle of screen</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>. : execute command that was last run</td>
+          <td>Repeat command</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>:reg : pull up the list of all the saved content<!-- raw HTML omitted -->&quot;(char)p : paste a certain text from register or (name)p because the Name is the title of it<!-- raw HTML omitted -->(name)(command) : does some command to that line in the register</td>
+          <td>Vim registers</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="insert-mode">Insert Mode</h2>
+<p>Insert mode will be used to do all the typing/programming.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>i : type before where the highlighted cursor<!-- raw HTML omitted -->a : type after the highlighted cursor<!-- raw HTML omitted -->o : create a new line below and enter insert mode<!-- raw HTML omitted -->Shift + i : go to beginning of current line and enter insert mode<!-- raw HTML omitted -->Shift + a : go to end of current line and enter insert mode<!-- raw HTML omitted -->Shift + o : create a new line above and enter insert mode</td>
+          <td>Entering Insert Mode</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="visual-mode">Visual Mode</h2>
+<p>Visual mode will be used to do different things to characters/lines of text.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Command</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>v</td>
+          <td>Enter Visual Mode</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Arrow keys</td>
+          <td>Select text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>d</td>
+          <td>Delete selected text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>c</td>
+          <td>Deletes selected text and enters insert mode where cursor is</td>
+          <td>}</td>
+      </tr>
+      <tr>
+          <td>y : yank/copy the text<!-- raw HTML omitted -->p (in normal mode) : paste the text</td>
+          <td>Copy/Paste selected text</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Shift + v</td>
+          <td>Visual Line mode (only select lines)</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Ctrl + v</td>
+          <td>Visual Block mode (select by columns)</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="other-useful-vim-tricks">Other Useful Vim tricks</h2>
+<p>These are some other random useful tricks that you might want to know when using vim.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Trick</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>~/.vimrc</td>
+          <td>Vim config file so you don&rsquo;t have to type configs everytime</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+</div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xenonminer</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true};</script><script src="/js/theme.min.js"></script></body>
+</html>

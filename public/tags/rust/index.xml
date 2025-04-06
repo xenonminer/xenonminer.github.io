@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Rust - Tag - pwnland</title>
+        <link>http://localhost:1313/tags/rust/</link>
+        <description>Rust - Tag - pwnland</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>jadenwijata@gmail.com (xenonminer)</managingEditor>
+            <webMaster>jadenwijata@gmail.com (xenonminer)</webMaster><lastBuildDate>Tue, 26 Jul 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>Dirfuzzer</title>
+    <link>http://localhost:1313/projects/dirfuzzer/</link>
+    <pubDate>Tue, 26 Jul 2022 00:00:00 &#43;0000</pubDate>
+    <author>Xenonminer</author>
+    <guid>http://localhost:1313/projects/dirfuzzer/</guid>
+    <description><![CDATA[<p>Project link: <a href="https://github.com/xenonminer/projects/tree/main/dirfuzzer" target="_blank" rel="noopener noreffer ">dirfuzzer</a></p>
+<p>Dirfuzzer is a small program that grabs the different directories of the website from the specified wordlist and returns an output saying the pages&rsquo; status when trying to request it.</p>
+<p>Help menu:</p>
+<p></p>
+<p>Example of run program:</p>
+<p></p>]]></description>
+</item>
+</channel>
+</rss>
