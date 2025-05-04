@@ -8,7 +8,7 @@ author: "Xenonminer"
 authorLink: "https://xenonminer.github.io"
 description: "My experience with 3 different Offensive Security Certifications"
 
-tags: ["HackTheBox", "Zero Pointer Security", "Offensive Security"]
+tags: ["HackTheBox", "Zero-Point Security", "Offensive Security"]
 categories: ["Posts"]
 
 lightgallery: true
