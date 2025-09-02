@@ -154,7 +154,7 @@ for i in range(1, 25):
 sla(b':', b'a')
 itr()
 ```
-```Flag: pTCNp5p6LP0d7qA77yvb4SHf40```
+Flag: ```pTCNp5p6LP0d7qA77yvb4SHf40```
 
 ### pwn/hashmatch
 
@@ -171,7 +171,7 @@ Attachments: [hashmatch.zip](https://ctfd.ritsec.club/files/67524143b8aa8bae3bfb
 ### Solution
 Note: Solved after the CTF ended.
 
-```Flag: nuclei```
+Flag: ```nuclei```
 
 ### jail/shrimple
 
@@ -203,4 +203,4 @@ Attachments: [seti.zip](https://ctfd.ritsec.club/files/fa22e106dfa5538a985b2fb28
 ### Solution
 
 
-```i forgor```
+Flag: ```i forgor```
