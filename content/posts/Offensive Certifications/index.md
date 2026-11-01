@@ -37,7 +37,6 @@ When I took the exam, the passing grade for the exam was 12/14 flags, but make s
 For the pentesting part, it is wise to brush up skills, knowledge, and tools in categories like web application pentesting, network pentesting along with pivoting and lateral movement, Active Directory pentesting, and Privileged Escalation.
 The exam will feel long, especially if you struggle to find one important piece that leads to all the others. However, it is important to persevere through the process as the exam isn't a simple one.
 
-> [!TIP]
 > One useful tip is to keep good notes during the pentest.
 > This can be done with tools like Obsidian, CherryTree, Notion. (I personally used Obsidian)
 > Also take many screenshots of command inputs, command outputs, scripts and everything else you think would be useful when writing the report.
@@ -46,7 +45,6 @@ For the report writing, using a software like Microsoft Word would work, but you
 Instead, I and many others from HackTheBox recommend using [SysReptor](https://portal.sysreptor.com) as it provides good templates for all the HackTheBox and OffSec exams, and is just a nice reporting template to use.
 For the actual report writing, I would recommend being concise with your wording, but trying to provide as much information as possible when showing scripts and commands.
 
-> [!TIP]
 > The last HackTheBox Academy section will go over reporting, but some important sections you might want to include for each vulnerability is the overview of the vulnerability (like name and cvss), how you exploited the vulnerability, the impact of the vulnerability, and how the company can remediate the vulnerability (in order from highest priority to least).
 > Also, if you are almost out of time from doing the actual pentest, focus your reporting on the main vulnerabilities that you think would be most critical towards the company, then work your way to the smaller vulnerabilities, even reporting on something like application versions being shown.
 > Remember, you are doing the entire pentest + report for the company, not for yourself.
@@ -54,7 +52,6 @@ For the actual report writing, I would recommend being concise with your wording
 After studying all the material for the exam, you may want some extra preparation. The HackTheBox Dante ProLab is a great test of abilities that is similar to the exam, along with some HackTheBox easy/medium machines you can find from [Ippsec's CPTS Prep list](https://www.youtube.com/playlist?list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5).
 
 What is really nice about CPTS and all the HackTheBox exams is that the with one voucher, you will get two attempts.
-> [!TIP]
 > I didn't take this opportunity as I was busy with school after, but I know some people took the second attempt to get the perfect score and to practice writing the perfect report.
 
 ## CBBH

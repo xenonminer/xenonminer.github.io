@@ -1,0 +1,62 @@
+{{ define "mainClass" }}wrap{{ if partial "toc-enabled.html" . }} has-toc{{ end }}{{ end }}
+{{ define "main" }}
+<article class="post">
+  <header class="post-header">
+    {{- if .Section }}
+    <a class="eyebrow eyebrow-link" href="{{ .CurrentSection.RelPermalink }}">{{ .CurrentSection.Title }}</a>
+    {{- end }}
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- with .Description }}{{ if ne . $.Title }}
+    <p class="post-subtitle">{{ . }}</p>
+    {{- end }}{{ end }}
+    {{- if .Section }}
+    <div class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ .ReadingTime }} min read</span>
+      {{- with .Params.tags }}
+      <span aria-hidden="true">·</span>
+      <span class="post-tags">
+        {{- range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ (printf "/tags/%s/" (urlize $t)) | relURL }}">{{ $t }}</a>{{ end -}}
+      </span>
+      {{- end }}
+    </div>
+    {{- end }}
+  </header>
+
+  {{- $toc := partial "toc-enabled.html" . }}
+  {{- if $toc }}
+  <details class="toc">
+    <summary>On this page</summary>
+    {{ .TableOfContents }}
+  </details>
+  {{- end }}
+
+  <div class="post-body">
+    {{- if $toc }}
+    {{- /* Wide screens: the same contents, pinned in the right margin with the current section highlighted. */}}
+    <aside class="toc-side" aria-label="On this page">
+      <div class="toc-side-inner" data-toc>
+        <div class="toc-side-title">On this page</div>
+        {{ replace .TableOfContents `id="TableOfContents"` "" | safeHTML }}
+      </div>
+    </aside>
+    {{- end }}
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </div>
+
+  {{- if .Section }}
+  <nav class="post-nav" aria-label="More posts">
+    {{- /* Hugo's "next" walks toward newer pages in the default date-descending order. */}}
+    {{- with .NextInSection }}
+    <a class="post-nav-link" href="{{ .RelPermalink }}"><span class="lbl">← Newer</span>{{ .Title }}</a>
+    {{- else }}<span></span>{{ end }}
+    {{- with .PrevInSection }}
+    <a class="post-nav-link next" href="{{ .RelPermalink }}"><span class="lbl">Older →</span>{{ .Title }}</a>
+    {{- end }}
+  </nav>
+  {{- end }}
+</article>
+{{ end }}

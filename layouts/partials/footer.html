@@ -1,0 +1,13 @@
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span>© {{ now.Year }} {{ site.Params.author.name }}</span>
+    <span class="footer-links">
+      <a href="{{ "/tags/" | relURL }}">Tags</a>
+      {{- with .Site.Home.OutputFormats.Get "rss" }}
+      <a href="{{ .RelPermalink }}">RSS</a>
+      {{- end }}
+      {{- with site.Params.social.email }}<a href="{{ . }}">Email</a>{{ end }}
+      {{- with site.Params.social.discord }}<a href="{{ . }}">Discord</a>{{ end }}
+    </span>
+  </div>
+</footer>

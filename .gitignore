@@ -1,0 +1,6 @@
+# Hugo build output and caches; CI builds the site fresh on every push.
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+.DS_Store

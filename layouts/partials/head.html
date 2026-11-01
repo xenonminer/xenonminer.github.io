@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- $title := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) }}
+{{- $desc := .Description | default .Summary | default site.Params.description | plainify | htmlUnescape | truncate 160 }}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f8f4ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16110e" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="https://github.com/xenonminer.png">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ .Title | default site.Title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ cond .IsPage "article" "website" }}">
+{{- with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">
+{{- end }}
+{{- /* Set the theme before first paint so there is no flash of the wrong one. */}}
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t !== 'light' && t !== 'dark') {
+        t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.dataset.theme = t;
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  })();
+</script>
+<link rel="preload" href="/fonts/charter_regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+{{- $css := slice (resources.Get "css/main.css") (resources.Get "css/syntax.css") | resources.Concat "css/site.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">

@@ -1,0 +1,51 @@
+/* Syntax colors: an "oxide" palette (rust, patina, copper, steel, brass) driven by the --syn-* tokens in main.css, so one set of rules serves both themes. Class names follow Chroma's short token classes. */
+.chroma .line { display: flex; }
+.chroma .hl { background-color: var(--accent-soft); }
+.chroma .lnt, .chroma .ln {
+  margin-right: 0.4em;
+  padding: 0 0.4em;
+  color: var(--text-faint);
+  white-space: pre;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.chroma .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
+.chroma .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; }
+.chroma .lnlinks { outline: none; text-decoration: none; color: inherit; }
+.chroma .err { color: var(--syn-keyword); text-decoration: underline wavy; }
+
+/* Keywords */
+.chroma :is(.k, .kd, .kn, .kp, .kr, .ow) { color: var(--syn-keyword); }
+.chroma :is(.kc, .kt) { color: var(--syn-type); }
+
+/* Names */
+.chroma :is(.nf, .fm) { color: var(--syn-func); }
+.chroma :is(.nc, .nn, .ne) { color: var(--syn-type); }
+.chroma :is(.nb, .bp) { color: var(--syn-func); }
+.chroma :is(.no, .nd, .nl) { color: var(--syn-number); }
+.chroma :is(.nt) { color: var(--syn-keyword); }
+.chroma :is(.na) { color: var(--syn-type); }
+.chroma :is(.nv, .vc, .vg, .vi, .vm) { color: var(--syn-var); }
+
+/* Literals */
+.chroma :is(.s, .sa, .sb, .sc, .dl, .sd, .s1, .s2, .sh, .sx, .ss) { color: var(--syn-string); }
+.chroma :is(.se, .si, .sr) { color: var(--syn-number); }
+.chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo) { color: var(--syn-number); }
+
+/* Operators and punctuation */
+.chroma .o { color: var(--syn-punct); }
+.chroma .p { color: var(--syn-punct); }
+
+/* Comments and preprocessor */
+.chroma :is(.c, .ch, .cm, .c1, .cs) { color: var(--syn-comment); font-style: italic; }
+.chroma :is(.cp, .cpf) { color: var(--syn-keyword); }
+
+/* Diffs and shell sessions */
+.chroma .gd { color: var(--syn-keyword); background-color: var(--accent-soft); }
+.chroma .gi { color: var(--syn-string); background-color: color-mix(in srgb, var(--syn-string) 12%, transparent); }
+.chroma .gh, .chroma .gu { color: var(--syn-func); font-weight: 600; }
+.chroma .gp { color: var(--syn-comment); -webkit-user-select: none; user-select: none; }
+.chroma .go { color: var(--text-muted); }
+.chroma .ge { font-style: italic; }
+.chroma .gs { font-weight: 700; }
+.chroma .gl { text-decoration: underline; }

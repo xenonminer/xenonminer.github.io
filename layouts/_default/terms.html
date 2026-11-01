@@ -1,0 +1,11 @@
+{{ define "main" }}
+<section class="terms-page">
+  <div class="eyebrow">Index</div>
+  <h1>{{ .Title }}</h1>
+  <ul class="term-cloud">
+    {{- range .Data.Terms.ByCount }}
+    <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}<span class="term-count">{{ .Count }}</span></a></li>
+    {{- end }}
+  </ul>
+</section>
+{{ end }}

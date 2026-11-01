@@ -1,0 +1,49 @@
+{{ define "mainClass" }}wrap wrap-wide{{ end }}
+{{ define "main" }}
+{{- $pages := .RegularPages.ByDate.Reverse }}
+{{- $kinds := slice }}
+{{- range $pages }}
+  {{- $k := index (.Params.categories | default (slice .Section)) 0 }}
+  {{- $k = index (dict "Posts" "Article" "Writeups" "Writeup") $k | default $k }}
+  {{- $kinds = $kinds | append $k }}
+{{- end }}
+{{- $kinds = $kinds | uniq }}
+<section class="list-page">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">{{ cond (eq .Kind "term") "Tagged" (.Section | default "Index") }}</div>
+      <h1>{{ .Title }}</h1>
+    </div>
+    {{- with .Content }}
+    <div class="section-intro">{{ . }}</div>
+    {{- else }}
+    <p class="section-intro">{{ len $pages }} {{ cond (eq (len $pages) 1) "entry" "entries" }}{{ with .Description }} · {{ . }}{{ end }}</p>
+    {{- end }}
+  </div>
+
+  {{- if gt (len $pages) 3 }}
+  <div class="list-tools" data-filter-root>
+    <label class="search-box">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input type="search" placeholder="Search by title, tag, or summary…" autocomplete="off" spellcheck="false" aria-label="Search {{ .Title }}" data-filter-search>
+      <span class="search-count" aria-live="polite" data-filter-count></span>
+    </label>
+    {{- if gt (len $kinds) 1 }}
+    <div class="chips" role="group" aria-label="Filter by kind">
+      <button type="button" class="chip" aria-pressed="true" data-filter-kind="">All</button>
+      {{- range $kinds }}
+      <button type="button" class="chip" aria-pressed="false" data-filter-kind="{{ . | lower }}">{{ . }}</button>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+  {{- end }}
+
+  <div class="card-grid" data-filter-grid>
+    {{- range $pages }}
+      {{- partial "card.html" . }}
+    {{- end }}
+  </div>
+  <p class="empty-state" data-filter-empty hidden>Nothing matches that search.</p>
+</section>
+{{ end }}

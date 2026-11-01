@@ -1,0 +1,4 @@
+{{- /* Whether a page gets a table of contents. Front matter uses either `toc: false` or `toc: {enable: false}` to opt out. */}}
+{{- $tocOff := false }}
+{{- with .Params.toc }}{{ if reflect.IsMap . }}{{ $tocOff = eq .enable false }}{{ else }}{{ $tocOff = eq . false }}{{ end }}{{ end }}
+{{- return and (not $tocOff) (gt (len .TableOfContents) 80) (gt .WordCount 400) }}

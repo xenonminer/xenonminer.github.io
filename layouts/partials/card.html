@@ -1,0 +1,21 @@
+{{- $kind := index (.Params.categories | default (slice .Section)) 0 }}
+{{- $kind = index (dict "Posts" "Article" "Writeups" "Writeup") $kind | default $kind }}
+{{- $summary := .Description | default .Summary | plainify | htmlUnescape }}
+<article class="card"
+  data-kind="{{ $kind | lower }}"
+  data-search="{{ (printf "%s %s %s" .Title (delimit (.Params.tags | default slice) " ") $summary) | lower }}">
+  <div class="card-head">
+    <span class="card-kind">{{ $kind }}</span>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
+  </div>
+  <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  {{- with $summary }}
+  <p class="card-summary">{{ . | truncate 180 }}</p>
+  {{- end }}
+  <div class="card-meta">
+    {{- with .Params.tags }}
+    <span><span class="lbl">Tags</span>{{ delimit . ", " }}</span>
+    {{- end }}
+    <span><span class="lbl">Read</span>{{ .ReadingTime }} min</span>
+  </div>
+</article>

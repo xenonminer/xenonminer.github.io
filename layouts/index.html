@@ -1,0 +1,59 @@
+{{ define "main" }}
+<section class="intro">
+  <h1>{{ site.Params.name | default site.Title }}</h1>
+  {{- with site.Params.bio }}
+  <p class="lede">{{ . | markdownify }}</p>
+  {{- end }}
+  {{- with site.Params.links }}
+  <div class="link-rows">
+    {{- range . }}
+    {{- $external := hasPrefix .url "http" }}
+    <a class="link-row" href="{{ .url | relURL }}"{{ if $external }} rel="noopener"{{ end }}>
+      <span class="link-row-name">{{ .name }}{{ if $external }}<svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06z"/></svg>{{ end }}</span>
+      <span class="link-row-note">{{ .note }}</span>
+    </a>
+    {{- end }}
+  </div>
+  {{- end }}
+</section>
+
+{{- with where site.RegularPages "Section" "posts" }}
+<section class="home-section">
+  <div class="home-section-head">
+    <h2>Recent posts</h2>
+    <a class="more" href="{{ "/posts/" | relURL }}">All posts →</a>
+  </div>
+  <div class="row-list">
+    {{- range first 5 .ByDate.Reverse }}
+    <a class="row" href="{{ .RelPermalink }}">
+      <span class="row-main">
+        <span class="row-title">{{ .Title }}</span>
+        {{- with .Description }}<span class="row-desc">{{ . }}</span>{{ end }}
+      </span>
+      <time class="row-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
+    </a>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{- with where site.RegularPages "Section" "projects" }}
+<section class="home-section">
+  <div class="home-section-head">
+    <h2>Projects</h2>
+    <a class="more" href="{{ "/projects/" | relURL }}">All projects →</a>
+  </div>
+  <div class="row-list">
+    {{- range .ByDate.Reverse }}
+    <a class="row" href="{{ .RelPermalink }}">
+      <span class="row-main">
+        <span class="row-title">{{ .Title }}</span>
+        {{- with .Description }}<span class="row-desc">{{ . }}</span>{{ end }}
+      </span>
+      {{- with .Params.tags }}<span class="row-date">{{ index . 0 }}</span>{{ end }}
+    </a>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+{{ end }}
