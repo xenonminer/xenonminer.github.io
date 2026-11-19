@@ -1,0 +1,23 @@
+{{- /*
+  One photo from the page bundle, linked to the full-size file.
+  Params: src (file name in the post's folder), alt, caption (optional, Markdown allowed).
+  Use it inside {{< gallery >}} or on its own.
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" -}}
+{{- with .Page.Resources.Get $src -}}
+{{- /* Big files (full-resolution screenshots) get a smaller WebP copy for the page; the link still opens the original. */ -}}
+{{- $img := . -}}
+{{- if gt .Width 1600 }}{{ $img = .Resize "1600x webp q85" }}{{ end -}}
+<figure class="photo">
+  <a class="photo-link" href="{{ .RelPermalink }}" target="_blank" rel="noopener" aria-label="Open full-size image{{ with $alt }}: {{ . }}{{ end }}">
+    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  </a>
+  {{- with $caption }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+</figure>
+{{- else -}}
+{{- errorf "photo shortcode: %q is not in the page bundle of %s" $src $.Page.File.Path -}}
+{{- end -}}

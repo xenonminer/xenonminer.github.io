@@ -49,11 +49,12 @@
 
   {{- if .Section }}
   <nav class="post-nav" aria-label="More posts">
-    {{- /* Hugo's "next" walks toward newer pages in the default date-descending order. */}}
-    {{- with .NextInSection }}
+    {{- /* Sort by date only, so a leftover `weight` in front matter can't reorder posts. In newest-first order, Next is the newer neighbour. */}}
+    {{- $siblings := .CurrentSection.RegularPages.ByDate.Reverse }}
+    {{- with $siblings.Next . }}
     <a class="post-nav-link" href="{{ .RelPermalink }}"><span class="lbl">← Newer</span>{{ .Title }}</a>
     {{- else }}<span></span>{{ end }}
-    {{- with .PrevInSection }}
+    {{- with $siblings.Prev . }}
     <a class="post-nav-link next" href="{{ .RelPermalink }}"><span class="lbl">Older →</span>{{ .Title }}</a>
     {{- end }}
   </nav>

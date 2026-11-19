@@ -12,7 +12,7 @@ math:
 
 ## Some Background Information
 
-I am Jaden Wijata and I am currently in my first year of college. I go to school at Mt. San Antonio College. My interests are pentesting, vulnerability research, and computer science. I play CTFs with the team [Squid Proxy Lovers](https://ctftime.org/team/222966).
+I am Jaden Wijata and I am currently in my third year of university. I go to school at Georgia Institute of Technology. My interests are pentesting, vulnerability research, and computer science. I play CTFs with the team [Squid Proxy Lovers](https://ctftime.org/team/222966).
 
 ## Contact Me
 

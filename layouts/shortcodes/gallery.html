@@ -1,0 +1,17 @@
+{{- /*
+  Photo gallery. Wrap {{< photo >}} shortcodes in it.
+
+    {{< gallery >}}                 equal columns, as many as fit
+    {{< gallery layout="feature" >}} first photo large on the left, the rest stacked beside it
+    {{< gallery layout="stack" >}}   one full-width photo per row (wide screenshots)
+
+  Example:
+    {{< gallery layout="feature" >}}
+    {{< photo src="board.webp" alt="..." caption="..." >}}
+    {{< photo src="led.webp" alt="..." >}}
+    {{< /gallery >}}
+*/ -}}
+{{- $layout := .Get "layout" | default "grid" -}}
+<div class="gallery gallery-{{ $layout }}">
+{{ .Inner }}
+</div>

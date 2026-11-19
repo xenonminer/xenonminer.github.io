@@ -640,6 +640,57 @@ img { max-width: 100%; height: auto; }
   border-radius: 6px;
 }
 
+/* Photos and galleries ({{< photo >}} inside {{< gallery >}}). */
+.prose .photo { margin: 1.75rem 0; min-width: 0; }
+.prose .photo-link { display: block; text-decoration: none; }
+.prose .photo img {
+  width: 100%;
+  margin: 0;
+  background: var(--surface);
+  transition: border-color 0.15s ease;
+}
+.prose .photo-link:hover img { border-color: var(--accent); }
+.prose .photo figcaption {
+  margin-top: 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.prose .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem 0.75rem;
+  margin: 1.75rem 0;
+}
+.prose .gallery .photo { margin: 0; }
+
+/* Stack: one full-width photo per row, for wide screenshots that would be unreadable side by side. */
+.prose .gallery-stack { grid-template-columns: 1fr; gap: 1.5rem; }
+
+/* Feature: small screens put the first photo full width with the rest in pairs below it.
+   Wider screens put it in a 2/3 column on the left, cropped to the height of the stack beside it. */
+.prose .gallery-feature { grid-template-columns: 1fr 1fr; }
+.prose .gallery-feature > .photo:first-child { grid-column: 1 / -1; }
+
+@media (min-width: 36rem) {
+  .prose .gallery-feature { grid-template-columns: 2fr 1fr; }
+  .prose .gallery-feature > .photo:first-child {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+  }
+  .prose .gallery-feature > .photo:first-child .photo-link { position: relative; flex: 1; min-height: 12rem; }
+  .prose .gallery-feature > .photo:first-child img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 .prose blockquote {
   margin: 1.75rem 0;
   padding: 0.1rem 0 0.1rem 1.25rem;
